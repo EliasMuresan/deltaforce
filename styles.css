@@ -1343,6 +1343,7 @@ body.lightbox-open {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
+  align-items: stretch;
 }
 
 .partner-card,
@@ -1356,23 +1357,36 @@ body.lightbox-open {
 }
 
 .partner-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.82fr) minmax(0, 1fr);
+  align-items: stretch;
   overflow: hidden;
 }
 
+.partner-card:nth-child(even) .partner-logo-shell {
+  order: 2;
+  border-right: 0;
+  border-left: 1px solid rgba(236, 88, 0, 0.08);
+}
+
+.partner-card:nth-child(even) .partner-copy {
+  order: 1;
+}
+
 .partner-logo-shell {
-  min-height: 220px;
-  padding: 34px;
+  min-height: 100%;
+  padding: 40px 36px;
   display: grid;
   place-items: center;
   background:
     linear-gradient(180deg, rgba(255, 248, 241, 0.03) 0%, rgba(255, 248, 241, 0.01) 100%),
     var(--surface-strong);
-  border-bottom: 1px solid rgba(236, 88, 0, 0.08);
+  border-right: 1px solid rgba(236, 88, 0, 0.08);
 }
 
 .partner-logo-image {
-  max-width: min(76%, 320px);
-  max-height: 112px;
+  max-width: min(100%, 320px);
+  max-height: 140px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -1381,9 +1395,10 @@ body.lightbox-open {
 }
 
 .partner-copy {
-  padding: 24px 26px 28px;
+  padding: 34px;
   display: grid;
-  gap: 10px;
+  align-content: center;
+  gap: 12px;
 }
 
 .partner-kicker,
@@ -1682,7 +1697,7 @@ body.is-loaded .hero-content {
 
   .nav-shell {
     position: relative;
-    align-items: flex-start;
+    align-items: center;
     border-radius: 26px;
   }
 
@@ -1719,24 +1734,65 @@ body.is-loaded .hero-content {
   .nav-links {
     position: absolute;
     top: calc(100% + 10px);
-    left: 0;
+    left: auto;
     right: 0;
     display: grid;
-    gap: 10px;
-    padding: 16px;
+    justify-items: start;
+    gap: 12px;
+    width: min(280px, calc(100vw - 40px));
+    padding: 18px;
     border: 1px solid var(--line);
     border-radius: 22px;
     background: rgba(19, 14, 11, 0.98);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
     opacity: 0;
     transform: translateY(-10px);
     pointer-events: none;
     transition: opacity 180ms ease, transform 180ms ease;
   }
 
+  .nav-links a {
+    font-size: 0.94rem;
+  }
+
   .language-toggle {
     width: 48px;
     height: 36px;
     justify-self: start;
+  }
+
+  .partner-card {
+    grid-template-columns: minmax(132px, 0.4fr) minmax(0, 1fr);
+  }
+
+  .partner-card:nth-child(even) .partner-logo-shell,
+  .partner-card:nth-child(even) .partner-copy {
+    order: initial;
+  }
+
+  .partner-card:nth-child(even) .partner-logo-shell {
+    border-left: 0;
+    border-right: 1px solid rgba(236, 88, 0, 0.08);
+  }
+
+  .partner-logo-shell {
+    padding: 26px 22px;
+  }
+
+  .partner-logo-image {
+    max-height: 96px;
+  }
+
+  .partner-copy {
+    padding: 24px 24px 26px;
+  }
+
+  .partner-name {
+    font-size: clamp(1.35rem, 4vw, 1.9rem);
+  }
+
+  .partner-description {
+    line-height: 1.65;
   }
 
   .contact-form-grid {
@@ -1845,12 +1901,98 @@ body.is-loaded .hero-content {
   }
 
   .nav-shell,
-  .season-card,
   .global-card,
   .contact-card,
   .contact-form-card,
   .contact-details {
     padding: 22px;
+  }
+
+  .season-card:not(.season-card-ftc):not(.season-card-frc-cover) {
+    padding: 22px;
+  }
+
+  .nav-shell {
+    padding: 14px 16px;
+  }
+
+  .nav-links {
+    width: min(248px, calc(100vw - 30px));
+    padding: 16px;
+  }
+
+  .brand-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .brand-copy strong {
+    font-size: 1rem;
+  }
+
+  .brand-copy small {
+    font-size: 0.56rem;
+  }
+
+  .season-card-ftc,
+  .season-card-frc-cover {
+    padding: 0;
+  }
+
+  .season-card-media-featured {
+    aspect-ratio: 4 / 5;
+  }
+
+  .events-grid {
+    gap: 20px;
+  }
+
+  .event-card-media,
+  .event-card:not(.event-card-featured) .event-card-media {
+    aspect-ratio: auto;
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 18px;
+  }
+
+  .event-card-image {
+    position: absolute;
+    inset: 0;
+  }
+
+  .event-card-label,
+  .event-card-title,
+  .event-card-copy,
+  .event-card-cta {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 2;
+  }
+
+  .event-card-label {
+    align-self: flex-start;
+    margin-bottom: auto;
+  }
+
+  .event-card-title {
+    font-size: clamp(1.55rem, 8vw, 2.1rem);
+    line-height: 0.96;
+  }
+
+  .event-card-copy {
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .event-card-cta {
+    align-self: flex-start;
+    margin-top: 2px;
   }
 
   .hero-logo-image {
@@ -1898,8 +2040,29 @@ body.is-loaded .hero-content {
   }
 
   .partner-logo-shell {
-    min-height: 184px;
-    padding: 26px;
+    min-height: 100%;
+    padding: 18px 16px;
+  }
+
+  .partner-card {
+    grid-template-columns: 108px minmax(0, 1fr);
+  }
+
+  .partner-logo-image {
+    max-height: 82px;
+  }
+
+  .partner-copy {
+    padding: 18px 18px 20px;
+    gap: 8px;
+  }
+
+  .partner-kicker {
+    font-size: 0.72rem;
+  }
+
+  .partner-name {
+    font-size: clamp(1.18rem, 7vw, 1.55rem);
   }
 
   .contact-form-card,

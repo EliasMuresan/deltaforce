@@ -641,6 +641,11 @@ updateScrollState();
 window.addEventListener("scroll", updateScrollState, { passive: true });
 window.addEventListener("resize", updateScrollState);
 
+const closeNavMenu = () => {
+  navToggle?.setAttribute("aria-expanded", "false");
+  navMenu?.classList.remove("is-open");
+};
+
 navToggle?.addEventListener("click", () => {
   const isOpen = navToggle.getAttribute("aria-expanded") === "true";
   navToggle.setAttribute("aria-expanded", String(!isOpen));
@@ -650,10 +655,27 @@ navToggle?.addEventListener("click", () => {
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
-    navToggle?.setAttribute("aria-expanded", "false");
-    navMenu?.classList.remove("is-open");
+    closeNavMenu();
     showTopbar();
   });
+});
+
+document.addEventListener("click", (event) => {
+  if (!navMenu?.classList.contains("is-open")) return;
+  if (!(event.target instanceof Node)) return;
+  if (navMenu.contains(event.target) || navToggle?.contains(event.target)) return;
+  closeNavMenu();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  closeNavMenu();
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 860) {
+    closeNavMenu();
+  }
 });
 
 languageToggle?.addEventListener("click", () => {

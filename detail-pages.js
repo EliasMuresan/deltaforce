@@ -1226,6 +1226,11 @@ const bindDetailNavInteractions = () => {
 
   navToggle.dataset.bound = "true";
 
+  const closeDetailNavMenu = () => {
+    navToggle.setAttribute("aria-expanded", "false");
+    navMenu?.classList.remove("is-open");
+  };
+
   navToggle.addEventListener("click", () => {
     const isOpen = navToggle.getAttribute("aria-expanded") === "true";
     navToggle.setAttribute("aria-expanded", String(!isOpen));
@@ -1234,9 +1239,26 @@ const bindDetailNavInteractions = () => {
 
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      navToggle.setAttribute("aria-expanded", "false");
-      navMenu?.classList.remove("is-open");
+      closeDetailNavMenu();
     });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!navMenu?.classList.contains("is-open")) return;
+    if (!(event.target instanceof Node)) return;
+    if (navMenu.contains(event.target) || navToggle.contains(event.target)) return;
+    closeDetailNavMenu();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    closeDetailNavMenu();
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 860) {
+      closeDetailNavMenu();
+    }
   });
 };
 
@@ -1248,6 +1270,8 @@ const bindDetailLanguageToggle = () => {
   toggle.addEventListener("click", () => {
     const nextLanguage = document.documentElement.lang === "ro" ? "en" : "ro";
     applyDetailLanguage(nextLanguage);
+    document.querySelector(".nav-toggle")?.setAttribute("aria-expanded", "false");
+    document.querySelector(".nav-links")?.classList.remove("is-open");
   });
 };
 

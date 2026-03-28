@@ -588,7 +588,7 @@ textarea {
 
   .nav-shell {
     position: relative;
-    align-items: flex-start;
+    align-items: center;
     border-radius: 26px;
   }
 
@@ -599,18 +599,25 @@ textarea {
   .nav-links {
     position: absolute;
     top: calc(100% + 10px);
-    left: 0;
+    left: auto;
     right: 0;
     display: grid;
-    gap: 10px;
-    padding: 16px;
+    justify-items: start;
+    gap: 12px;
+    width: min(280px, calc(100vw - 40px));
+    padding: 18px;
     border: 1px solid var(--line);
     border-radius: 22px;
     background: rgba(19, 14, 11, 0.98);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
     opacity: 0;
     transform: translateY(-10px);
     pointer-events: none;
     transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .nav-links a {
+    font-size: 0.94rem;
   }
 
   .language-toggle {
@@ -667,6 +674,28 @@ textarea {
 @media (max-width: 640px) {
   :root {
     --container: min(100vw - 22px, 1240px);
+  }
+
+  .nav-shell {
+    padding: 14px 16px;
+  }
+
+  .nav-links {
+    width: min(248px, calc(100vw - 30px));
+    padding: 16px;
+  }
+
+  .brand-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .brand-copy strong {
+    font-size: 1rem;
+  }
+
+  .brand-copy small {
+    font-size: 0.56rem;
   }
 
   .detail-intro h1 {
