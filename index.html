@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Delta Force Robotics - site cinematic pentru FRC 9001 si FTC 17713, organizat pe sezoane si competitii.">
+  <title>Delta Force Robotics | FRC 9001 & FTC 17713</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <nav class="nav-shell">
+      <a class="brand" href="#home" aria-label="Delta Force homepage">
+        <img class="brand-logo" src="media/logo copy.png" alt="Delta Force logo">
+        <span class="brand-copy">
+          <strong>DELtA FORcE</strong>
+          <small>FRC 9001 / FtC 17713</small>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links" id="nav-menu">
+        <a href="#home" data-nav-link="home">Home</a>
+        <a href="#ftc" data-nav-link="ftc">FTC</a>
+        <a href="#frc" data-nav-link="frc">FRC</a>
+        <a href="#events" data-nav-link="events">Evenimente</a>
+        <a href="#fgc" data-nav-link="fgc">FGC</a>
+        <a href="#sponsors" data-nav-link="sponsors">Sponsori</a>
+        <a href="#partners" data-nav-link="partners">Parteneri</a>
+        <a href="#contact" data-nav-link="contact">Contact</a>
+        <button class="language-toggle" type="button" aria-label="Switch to English" title="Switch to English" aria-pressed="false">
+          <img class="language-flag-image" id="language-flag-image" src="Flags/romania.png" alt="" aria-hidden="true">
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <video class="hero-video" autoplay muted loop playsinline poster="">
+        <source src="media/videomain.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="hero-logo-shell" data-logo-shell>
+          <img
+            class="hero-logo-image"
+            id="team-logo-image"
+            src="media/logo.png"
+            alt="Delta Force logo"
+          >
+        </div>
+
+        <p class="hero-type-line" aria-live="polite">
+          <span class="hero-type-static" id="hero-static-word">CONSTRUIM</span>
+          <span class="hero-type-dynamic" id="typed-word">ROBOTS</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="section overview about-section" id="overview">
+      <div class="about-shell reveal">
+        <div class="about-header">
+          <p class="eyebrow about-eyebrow">Despre noi</p>
+          <h2 class="about-title">Delta Force Robotics</h2>
+        </div>
+
+        <div class="about-body" aria-label="Imagini reprezentative Delta Force">
+          <figure
+            class="about-team-shot lightbox-trigger"
+            role="button"
+            tabindex="0"
+            data-lightbox-title="Fotografie de grup Delta Force"
+            aria-label="Deschide fotografia de grup"
+          >
+            <img src="section1/teamphoto.png" alt="Fotografie de grup a echipei Delta Force" loading="lazy">
+          </figure>
+
+          <div class="about-side">
+            <article class="about-panel">
+              <p class="about-lead">
+                Suntem Delta Force, echipa de robotica a Liceului National de Informatica Arad, fondata in 2018.
+              </p>
+              <p class="about-copy-one">
+                Am pornit la drum cu resurse limitate, dar prin perseverenta, invatare continua si colaborare am crescut
+                intr-o echipa stabila, cu un laborator dedicat si o comunitate care ne sustine.
+              </p>
+              <p class="about-copy-two">
+                Credem in fair-play, respect reciproc si sprijin intre echipe, iar modul nostru de lucru se bazeaza pe
+                prototipare, testare si asumare a responsabilitatii fata de obiectivele echipei si fata de comunitatea FIRST.
+              </p>
+            </article>
+
+            <figure
+              class="about-robot-shot lightbox-trigger"
+              role="button"
+              tabindex="0"
+              data-lightbox-title="Robot Delta Force"
+              aria-label="Deschide fotografia robotului"
+            >
+              <img src="section1/robotphoto.png" alt="Robotul echipei Delta Force" loading="lazy">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section archive-section" id="ftc">
+      <div class="section-heading section-heading-centered reveal">
+        <p class="eyebrow">FTC 17713</p>
+        <h2 class="ftc-title">First Tech Challenge</h2>
+        <p class="ftc-subtitle">
+          De la primul sezon pana in prezent, o privire asupra fiecarui an de competitie, provocarilor pe care le-am infruntat si progresului pe care l-am facut ca echipa.
+        </p>
+      </div>
+
+      <div class="season-grid season-grid-ftc">
+        <article class="season-card season-card-ftc season-card-featured reveal" data-program="ftc">
+          <a class="season-card-media season-card-media-featured season-card-link" href="ftc-freight-frenzy.html">
+            <img class="season-cover-image" src="FTCcovers/freight.png" alt="Cover Freight Frenzy" loading="lazy">
+            <span class="season-card-year">2021 - 2022</span>
+            <h3 class="season-card-title">Freight Frenzy</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+
+        <article class="season-card season-card-ftc reveal" data-program="ftc">
+          <a class="season-card-media season-card-link" href="ftc-power-play.html">
+            <img class="season-cover-image" src="FTCcovers/powerplay.png" alt="Cover Power Play" loading="lazy">
+            <span class="season-card-year">2022 - 2023</span>
+            <h3 class="season-card-title">Power Play</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+
+        <article class="season-card season-card-ftc reveal" data-program="ftc">
+          <a class="season-card-media season-card-link" href="ftc-centerstage.html">
+            <img class="season-cover-image" src="FTCcovers/centerstage.png" alt="Cover Centerstage" loading="lazy">
+            <span class="season-card-year">2023 - 2024</span>
+            <h3 class="season-card-title">Centerstage</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+
+        <article class="season-card season-card-ftc reveal" data-program="ftc">
+          <a class="season-card-media season-card-link" href="ftc-into-the-deep.html">
+            <img class="season-cover-image" src="FTCcovers/intothedeep.png" alt="Cover Into The Deep" loading="lazy">
+            <span class="season-card-year">2024 - 2025</span>
+            <h3 class="season-card-title">Into The Deep</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+
+        <article class="season-card season-card-ftc reveal" data-program="ftc">
+          <a class="season-card-media season-card-link" href="ftc-decode.html">
+            <img class="season-cover-image" src="FTCcovers/decode.png" alt="Cover DECODE" loading="lazy">
+            <span class="season-card-year">2025 - 2026</span>
+            <span class="season-card-status season-status-current">Actual</span>
+            <h3 class="season-card-title">DECODE</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section archive-section" id="frc">
+      <div class="section-heading section-heading-centered reveal">
+        <p class="eyebrow">FRC 9001</p>
+        <h2 class="frc-title">FRC are propria sectiune, separata si usor de parcurs.</h2>
+        <p class="frc-subtitle">
+          Am pastrat doar sezoanele FRC, fiecare cu propriul cover, ca arhiva sa ramana curata si usor de parcurs.
+        </p>
+      </div>
+
+      <div class="season-grid season-grid-frc-covers">
+        <article class="season-card season-card-frc-cover reveal" data-program="frc">
+          <a class="season-card-media season-card-link" href="frc-charged-up.html">
+            <img class="season-cover-image" src="FRCcovers/chargedup.png" alt="Cover Charged Up" loading="lazy">
+            <span class="season-card-year">2023</span>
+            <h3 class="season-card-title">Charged Up</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+
+        <article class="season-card season-card-frc-cover reveal" data-program="frc">
+          <a class="season-card-media season-card-link" href="frc-crescendo.html">
+            <img class="season-cover-image" src="FRCcovers/crescendo.png" alt="Cover Crescendo" loading="lazy">
+            <span class="season-card-year">2024</span>
+            <h3 class="season-card-title">Crescendo</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+
+        <article class="season-card season-card-frc-cover reveal" data-program="frc">
+          <a class="season-card-media season-card-link" href="frc-reefscape.html">
+            <img class="season-cover-image" src="FRCcovers/reefscape.png" alt="Cover Reefscape" loading="lazy">
+            <span class="season-card-year">2025</span>
+            <h3 class="season-card-title">Reefscape</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+
+        <article class="season-card season-card-frc-cover reveal" data-program="frc">
+          <a class="season-card-media season-card-link" href="frc-rebuilt.html">
+            <img class="season-cover-image" src="FRCcovers/rebuilt.png" alt="Cover REBUILT" loading="lazy">
+            <span class="season-card-year">2026</span>
+            <span class="season-card-status season-status-current">Actual</span>
+            <h3 class="season-card-title">REBUILT</h3>
+            <span class="season-card-cta">Vizualizeaza sezonul</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section events-section" id="events">
+      <div class="section-heading section-heading-centered reveal">
+        <p class="eyebrow events-eyebrow">Special</p>
+        <h2 class="events-title">Evenimente premier / invitationale</h2>
+        <p class="events-subtitle">
+          O zona separata pentru aparitii speciale, invitationale si momente care merita propria pagina, nu doar un loc pierdut intre sezoane.
+        </p>
+      </div>
+
+      <div class="events-grid">
+        <article class="event-card event-card-featured reveal">
+          <a class="event-card-media" href="events-premier.html">
+            <img class="event-card-image" src="placeholder.png" alt="Evenimente premier Delta Force" loading="lazy">
+            <span class="event-card-label event-label-premier">Premier</span>
+            <h3 class="event-card-title event-title-premier">Evenimente Premier</h3>
+            <p class="event-card-copy event-copy-premier">
+              Prezentari, aparitii speciale si momente de referinta puse intr-un spatiu separat, pregatit pentru media si recap.
+            </p>
+            <span class="event-card-cta event-cta-premier">Deschide pagina</span>
+          </a>
+        </article>
+
+        <article class="event-card reveal">
+          <a class="event-card-media" href="events-invitationals.html">
+            <img class="event-card-image" src="placeholder.png" alt="Invitationale Delta Force" loading="lazy">
+            <span class="event-card-label event-label-invitational">Invitational</span>
+            <h3 class="event-card-title event-title-invitational">Invitationale</h3>
+            <p class="event-card-copy event-copy-invitational">
+              Un loc dedicat pentru competitii speciale, parteneriate si rezultate care nu tin strict de sezonul standard.
+            </p>
+            <span class="event-card-cta event-cta-invitational">Deschide pagina</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section global-section" id="fgc">
+      <div class="section-heading section-heading-centered reveal">
+        <p class="eyebrow">FGC 2023</p>
+        <h2 class="fgc-title">First Global Challenge merita propria prezenta, nu doar o nota mica in subsol.</h2>
+        <p class="fgc-subtitle">
+          Sectiunea este separata ca sa ai loc pentru poveste, imagini si context international fara sa incarci FTC sau FRC.
+        </p>
+      </div>
+
+      <article class="global-cover-card reveal">
+        <a class="global-cover-media" href="fgc-2023.html">
+          <img class="global-cover-image" src="FGCcovers/firstglobalcover.png" alt="Cover First Global Challenge 2023" loading="lazy">
+          <span class="global-cover-year">2023</span>
+
+          <div class="global-cover-copy">
+            <span class="program-label fgc-program-label">First Global Challenge</span>
+            <h3>FGC 2023</h3>
+          </div>
+
+          <span class="global-cover-cta fgc-cta">Vizualizeaza povestea</span>
+        </a>
+      </article>
+    </section>
+
+    <section class="section sponsors-section" id="sponsors">
+      <div class="sponsors-intro reveal">
+        <p class="eyebrow sponsors-eyebrow">Sponsori</p>
+        <h2 class="sponsors-title">Multumim sponsorilor nostrii:</h2>
+        <p class="sponsors-subtitle">
+          Sprijinul lor ne ajuta sa construim, sa concuram si sa crestem de la sezon la sezon.
+        </p>
+      </div>
+
+      <div class="sponsors-marquee reveal" aria-label="Logouri sponsori">
+        <div class="sponsors-track">
+          <div class="sponsor-logo"><img src="Sponsorslogos/aptiv.png" alt="APTIV" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/aumovio.png" alt="Aumovio" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/cicor.png" alt="Cicor" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/filip.png" alt="Filip" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/fundatiaalber.png" alt="Fundatia Alber" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/giscad.png" alt="GISCAD" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/lexus.png" alt="Lexus Publicitate" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/morar.png" alt="Morar" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/speedline.png" alt="Speedline" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/spiculturcin.png" alt="Spicul Turcin" loading="lazy"></div>
+        </div>
+
+        <div class="sponsors-track" aria-hidden="true">
+          <div class="sponsor-logo"><img src="Sponsorslogos/aptiv.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/aumovio.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/cicor.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/filip.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/fundatiaalber.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/giscad.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/lexus.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/morar.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/speedline.png" alt="" loading="lazy"></div>
+          <div class="sponsor-logo"><img src="Sponsorslogos/spiculturcin.png" alt="" loading="lazy"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section partners-section" id="partners">
+      <div class="section-heading reveal partners-heading">
+        <p class="eyebrow partners-eyebrow">Parteneri</p>
+        <h2 class="partners-title">Parteneri educationali</h2>
+        <p class="partners-subtitle">
+          Institutii care sustin cresterea echipei prin educatie, spatiu de dezvoltare si deschidere catre proiecte reale.
+        </p>
+      </div>
+
+      <div class="partners-grid">
+        <article class="partner-card reveal">
+          <div class="partner-logo-shell">
+            <img class="partner-logo-image" src="parteners/liceu.png" alt="Liceul National de Informatica Arad" loading="lazy">
+          </div>
+
+          <div class="partner-copy">
+            <p class="partner-kicker">Arad</p>
+            <h3 class="partner-name partner-name-liceu">Liceul National de Informatica Arad</h3>
+            <p class="partner-description partner-desc-liceu">
+              Locul in care a inceput povestea Delta Force si mediul care a sustinut cresterea echipei de la primul sezon pana azi.
+            </p>
+          </div>
+        </article>
+
+        <article class="partner-card reveal">
+          <div class="partner-logo-shell">
+            <img class="partner-logo-image" src="parteners/uav.png" alt="Universitatea Aurel Vlaicu Arad" loading="lazy">
+          </div>
+
+          <div class="partner-copy">
+            <p class="partner-kicker">Arad</p>
+            <h3 class="partner-name partner-name-uav">Universitatea Aurel Vlaicu Arad</h3>
+            <p class="partner-description partner-desc-uav">
+              Un partener educational important pentru deschiderea catre comunitatea academica si pentru consolidarea directiei tehnice a echipei.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="section-heading reveal contact-heading">
+        <p class="eyebrow contact-eyebrow">Contact</p>
+        <h2 class="contact-title">Contacteaza-ne</h2>
+        <p class="contact-copy">
+          Daca vrei sa colaborezi cu echipa, sa ne sustii sau sa afli mai multe despre activitatea noastra, ne poti scrie direct aici.
+        </p>
+      </div>
+
+      <div class="contact-layout">
+        <article class="contact-form-card reveal">
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="contact-form-grid">
+              <label class="field">
+                <span class="field-label contact-label-name">Nume</span>
+                <input class="field-input contact-input-name" type="text" placeholder="Cum te numesti">
+              </label>
+
+              <label class="field">
+                <span class="field-label contact-label-email">Email</span>
+                <input class="field-input contact-input-email" type="email" placeholder="adresa@exemplu.com">
+              </label>
+
+              <label class="field field-full">
+                <span class="field-label contact-label-message">Mesaj</span>
+                <textarea class="field-input field-textarea contact-input-message" rows="6" placeholder="Spune-ne cu ce te putem ajuta"></textarea>
+              </label>
+            </div>
+
+            <div class="contact-form-footer">
+              <p class="contact-form-note">Formular demonstrativ pentru moment. Il conectam ulterior.</p>
+              <button class="contact-submit" type="submit">Trimite mesaj</button>
+            </div>
+          </form>
+        </article>
+
+        <aside class="contact-details reveal">
+          <article class="contact-method contact-method-primary">
+            <span class="contact-method-label contact-email-label">Email</span>
+            <a class="contact-method-value contact-email-value" href="mailto:deltaforcerobotics@gmail.com">deltaforcerobotics@gmail.com</a>
+          </article>
+
+          <article class="contact-method">
+            <span class="contact-method-label contact-phone-label">Numere de telefon</span>
+
+            <div class="contact-people">
+              <div class="contact-person">
+                <a class="contact-person-number" href="tel:+40747893869">+40 747 893 869</a>
+                <p class="contact-person-role contact-corina-role">Corina Botosan - Mentor</p>
+              </div>
+
+              <div class="contact-person">
+                <a class="contact-person-number" href="tel:+40755192610">+40 755 192 610</a>
+                <p class="contact-person-role contact-octavian-role">Octavian Botosan - Mentor</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="contact-method">
+            <span class="contact-method-label contact-note-label">Colaborari</span>
+            <p class="contact-method-copy contact-side-note">
+              Pentru parteneriate, sponsorizari sau oportunitati educationale, ne poti contacta direct prin email sau telefon.
+            </p>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <strong>Delta Force Robotics</strong>
+      <span>FRC 9001 / FTC 17713</span>
+    </div>
+
+    <div class="footer-links">
+      <a href="#ftc" data-footer-link="ftc">Arhiva FTC</a>
+      <a href="#frc" data-footer-link="frc">Arhiva FRC</a>
+      <a href="#events" data-footer-link="events">Evenimente</a>
+      <a href="#partners" data-footer-link="partners">Parteneri</a>
+      <a href="#fgc">FGC 2023</a>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="image-lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" data-lightbox-close></div>
+
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Vizualizare imagine">
+      <div class="lightbox-toolbar">
+        <button class="lightbox-control lightbox-close" type="button" data-lightbox-close aria-label="Inchide imaginea">
+          Inchide
+        </button>
+      </div>
+
+      <div class="lightbox-frame">
+        <img class="lightbox-image" id="lightbox-image" src="" alt="">
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
