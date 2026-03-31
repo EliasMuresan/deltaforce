@@ -9,14 +9,92 @@ const navLinks = [...document.querySelectorAll(".nav-links a")];
 const languageToggle = document.querySelector(".language-toggle");
 const metaDescription = document.querySelector('meta[name="description"]');
 
+const mojibakePairs = [
+  [String.fromCodePoint(0x00C4, 0x201A), "Ă"],
+  [String.fromCodePoint(0x00C4, 0x0083), "ă"],
+  [String.fromCodePoint(0x0102, 0x201A), "Â"],
+  [String.fromCodePoint(0x0102, 0x02D8), "â"],
+  [String.fromCodePoint(0x0102, 0x017D), "Î"],
+  [String.fromCodePoint(0x0102, 0x00AE), "î"],
+  [String.fromCodePoint(0x010C, 0x0098), "Ș"],
+  [String.fromCodePoint(0x010C, 0x2122), "ș"],
+  [String.fromCodePoint(0x010C, 0x0161), "Ț"],
+  [String.fromCodePoint(0x010C, 0x203A), "ț"],
+  [String.fromCodePoint(0x00C2, 0x00AB), "«"],
+  [String.fromCodePoint(0x00C2, 0x00BB), "»"],
+];
+
+const repairMojibakeString = (value) => {
+  if (typeof value !== "string") return value;
+
+  let repaired = value;
+
+  mojibakePairs.forEach(([broken, fixed]) => {
+    repaired = repaired.split(broken).join(fixed);
+  });
+
+  return repaired;
+};
+
+const repairNestedStrings = (value) => {
+  if (typeof value === "string") {
+    return repairMojibakeString(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(repairNestedStrings);
+  }
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, entry]) => [key, repairNestedStrings(entry)])
+    );
+  }
+
+  return value;
+};
+
+const repairRenderedText = (root = document.body) => {
+  if (!root) return;
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  const attributeNames = ["aria-label", "title", "alt", "placeholder", "content"];
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const parentTag = node.parentElement?.tagName;
+    if (parentTag === "SCRIPT" || parentTag === "STYLE") continue;
+    textNodes.push(node);
+  }
+
+  textNodes.forEach((node) => {
+    const fixed = repairMojibakeString(node.nodeValue);
+    if (fixed !== node.nodeValue) {
+      node.nodeValue = fixed;
+    }
+  });
+
+  root.querySelectorAll?.("*").forEach((element) => {
+    attributeNames.forEach((attribute) => {
+      if (!element.hasAttribute(attribute)) return;
+      const value = element.getAttribute(attribute);
+      const fixed = repairMojibakeString(value);
+      if (fixed !== value) {
+        element.setAttribute(attribute, fixed);
+      }
+    });
+  });
+};
+
 const translations = {
   ro: {
     meta: {
-      title: "SusČ›inerea ta conteazÄ | Delta Force Robotics",
+      title: "Susținerea ta contează | Delta Force Robotics",
       description:
-        "SusČ›inerea ta conteazÄ - pagina Delta Force dedicatÄ sponsorizÄrii, Formularului 230, donaČ›iilor Č™i transferului bancar.",
+        "Susținerea ta contează - pagina Delta Force dedicată sponsorizării, Formularului 230, donațiilor și transferului bancar.",
     },
-    brandAria: "Pagina de susČ›inere Delta Force",
+    brandAria: "Pagina de susținere Delta Force",
     navToggleLabel: "Deschide meniul de navigare",
     brand: {
       logoAlt: "Sigla Delta Force",
@@ -30,58 +108,58 @@ const translations = {
     },
     language: {
       image: "../assets/images/flags/romania.png",
-      label: "SchimbÄ Ă®n englezÄ",
+      label: "Schimbă în engleză",
     },
     hero: {
-      eyebrow: "DRUMUL SPRE MONDIALÄ‚",
-      title: "SusČ›inerea ta conteazÄ",
+      eyebrow: "DRUMUL SPRE MONDIALĂ",
+      title: "Susținerea ta contează",
       copy:
-        "Fiecare sponsorizare, redirecČ›ionare de impozit sau donaČ›ie ne ajutÄ sÄ reprezentÄm mai departe Delta Force Č™i RomĂ˘nia pe scena internaČ›ionalÄ.",
+        "Fiecare sponsorizare, redirecționare de impozit sau donație ne ajută să reprezentăm mai departe Delta Force și România pe scena internațională.",
       pillOne: "SPONSORIZARE",
       pillTwo: "FORMULAR 230",
-      pillThree: "PAYPAL ČI IBAN",
+      pillThree: "PAYPAL ȘI IBAN",
       imageAlt: "Echipa Delta Force",
       panelEyebrow: "DELTA FORCE / TEAM ROMANIA",
-      panelTitle: "SusČ›ine parcursul nostru internaČ›ional",
+      panelTitle: "Susține parcursul nostru internațional",
       panelCopy:
-        "Pe aceastÄ paginÄ gÄseČ™ti toate variantele prin care ne poČ›i fi alÄturi: sponsorizare, Formular 230, PayPal Č™i transfer bancar.",
+        "Pe această pagină găsești toate variantele prin care ne poți fi alături: sponsorizare, Formular 230, PayPal și transfer bancar.",
     },
     actions: {
-      eyebrow: "OPČšIUNI DE SUSČšINERE",
-      title: "Alege varianta potrivitÄ",
+      eyebrow: "OPȚIUNI DE SUSȚINERE",
+      title: "Alege varianta potrivită",
       copy:
-        "Am pregÄtit o paginÄ clarÄ, fÄrÄ paČ™i complicaČ›i, astfel Ă®ncĂ˘t sÄ poČ›i ajuta rapid, fie ca persoanÄ juridicÄ, fie ca persoanÄ fizicÄ.",
+        "Am pregătit o pagină clară, fără pași complicați, astfel încât să poți ajuta rapid, fie ca persoană juridică, fie ca persoană fizică.",
     },
     sponsor: {
       eyebrow: "PERSOANE JURIDICE",
       title: "Material de sponsorizare",
       copy:
-        "DacÄ reprezinČ›i o companie, poČ›i descÄrca materialul de sponsorizare Č™i reveni cÄtre noi pentru detaliile finale.",
-      button: "DescarcÄ PDF-ul",
-      note: "FiČ™ierul disponibil acum este pachetul nostru de sponsorizare curent.",
+        "Dacă reprezinți o companie, poți descărca materialul de sponsorizare și reveni către noi pentru detaliile finale.",
+      button: "Descarcă PDF-ul",
+      note: "Fișierul disponibil aici este modelul de contract de sponsorizare pentru persoane juridice.",
     },
     form230: {
       eyebrow: "PERSOANE FIZICE",
       title: "Formular 230",
       copy:
-        "PoČ›i completa direct Formularul 230 pentru redirecČ›ionarea impozitului, direct din site-ul nostru, prin platforma oficialÄ formular230.ro.",
+        "Poți completa direct Formularul 230 pentru redirecționarea impozitului, direct din site-ul nostru, prin platforma oficială formular230.ro.",
       button: "Deschide Formularul 230",
-      note: "Formularul se deschide Ă®ntr-un pop-up securizat, fÄrÄ sÄ pÄrÄseČ™ti pagina.",
+      note: "Formularul se deschide într-un pop-up securizat, fără să părăsești pagina.",
     },
     paypal: {
-      eyebrow: "DONAČšII RAPIDE",
+      eyebrow: "DONAȚII RAPIDE",
       title: "PayPal",
       copy:
-        "Butonul direct cÄtre PayPal va fi conectat aici, ca varianta cea mai rapidÄ pentru donaČ›ii individuale.",
-      button: "Link PayPal Ă®n curĂ˘nd",
-      note: "AdÄugÄm linkul de donaČ›ie imediat ce ni-l trimiČ›i.",
+        "Butonul direct către PayPal va fi conectat aici, ca varianta cea mai rapidă pentru donații individuale.",
+      button: "Link PayPal în curând",
+      note: "Adăugăm linkul de donație imediat ce ni-l trimiți.",
     },
     iban: {
       eyebrow: "TRANSFER BANCAR",
       title: "IBAN",
-      copy: "Vom afiČ™a aici coordonatele complete pentru transfer imediat ce le primim.",
-      value: "IBAN-ul va fi adÄugat aici imediat ce ne trimiČ›i datele.",
-      note: "PĂ˘nÄ atunci ne poČ›i scrie pentru orice Ă®ntrebare legatÄ de susČ›inere.",
+      copy: "Vom afișa aici coordonatele complete pentru transfer imediat ce le primim.",
+      value: "IBAN-ul va fi adăugat aici imediat ce ne trimiți datele.",
+      note: "Până atunci ne poți scrie pentru orice întrebare legată de susținere.",
     },
   },
   en: {
@@ -132,7 +210,7 @@ const translations = {
       copy:
         "If you represent a company, you can download the sponsorship material and come back to us for the final details.",
       button: "Download the PDF",
-      note: "The current file available here is our active sponsorship packet.",
+      note: "The file available here is the sponsorship contract model for legal entities.",
     },
     form230: {
       eyebrow: "INDIVIDUAL SUPPORT",
@@ -159,6 +237,10 @@ const translations = {
     },
   },
 };
+
+Object.keys(translations).forEach((language) => {
+  translations[language] = repairNestedStrings(translations[language]);
+});
 
 let currentLanguage = "ro";
 
@@ -218,6 +300,12 @@ const applyLanguage = (language) => {
   try {
     window.localStorage.setItem("delta-language", language);
   } catch {}
+
+  repairRenderedText(document.body);
+  document.title = repairMojibakeString(document.title);
+  if (metaDescription) {
+    metaDescription.setAttribute("content", repairMojibakeString(metaDescription.getAttribute("content") ?? ""));
+  }
 };
 
 const showTopbar = () => {
@@ -315,4 +403,5 @@ const storedLanguage = (() => {
 })();
 
 applyLanguage(storedLanguage === "en" ? "en" : "ro");
+
 

@@ -66,6 +66,7 @@ const contactInputEmail = document.querySelector(".contact-input-email");
 const contactInputMessage = document.querySelector(".contact-input-message");
 const contactFormNote = document.querySelector(".contact-form-note");
 const contactSubmit = document.querySelector(".contact-submit");
+const contactEmailValue = document.querySelector(".contact-email-value");
 const contactEmailLabel = document.querySelector(".contact-email-label");
 const contactPhoneLabel = document.querySelector(".contact-phone-label");
 const contactNoteLabel = document.querySelector(".contact-note-label");
@@ -86,13 +87,103 @@ const navLinkMap = {
   contact: document.querySelector('[data-nav-link="contact"]'),
 };
 
+const CONTACT_EMAIL = "contact@deltaforce.ro";
+const EMAILJS_PUBLIC_KEY = "rifnckMBE_mNi7VpZ";
+const EMAILJS_SERVICE_ID = "service_0jzjlie";
+const EMAILJS_TEMPLATE_ID = "template_m4msnqs";
+
+const mojibakePairs = [
+  [String.fromCodePoint(0x00C4, 0x201A), "Ă"],
+  [String.fromCodePoint(0x00C4, 0x0083), "ă"],
+  [String.fromCodePoint(0x0102, 0x201A), "Â"],
+  [String.fromCodePoint(0x0102, 0x02D8), "â"],
+  [String.fromCodePoint(0x0102, 0x017D), "Î"],
+  [String.fromCodePoint(0x0102, 0x00AE), "î"],
+  [String.fromCodePoint(0x010C, 0x0098), "Ș"],
+  [String.fromCodePoint(0x010C, 0x2122), "ș"],
+  [String.fromCodePoint(0x010C, 0x0161), "Ț"],
+  [String.fromCodePoint(0x010C, 0x203A), "ț"],
+  [String.fromCodePoint(0x00C2, 0x00AB), "«"],
+  [String.fromCodePoint(0x00C2, 0x00BB), "»"],
+];
+
+const repairMojibakeString = (value) => {
+  if (typeof value !== "string") return value;
+
+  let repaired = value;
+
+  mojibakePairs.forEach(([broken, fixed]) => {
+    repaired = repaired.split(broken).join(fixed);
+  });
+
+  return repaired;
+};
+
+const repairNestedStrings = (value) => {
+  if (typeof value === "string") {
+    return repairMojibakeString(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(repairNestedStrings);
+  }
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, entry]) => [key, repairNestedStrings(entry)])
+    );
+  }
+
+  return value;
+};
+
+const repairRenderedText = (root = document.body) => {
+  if (!root) return;
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  const attributeNames = [
+    "aria-label",
+    "title",
+    "alt",
+    "placeholder",
+    "content",
+    "data-lightbox-title",
+  ];
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const parentTag = node.parentElement?.tagName;
+    if (parentTag === "SCRIPT" || parentTag === "STYLE") continue;
+    textNodes.push(node);
+  }
+
+  textNodes.forEach((node) => {
+    const fixed = repairMojibakeString(node.nodeValue);
+    if (fixed !== node.nodeValue) {
+      node.nodeValue = fixed;
+    }
+  });
+
+  root.querySelectorAll?.("*").forEach((element) => {
+    attributeNames.forEach((attribute) => {
+      if (!element.hasAttribute(attribute)) return;
+      const value = element.getAttribute(attribute);
+      const fixed = repairMojibakeString(value);
+      if (fixed !== value) {
+        element.setAttribute(attribute, fixed);
+      }
+    });
+  });
+};
+
 const translations = {
   ro: {
     meta: {
       title: "Delta Force Robotics | FRC 9001 & FTC 17713",
-      description: "Delta Force Robotics - site cinematic pentru FRC 9001 Č™i FTC 17713, organizat pe sezoane Č™i competiČ›ii.",
+      description: "Delta Force Robotics - site cinematic pentru FRC 9001 și FTC 17713, organizat pe sezoane și competiții.",
     },
-    brandAria: "Pagina principalÄ Delta Force",
+    brandAria: "Pagina principală Delta Force",
     navToggleLabel: "Deschide meniul de navigare",
     nav: {
       home: "Home",
@@ -103,15 +194,15 @@ const translations = {
     },
     language: {
       image: "assets/images/flags/romania.png",
-      label: "SchimbÄ Ă®n englezÄ",
+      label: "Schimbă în engleză",
     },
     hero: {
       static: "CONSTRUIM",
       words: [
-        "ROBOČšI",
+        "ROBOȚI",
         "ECHIPE",
         "AUTONOMII",
-        "ALIANČšE",
+        "ALIANȚE",
         "COMUNITATE",
         "LIDERI",
         "CAMPIONI",
@@ -122,11 +213,11 @@ const translations = {
     about: {
       eyebrow: "Despre noi",
       title: "Delta Force Robotics",
-      lead: "Suntem Delta Force, echipa de roboticÄ a Liceului NaČ›ional de InformaticÄ Arad, fondatÄ Ă®n 2018.",
+      lead: "Suntem Delta Force, echipa de robotică a Liceului Național de Informatică Arad, fondată în 2018.",
       copyOne:
-        "Am pornit la drum cu resurse limitate, dar prin perseverenČ›Ä, Ă®nvÄČ›are continuÄ Č™i colaborare am crescut Ă®ntr-o echipÄ stabilÄ, cu un laborator dedicat Č™i o comunitate care ne susČ›ine.",
+        "Am pornit la drum cu resurse limitate, dar prin perseverență, învățare continuă și colaborare am crescut într-o echipă stabilă, cu un laborator dedicat și o comunitate care ne susține.",
       copyTwo:
-        "Credem Ă®n fair-play, respect reciproc Č™i sprijin Ă®ntre echipe, iar modul nostru de lucru se bazeazÄ pe prototipare, testare Č™i asumarea responsabilitÄČ›ii faČ›Ä de obiectivele echipei Č™i faČ›Ä de comunitatea FIRST.",
+        "Credem în fair-play, respect reciproc și sprijin între echipe, iar modul nostru de lucru se bazează pe prototipare, testare și asumarea responsabilității față de obiectivele echipei și față de comunitatea FIRST.",
       teamAlt: "Fotografie de grup a echipei Delta Force",
       teamAria: "Deschide fotografia de grup",
       teamLightboxTitle: "Fotografie de grup Delta Force",
@@ -137,58 +228,65 @@ const translations = {
     ftc: {
       title: "FIRST Tech Challenge",
       subtitle:
-        "CompetiČ›ie pentru roboČ›i de dimensiuni mici, construiČ›i Č™i programaČ›i de elevi, Ă®n meciuri rapide Č™i foarte tehnice.",
-      factOne: "roboČ›i de mici dimensiuni",
-      factTwo: "alianČ›e de cĂ˘te 2 echipe",
-      factThree: "iterare, autonomie Č™i driver control",
-      cta: "VizualizeazÄ sezonul",
+        "Competiție pentru roboți de dimensiuni mici, construiți și programați de elevi, în meciuri rapide și foarte tehnice.",
+      factOne: "roboți de mici dimensiuni",
+      factTwo: "alianțe de câte 2 echipe",
+      factThree: "iterare, autonomie și driver control",
+      cta: "Vizualizează sezonul",
       currentBadge: "Actual",
     },
     frc: {
       title: "FIRST Robotics Competition",
       subtitle:
-        "CompetiČ›ie pentru roboČ›i de mari dimensiuni, unde designul mecanic, strategia Č™i rezistenČ›a fac diferenČ›a.",
-      factOne: "roboČ›i de mari dimensiuni",
-      factTwo: "alianČ›e de cĂ˘te 3 echipe",
-      factThree: "strategie, impact Č™i meciuri intense",
-      cta: "VizualizeazÄ sezonul",
+        "Competiție pentru roboți de mari dimensiuni, unde designul mecanic, strategia și rezistența fac diferența.",
+      factOne: "roboți de mari dimensiuni",
+      factTwo: "alianțe de câte 3 echipe",
+      factThree: "strategie, impact și meciuri intense",
+      cta: "Vizualizează sezonul",
     },
     fgc: {
       title: "FIRST Global Challenge",
       subtitle:
-        "CompetiČ›ie internaČ›ionalÄ de roboticÄ Ă®n care fiecare Č›arÄ vine cu o singurÄ echipÄ. Pentru noi, FGC Ă®nseamnÄ reprezentarea RomĂ˘niei Ă®ntr-un format axat pe STEM, colaborare Č™i impact global.",
-      program: "Participarea Delta Force la competiČ›ia globalÄ FIRST",
+        "Competiție internațională de robotică în care fiecare țară vine cu o singură echipă. Pentru noi, FGC înseamnă reprezentarea României într-un format axat pe STEM, colaborare și impact global.",
+      program: "Participarea Delta Force la competiția globală FIRST",
       cta: "Vezi participarea",
     },
     contact: {
       eyebrow: "Contact",
-      title: "ContacteazÄ-ne",
+      title: "Contactează-ne",
       copy:
-        "DacÄ vrei sÄ colaborezi cu echipa, sÄ ne susČ›ii sau sÄ afli mai multe despre activitatea noastrÄ, ne poČ›i scrie direct aici.",
+        "Dacă vrei să colaborezi cu echipa, să ne susții sau să afli mai multe despre activitatea noastră, ne poți scrie direct aici.",
       formName: "Nume",
       formEmail: "Email",
       formMessage: "Mesaj",
-      formNamePlaceholder: "Cum te numeČ™ti",
+      formNamePlaceholder: "Cum te numești",
       formEmailPlaceholder: "adresa@exemplu.com",
       formMessagePlaceholder: "Spune-ne cu ce te putem ajuta",
-      formNote: "Formular demonstrativ pentru moment. ĂŽl conectÄm ulterior.",
+      formNote: "Mesajele se trimit direct din site către contact@deltaforce.ro.",
+      formValidation: "Completează numele, emailul și mesajul înainte să trimiți.",
+      formInvalidEmail: "Introdu o adresă de email validă înainte să trimiți.",
+      formSending: "Trimitem mesajul acum...",
+      formSuccess: "Mesaj trimis. Revenim cât mai curând.",
+      formFailure: "N-am reușit să trimitem mesajul acum. Încearcă din nou sau scrie-ne la contact@deltaforce.ro.",
+      formFailureWithReason: "N-am reușit să trimitem mesajul: {reason}",
       submit: "Trimite mesaj",
+      submitSending: "Se trimite...",
       emailLabel: "Email",
       phoneLabel: "Numere de telefon",
-      noteLabel: "ColaborÄri",
+      noteLabel: "Colaborări",
       corinaRole: "Corina Botosan - Mentor",
       octavianRole: "Octavian Botosan - Mentor",
       sideNote:
-        "Pentru parteneriate, sponsorizÄri sau oportunitÄČ›i educaČ›ionale, ne poČ›i contacta direct prin email sau telefon.",
+        "Pentru parteneriate, sponsorizări sau oportunități educaționale, ne poți contacta direct prin email sau telefon.",
     },
     supportPopup: {
-      ariaLabel: "SusČ›inere Delta Force",
-      closeLabel: "ĂŽnchide fereastra",
-      eyebrow: "SUSČšINE DELTA FORCE",
-      title: "SusČ›inerea ta conteazÄ",
+      ariaLabel: "Susținere Delta Force",
+      closeLabel: "Închide fereastra",
+      eyebrow: "SUSȚINE DELTA FORCE",
+      title: "Susținerea ta contează",
       copy:
-        "IntrÄ pe pagina de susČ›inere Č™i vezi variantele prin care ne poČ›i ajuta sÄ ajungem mai aproape de competiČ›ia mondialÄ.",
-      cta: "Vezi cum poČ›i ajuta",
+        "Intră pe pagina de susținere și vezi variantele prin care ne poți ajuta să ajungem mai aproape de competiția mondială.",
+      cta: "Vezi cum poți ajuta",
     },
     footer: {
       ftc: "Arhiva FTC",
@@ -196,12 +294,12 @@ const translations = {
     },
     carousel: {
       prev: "Sezonul anterior",
-      next: "Sezonul urmÄtor",
+      next: "Sezonul următor",
     },
     lightbox: {
       dialogLabel: "Vizualizare imagine",
-      closeLabel: "ĂŽnchide imaginea",
-      closeText: "ĂŽnchide",
+      closeLabel: "Închide imaginea",
+      closeText: "Închide",
     },
   },
   en: {
@@ -288,8 +386,15 @@ const translations = {
       formNamePlaceholder: "What is your name",
       formEmailPlaceholder: "address@example.com",
       formMessagePlaceholder: "Tell us how we can help",
-      formNote: "Demo form for now. We will connect it later.",
+      formNote: "Messages are sent directly from the site to contact@deltaforce.ro.",
+      formValidation: "Please complete your name, email, and message before sending.",
+      formInvalidEmail: "Please enter a valid email address before sending.",
+      formSending: "Sending your message now...",
+      formSuccess: "Message sent. We will get back to you soon.",
+      formFailure: "We could not send the message right now. Please try again or write to contact@deltaforce.ro.",
+      formFailureWithReason: "We could not send the message: {reason}",
       submit: "Send message",
+      submitSending: "Sending...",
       emailLabel: "Email",
       phoneLabel: "Phone numbers",
       noteLabel: "Collaborations",
@@ -323,17 +428,21 @@ const translations = {
   },
 };
 
+Object.keys(translations).forEach((language) => {
+  translations[language] = repairNestedStrings(translations[language]);
+});
+
 translations.ro.fgc = {
   title: "FIRST Global Challenge",
   subtitle:
-    "CompetiČ›ie internaČ›ionalÄ de roboticÄ Ă®n care fiecare Č›arÄ vine cu o singurÄ echipÄ. Pentru noi, FGC Ă®nseamnÄ reprezentarea RomĂ˘niei Ă®ntr-un format axat pe STEM, colaborare Č™i impact global.",
-  factOne: "o singurÄ echipÄ pentru fiecare Č›arÄ",
-  factTwo: "RomĂ˘nia Ă®ntr-o competiČ›ie globalÄ",
-  factThree: "roboticÄ, STEM Č™i colaborare internaČ›ionalÄ",
-  program: "Participarea Delta Force la competiČ›ia globalÄ FIRST",
-  coverTitle: "RomĂ˘nia la FGC 2023",
+    "Competiție internațională de robotică în care fiecare țară vine cu o singură echipă. Pentru noi, FGC înseamnă reprezentarea României într-un format axat pe STEM, colaborare și impact global.",
+  factOne: "o singură echipă pentru fiecare țară",
+  factTwo: "România într-o competiție globală",
+  factThree: "robotică, STEM și colaborare internațională",
+  program: "Participarea Delta Force la competiția globală FIRST",
+  coverTitle: "România la FGC 2023",
   coverCopy:
-    "Povestea participÄrii noastre Ă®ntr-o competiČ›ie internaČ›ionalÄ unde fiecare Č›arÄ este reprezentatÄ de o singurÄ echipÄ.",
+    "Povestea participării noastre într-o competiție internațională unde fiecare țară este reprezentată de o singură echipă.",
   cta: "Vezi participarea",
 };
 
@@ -460,6 +569,37 @@ const dismissSupportPopup = () => {
   window.setTimeout(() => {
     supportPopup.hidden = true;
   }, 220);
+};
+
+const getContactCopy = () => (translations[currentLanguage] ?? translations.ro).contact;
+
+const setContactFormNote = (message) => {
+  if (contactFormNote) {
+    contactFormNote.textContent = message;
+  }
+};
+
+const setContactSubmitState = (isSending) => {
+  if (!(contactSubmit instanceof HTMLButtonElement)) return;
+
+  const contactCopy = getContactCopy();
+  contactSubmit.disabled = isSending;
+  contactSubmit.textContent = isSending ? contactCopy.submitSending : contactCopy.submit;
+};
+
+const ensureEmailJs = () => {
+  const emailjsClient = window.emailjs;
+
+  if (!emailjsClient?.send || !emailjsClient?.init) {
+    return null;
+  }
+
+  if (!ensureEmailJs.initialized) {
+    emailjsClient.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    ensureEmailJs.initialized = true;
+  }
+
+  return emailjsClient;
 };
 
 const finalizeSiteEntrance = () => {
@@ -664,6 +804,10 @@ const applyLanguage = (language) => {
   contactInputMessage?.setAttribute("placeholder", copy.contact.formMessagePlaceholder);
   contactFormNote && (contactFormNote.textContent = copy.contact.formNote);
   contactSubmit && (contactSubmit.textContent = copy.contact.submit);
+  if (contactEmailValue) {
+    contactEmailValue.textContent = CONTACT_EMAIL;
+    contactEmailValue.setAttribute("href", `mailto:${CONTACT_EMAIL}`);
+  }
   contactEmailLabel && (contactEmailLabel.textContent = copy.contact.emailLabel);
   contactPhoneLabel && (contactPhoneLabel.textContent = copy.contact.phoneLabel);
   contactNoteLabel && (contactNoteLabel.textContent = copy.contact.noteLabel);
@@ -689,6 +833,12 @@ const applyLanguage = (language) => {
   try {
     window.localStorage.setItem("delta-language", language);
   } catch {}
+
+  repairRenderedText(document.body);
+  document.title = repairMojibakeString(document.title);
+  if (metaDescription) {
+    metaDescription.setAttribute("content", repairMojibakeString(metaDescription.getAttribute("content") ?? ""));
+  }
 };
 
 window.addEventListener("load", () => {
@@ -798,8 +948,91 @@ languageToggle?.addEventListener("click", () => {
 
 supportPopupClose?.addEventListener("click", dismissSupportPopup);
 
-contactForm?.addEventListener("submit", (event) => {
+contactForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const contactCopy = getContactCopy();
+  const name = contactInputName?.value.trim() ?? "";
+  const email = contactInputEmail?.value.trim() ?? "";
+  const message = contactInputMessage?.value.trim() ?? "";
+
+  if (!name || !email || !message) {
+    setContactFormNote(contactCopy.formValidation);
+
+    if (!name) {
+      contactInputName?.focus();
+      contactInputName?.reportValidity?.();
+      return;
+    }
+
+    if (!email) {
+      contactInputEmail?.focus();
+      contactInputEmail?.reportValidity?.();
+      return;
+    }
+
+    contactInputMessage?.focus();
+    contactInputMessage?.reportValidity?.();
+    return;
+  }
+
+  if (contactInputEmail instanceof HTMLInputElement && !contactInputEmail.checkValidity()) {
+    setContactFormNote(contactCopy.formInvalidEmail);
+    contactInputEmail.focus();
+    contactInputEmail.reportValidity();
+    return;
+  }
+
+  const emailjsClient = ensureEmailJs();
+
+  if (!emailjsClient) {
+    setContactFormNote(contactCopy.formFailure);
+    return;
+  }
+
+  const subject = currentLanguage === "en" ? `Website message from ${name}` : `Mesaj de pe site de la ${name}`;
+  const timestamp = new Intl.DateTimeFormat(currentLanguage === "en" ? "en-GB" : "ro-RO", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date());
+  const templateParams = {
+    name,
+    email,
+    message,
+    subject,
+    to_email: CONTACT_EMAIL,
+    from_name: name,
+    from_email: email,
+    reply_to: email,
+    reply_email: email,
+    sender_name: name,
+    sender_email: email,
+    user_name: name,
+    user_email: email,
+    file_name: currentLanguage === "en" ? "No attachment" : "Fără atașament",
+    time: timestamp,
+    message_html: message.replace(/\n/g, "<br>"),
+  };
+
+  setContactSubmitState(true);
+  setContactFormNote(contactCopy.formSending);
+
+  try {
+    await emailjsClient.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+    contactForm.reset();
+    setContactFormNote(contactCopy.formSuccess);
+  } catch (error) {
+    console.error("EmailJS send failed", error);
+    const reason =
+      error?.text ||
+      error?.message ||
+      (typeof error === "string" ? error : "") ||
+      contactCopy.formFailure;
+    const message = contactCopy.formFailureWithReason.replace("{reason}", reason);
+    setContactFormNote(message);
+  } finally {
+    setContactSubmitState(false);
+  }
 });
 
 lightboxTriggers.forEach((trigger) => {
@@ -840,4 +1073,5 @@ const storedLanguage = (() => {
 })();
 
 applyLanguage(storedLanguage === "en" ? "en" : "ro");
+
 

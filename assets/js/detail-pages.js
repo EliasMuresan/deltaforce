@@ -21,20 +21,20 @@ const detailTranslations = {
       fgc: "FGC",
       contact: "Contact",
     },
-    brandAria: "Pagina principalÄ a echipei noastre",
+    brandAria: "Pagina principală a echipei noastre",
     navToggleLabel: "Deschide meniul de navigare",
-    languageLabel: "SchimbÄ Ă®n englezÄ",
+    languageLabel: "Schimbă în engleză",
     languageImage: "assets/images/flags/romania.png",
     gallery: {
-      previous: "ĂŽnapoi",
-      next: "ĂŽnainte",
-      close: "ĂŽnchide",
+      previous: "Înapoi",
+      next: "Înainte",
+      close: "Închide",
       open: "Deschide imaginea",
       counter: (index, total) => `${index} / ${total}`,
       imageLabels: [
         "hero de sezon",
         "cadru de atelier",
-        "cadru de competiČ›ie",
+        "cadru de competiție",
         "moment de echipa",
       ],
     },
@@ -69,20 +69,33 @@ const detailTranslations = {
 
 const placeholderSet = Array(4).fill("assets/images/common/placeholder.png");
 
-detailTranslations.ro.brandAria = "Pagina principalÄ Delta Force";
-detailTranslations.ro.languageLabel = "SchimbÄ Ă®n englezÄ";
+detailTranslations.ro.brandAria = "Pagina principală Delta Force";
+detailTranslations.ro.languageLabel = "Schimbă în engleză";
 detailTranslations.en.brandAria = "Delta Force home page";
 
 const repairMojibakeString = (text) => {
   if (typeof text !== "string") return text;
 
+  const mojibakePairs = [
+    [String.fromCodePoint(0x00C4, 0x201A), "Ă"],
+    [String.fromCodePoint(0x00C4, 0x0083), "ă"],
+    [String.fromCodePoint(0x0102, 0x201A), "Â"],
+    [String.fromCodePoint(0x0102, 0x02D8), "â"],
+    [String.fromCodePoint(0x0102, 0x017D), "Î"],
+    [String.fromCodePoint(0x0102, 0x00AE), "î"],
+    [String.fromCodePoint(0x010C, 0x0098), "Ș"],
+    [String.fromCodePoint(0x010C, 0x2122), "ș"],
+    [String.fromCodePoint(0x010C, 0x0161), "Ț"],
+    [String.fromCodePoint(0x010C, 0x203A), "ț"],
+    [String.fromCodePoint(0x00C2, 0x00AB), "«"],
+    [String.fromCodePoint(0x00C2, 0x00BB), "»"],
+  ];
+
   let repaired = text;
 
-  if (/[Ä‚ÄŚĂ„Ă˘]/.test(repaired)) {
-    try {
-      repaired = decodeURIComponent(escape(repaired));
-    } catch {}
-  }
+  mojibakePairs.forEach(([broken, fixed]) => {
+    repaired = repaired.split(broken).join(fixed);
+  });
 
   return repaired.replace(/\bFirst\b/g, "FIRST").replace(/\s{2,}/g, " ").trim();
 };
@@ -103,6 +116,46 @@ const repairNestedStrings = (value) => {
   }
 
   return value;
+};
+
+const repairRenderedText = (root = document.body) => {
+  if (!root) return;
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  const attributeNames = [
+    "aria-label",
+    "title",
+    "alt",
+    "placeholder",
+    "content",
+    "data-lightbox-title",
+  ];
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const parentTag = node.parentElement?.tagName;
+    if (parentTag === "SCRIPT" || parentTag === "STYLE") continue;
+    textNodes.push(node);
+  }
+
+  textNodes.forEach((node) => {
+    const fixed = repairMojibakeString(node.nodeValue);
+    if (fixed !== node.nodeValue) {
+      node.nodeValue = fixed;
+    }
+  });
+
+  root.querySelectorAll?.("*").forEach((element) => {
+    attributeNames.forEach((attribute) => {
+      if (!element.hasAttribute(attribute)) return;
+      const value = element.getAttribute(attribute);
+      const fixed = repairMojibakeString(value);
+      if (fixed !== value) {
+        element.setAttribute(attribute, fixed);
+      }
+    });
+  });
 };
 
 const detailPages = {
@@ -344,22 +397,22 @@ const detailPages = {
   "events-premier": {
     title: "Evenimente Premier",
     eyebrow: "Premier Events",
-    lead: "Pagina asta e pentru momentele care nu Č›in strict de un singur sezon, dar meritÄ totuČ™i spaČ›iu propriu Č™i o prezentare care sÄ parÄ premium.",
+    lead: "Pagina asta e pentru momentele care nu țin strict de un singur sezon, dar merită totuși spațiu propriu și o prezentare care să pară premium.",
     intro: [
-      "Evenimentele premier pot include showcase-uri, prezenČ›e speciale, demonstraČ›ii, apariČ›ii publice sau orice context Ă®n care Delta Force a avut nevoie de o paginÄ separatÄ faČ›Ä de arhiva clasicÄ.",
-      "Formatul Ästa lasÄ imaginile sÄ preia tonul vizual, iar textul rÄmĂ˘ne doar atĂ˘t cĂ˘t e nevoie pentru a lega apariČ›ia, contextul Č™i impactul evenimentului.",
+      "Evenimentele premier pot include showcase-uri, prezențe speciale, demonstrații, apariții publice sau orice context în care Delta Force a avut nevoie de o pagină separată față de arhiva clasică.",
+      "Formatul ăsta lasă imaginile să preia tonul vizual, iar textul rămâne doar atât cât e nevoie pentru a lega apariția, contextul și impactul evenimentului.",
     ],
     focusLabel: "Event focus",
-    focusTitle: "Momente care meritÄ pagina lor",
-    focusBody: "Aici poČ›i grupa povestea unui eveniment special, felul Ă®n care a fost pregÄtit, cine a participat, ce a fost prezentat Č™i de ce momentul meritÄ pÄstrat separat.",
+    focusTitle: "Momente care merită pagina lor",
+    focusBody: "Aici poți grupa povestea unui eveniment special, felul în care a fost pregătit, cine a participat, ce a fost prezentat și de ce momentul merită păstrat separat.",
     highlights: [
-      "bun pentru showcase, demo Č™i prezentÄri publice",
-      "spaČ›iu pentru poze mari Č™i recap scurt",
+      "bun pentru showcase, demo și prezentări publice",
+      "spațiu pentru poze mari și recap scurt",
       "loc pentru evenimente care ies din cronologia standard",
     ],
     outro: [
-      "Paginile de tipul Ästa ies mai bine cĂ˘nd par aerisite Č™i deliberate. CĂ˘teva imagini bune Č™i un text scurt spun mai mult decĂ˘t foarte multe casete Č™i etichete.",
-      "Pe termen lung, secČ›iunea poate deveni un loc bun pentru cele mai vizibile momente publice ale echipei, fÄrÄ sÄ Ă®ncarce sezoanele FTC, FRC sau FGC.",
+      "Paginile de tipul ăsta ies mai bine când par aerisite și deliberate. Câteva imagini bune și un text scurt spun mai mult decât foarte multe casete și etichete.",
+      "Pe termen lung, secțiunea poate deveni un loc bun pentru cele mai vizibile momente publice ale echipei, fără să încarce sezoanele FTC, FRC sau FGC.",
     ],
     footer: "Pagina de evenimente premier",
     images: placeholderSet,
@@ -393,22 +446,22 @@ Object.assign(detailPages, {
   "ftc-freight-frenzy": {
     title: "Freight Frenzy",
     eyebrow: "2021 - 2022",
-    lead: "Freight Frenzy a fost sezonul Ă®n care Delta Force a trecut din statutul de echipÄ foarte bunÄ la statutul de campioanÄ mondialÄ FTC. Jocul a fost despre freight, duck carousel Č™i warehouse cycles, iar 17713 a Ă®ncheiat anul oficial cu 18 victorii Č™i 5 Ă®nfrĂ˘ngeri.",
+    lead: "Freight Frenzy a fost sezonul în care Delta Force a trecut din statutul de echipă foarte bună la statutul de campioană mondială FTC. Jocul a fost despre freight, duck carousel și warehouse cycles, iar 17713 a încheiat anul oficial cu 18 victorii și 5 înfrângeri.",
     intro: [
-      "ĂŽn RomĂ˘nia, Delta Force a ajuns pĂ˘nÄ Ă®n zona de top a campionatului naČ›ional Č™i a primit Inspire Award 2nd Place, un semn clar cÄ echipa nu impresiona doar prin meciuri, ci Č™i prin robot, documentaČ›ie, outreach Č™i prezentare tehnicÄ.",
-      "La Houston, povestea a urcat la nivelul maxim: 17713 a cĂ˘Č™tigat Franklin Division Č™i apoi FIRST World Championship, din postura de alliance captain. Pentru Delta Force, Freight Frenzy rÄmĂ˘ne sezonul care a stabilit standardul real al programului FTC.",
+      "În România, Delta Force a ajuns până în zona de top a campionatului național și a primit Inspire Award 2nd Place, un semn clar că echipa nu impresiona doar prin meciuri, ci și prin robot, documentație, outreach și prezentare tehnică.",
+      "La Houston, povestea a urcat la nivelul maxim: 17713 a câștigat Franklin Division și apoi FIRST World Championship, din postura de alliance captain. Pentru Delta Force, Freight Frenzy rămâne sezonul care a stabilit standardul real al programului FTC.",
     ],
     focusLabel: "Season focus",
-    focusTitle: "De la NaČ›ionalÄ la Houston",
-    focusBody: "Partea centralÄ a sezonului este tranziČ›ia de la performanČ›a naČ›ionalÄ la run-ul internaČ›ional din Houston. Freight Frenzy a fost anul Ă®n care Delta Force a dovedit cÄ poate construi un robot de top, poate susČ›ine presiunea playoff-urilor Č™i poate Ă®nchide sezonul cu cel mai mare rezultat posibil Ă®n FTC.",
+    focusTitle: "De la Națională la Houston",
+    focusBody: "Partea centrală a sezonului este tranziția de la performanța națională la run-ul internațional din Houston. Freight Frenzy a fost anul în care Delta Force a dovedit că poate construi un robot de top, poate susține presiunea playoff-urilor și poate închide sezonul cu cel mai mare rezultat posibil în FTC.",
     highlights: [
-      "18-5 Ă®n evenimentele oficiale FTC din sezon",
+      "18-5 în evenimentele oficiale FTC din sezon",
       "Inspire Award 2nd Place la Romania National Championship",
-      "Franklin Division winner Č™i FIRST World Championship winner la Houston",
+      "Franklin Division winner și FIRST World Championship winner la Houston",
     ],
     outro: [
-      "Din punct de vedere al arhivei, Freight Frenzy este sezonul care explicÄ de ce numele Delta Force a Ă®nceput sÄ fie menČ›ionat mult mai des Ă®n afara RomĂ˘niei. A fost o combinaČ›ie rarÄ de ritm, consistenČ›Ä, leadership Č™i execuČ›ie tehnicÄ bunÄ pĂ˘nÄ la capÄt.",
-      "Descrierea sezonului poate merge foarte clar pe ideea de breakthrough year: primul mare vĂ˘rf internaČ›ional, primul titlu mondial Č™i anul care a fÄcut ca toate sezoanele urmÄtoare sÄ fie privite printr-un standard mult mai ridicat.",
+      "Din punct de vedere al arhivei, Freight Frenzy este sezonul care explică de ce numele Delta Force a început să fie menționat mult mai des în afara României. A fost o combinație rară de ritm, consistență, leadership și execuție tehnică bună până la capăt.",
+      "Descrierea sezonului poate merge foarte clar pe ideea de breakthrough year: primul mare vârf internațional, primul titlu mondial și anul care a făcut ca toate sezoanele următoare să fie privite printr-un standard mult mai ridicat.",
     ],
     footer: "Pagina de sezon FTC 17713",
     images: [
@@ -421,22 +474,22 @@ Object.assign(detailPages, {
   "ftc-power-play": {
     title: "Power Play",
     eyebrow: "2022 - 2023",
-    lead: "Power Play a fost sezonul conurilor, al junction-urilor Č™i al controlului de final, iar pentru Delta Force a devenit anul Ă®n care progresul dintre Ă®nceputul sezonului Č™i naČ›ionalÄ s-a vÄzut cel mai clar.",
+    lead: "Power Play a fost sezonul conurilor, al junction-urilor și al controlului de final, iar pentru Delta Force a devenit anul în care progresul dintre începutul sezonului și națională s-a văzut cel mai clar.",
     intro: [
-      "17713 a Ă®ncheiat sezonul oficial cu 11 victorii Č™i 8 Ă®nfrĂ˘ngeri. ĂŽn prima parte a anului a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevÄrata explozie a venit la Romania National Championship.",
-      "La naČ›ionalÄ, Delta Force a terminat pe locul 1 dupÄ calificÄri, a intrat Ă®n playoff-uri ca Finalist Alliance Captain Č™i a primit Design Award. Power Play a arÄtat foarte bine cum o echipÄ poate urca Ă®n timpul sezonului Č™i poate Ă®nchide anul mult peste aČ™teptÄrile iniČ›iale.",
+      "17713 a încheiat sezonul oficial cu 11 victorii și 8 înfrângeri. În prima parte a anului a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevărata explozie a venit la Romania National Championship.",
+      "La națională, Delta Force a terminat pe locul 1 după calificări, a intrat în playoff-uri ca Finalist Alliance Captain și a primit Design Award. Power Play a arătat foarte bine cum o echipă poate urca în timpul sezonului și poate închide anul mult peste așteptările inițiale.",
     ],
     focusLabel: "Season focus",
-    focusTitle: "Sezonul saltului de consistenČ›Ä",
-    focusBody: "Descrierea sezonului merge pe ideea de precizie Č™i creČ™tere. Power Play nu a fost doar despre scor pe junctions Č™i endgame control, ci despre felul Ă®n care Delta Force a ajustat robotul Č™i jocul de echipÄ pĂ˘nÄ a ajuns sÄ domine ranking-ul de la naČ›ionalÄ.",
+    focusTitle: "Sezonul saltului de consistență",
+    focusBody: "Descrierea sezonului merge pe ideea de precizie și creștere. Power Play nu a fost doar despre scor pe junctions și endgame control, ci despre felul în care Delta Force a ajustat robotul și jocul de echipă până a ajuns să domine ranking-ul de la națională.",
     highlights: [
-      "11-8 Ă®n circuitul oficial Power Play",
-      "locul 1 dupÄ calificÄri la Romania National Championship",
-      "Finalist Alliance Captain Č™i Design Award la naČ›ionalÄ",
+      "11-8 în circuitul oficial Power Play",
+      "locul 1 după calificări la Romania National Championship",
+      "Finalist Alliance Captain și Design Award la națională",
     ],
     outro: [
-      "Ca poveste de sezon, Power Play este capitolul Ă®n care Delta Force a arÄtat cÄ Č™tie sÄ corecteze repede, sÄ Ă®nveČ›e din competiČ›ie Č™i sÄ transforme un an dificil Ă®ntr-unul foarte puternic la final.",
-      "Este Č™i unul dintre cele mai bune exemple pentru ideea de progres intern: nu doar rezultat final bun, ci Č™i un traseu clar de la iteraČ›ii Č™i ajustÄri cÄtre o formÄ de top exact cĂ˘nd conta mai mult.",
+      "Ca poveste de sezon, Power Play este capitolul în care Delta Force a arătat că știe să corecteze repede, să învețe din competiție și să transforme un an dificil într-unul foarte puternic la final.",
+      "Este și unul dintre cele mai bune exemple pentru ideea de progres intern: nu doar rezultat final bun, ci și un traseu clar de la iterații și ajustări către o formă de top exact când conta mai mult.",
     ],
     footer: "Pagina Power Play",
     images: placeholderSet,
@@ -444,22 +497,22 @@ Object.assign(detailPages, {
   "ftc-centerstage": {
     title: "Centerstage",
     eyebrow: "2023 - 2024",
-    lead: "Centerstage a fost sezonul pixelilor, al backdrop-ului Č™i al dronei, iar pentru Delta Force a funcČ›ionat ca un an Ă®n care jocul, designul robotului Č™i felul Ă®n care echipa se prezenta au Ă®nceput sÄ se lege foarte bine.",
+    lead: "Centerstage a fost sezonul pixelilor, al backdrop-ului și al dronei, iar pentru Delta Force a funcționat ca un an în care jocul, designul robotului și felul în care echipa se prezenta au început să se lege foarte bine.",
     intro: [
-      "ĂŽn datele oficiale FTC, 17713 a terminat sezonul cu 20 de victorii Č™i 7 Ă®nfrĂ˘ngeri Ă®n 5 evenimente. La RO #3 TimiČ™oara, echipa a obČ›inut Design Award Č™i a fost Finalist Alliance - 1st Team Selected, semn cÄ robotul Č™i execuČ›ia din meciuri mergeau Ă®n direcČ›ia bunÄ.",
-      "Centerstage a fost Č™i un sezon cu mult potenČ›ial vizual: backdrop scoring, drone launch Č™i o prezentare mai curatÄ a Ă®ntregii munci. Pentru Delta Force, anul acesta aratÄ un program FTC mai matur Č™i mai coerent Ă®n toate direcČ›iile lui.",
+      "În datele oficiale FTC, 17713 a terminat sezonul cu 20 de victorii și 7 înfrângeri în 5 evenimente. La RO #3 Timișoara, echipa a obținut Design Award și a fost Finalist Alliance - 1st Team Selected, semn că robotul și execuția din meciuri mergeau în direcția bună.",
+      "Centerstage a fost și un sezon cu mult potențial vizual: backdrop scoring, drone launch și o prezentare mai curată a întregii munci. Pentru Delta Force, anul acesta arată un program FTC mai matur și mai coerent în toate direcțiile lui.",
     ],
     focusLabel: "Season focus",
-    focusTitle: "Un sezon cu imagine clarÄ",
-    focusBody: "Descrierea sezonului poate merge pe ideea de maturizare a identitÄČ›ii de echipÄ. Centerstage nu a fost doar un an bun de competiČ›ie, ci Č™i unul Ă®n care Delta Force a arÄtat mai clar cum Ă®mbinÄ performanČ›a, designul robotului Č™i felul Ă®n care Ă®Č™i comunicÄ munca.",
+    focusTitle: "Un sezon cu imagine clară",
+    focusBody: "Descrierea sezonului poate merge pe ideea de maturizare a identității de echipă. Centerstage nu a fost doar un an bun de competiție, ci și unul în care Delta Force a arătat mai clar cum îmbină performanța, designul robotului și felul în care își comunică munca.",
     highlights: [
-      "20-7 Ă®n evenimentele oficiale FTC",
+      "20-7 în evenimentele oficiale FTC",
       "Design Award la RO #3 Timisoara",
-      "Finalist Alliance - 1st Team Selected Ă®ntr-un sezon mult mai stabil",
+      "Finalist Alliance - 1st Team Selected într-un sezon mult mai stabil",
     ],
     outro: [
-      "Centerstage meritÄ descris ca un sezon de consolidare vizibilÄ. Rezultatele au rÄmas bune, dar poate Č™i mai important a fost faptul cÄ echipa a pÄrut mai sigurÄ pe ea, mai bine organizatÄ Č™i mai clarÄ Ă®n alegerile tehnice.",
-      "DacÄ Freight Frenzy este sezonul breakthrough, iar Power Play este sezonul progresului, Centerstage este anul Ă®n care Delta Force Ă®ncepe sÄ arate ca o echipÄ complet formatÄ Č™i foarte conČ™tientÄ de identitatea ei.",
+      "Centerstage merită descris ca un sezon de consolidare vizibilă. Rezultatele au rămas bune, dar poate și mai important a fost faptul că echipa a părut mai sigură pe ea, mai bine organizată și mai clară în alegerile tehnice.",
+      "Dacă Freight Frenzy este sezonul breakthrough, iar Power Play este sezonul progresului, Centerstage este anul în care Delta Force începe să arate ca o echipă complet formată și foarte conștientă de identitatea ei.",
     ],
     footer: "Pagina Centerstage",
     images: placeholderSet,
@@ -467,22 +520,22 @@ Object.assign(detailPages, {
   "ftc-into-the-deep": {
     title: "Into The Deep",
     eyebrow: "2024 - 2025",
-    lead: "Into The Deep a dus jocul FTC Ă®ntr-o zonÄ subacvaticÄ, cu samples, specimens Č™i ascent, iar pentru Delta Force a devenit unul dintre cele mai solide Č™i mai eficiente sezoane de pĂ˘nÄ acum.",
+    lead: "Into The Deep a dus jocul FTC într-o zonă subacvatică, cu samples, specimens și ascent, iar pentru Delta Force a devenit unul dintre cele mai solide și mai eficiente sezoane de până acum.",
     intro: [
-      "17713 a Ă®ncheiat anul cu 23 de victorii Č™i doar 3 Ă®nfrĂ˘ngeri Ă®n 7 evenimente oficiale. La Romania West League Tournament, Delta Force a cĂ˘Č™tigat din postura de 1st Team Selected Č™i a luat Č™i Design Award, apoi Č™i-a continuat parcursul cÄtre Romania Championship.",
-      "Into The Deep a fost sezonul Ă®n care robotul a pÄrut foarte controlat, iar ritmul de competiČ›ie a rÄmas constant de la un event la altul. Din punct de vedere al arhivei FTC, este un sezon uČ™or de descris ca fiind compact, clar Č™i foarte competitiv.",
+      "17713 a încheiat anul cu 23 de victorii și doar 3 înfrângeri în 7 evenimente oficiale. La Romania West League Tournament, Delta Force a câștigat din postura de 1st Team Selected și a luat și Design Award, apoi și-a continuat parcursul către Romania Championship.",
+      "Into The Deep a fost sezonul în care robotul a părut foarte controlat, iar ritmul de competiție a rămas constant de la un event la altul. Din punct de vedere al arhivei FTC, este un sezon ușor de descris ca fiind compact, clar și foarte competitiv.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Unul dintre cele mai solide sezoane FTC",
-    focusBody: "Descrierea sezonului poate sta pe ideea de control Č™i constanČ›Ä. Into The Deep a avut un record excelent, un turneu regional cĂ˘Č™tigat, Design Award Č™i suficientÄ stabilitate cĂ˘t sÄ confirme cÄ Delta Force nu trÄieČ™te doar din vĂ˘rfuri punctuale, ci din consistenČ›Ä realÄ.",
+    focusBody: "Descrierea sezonului poate sta pe ideea de control și constanță. Into The Deep a avut un record excelent, un turneu regional câștigat, Design Award și suficientă stabilitate cât să confirme că Delta Force nu trăiește doar din vârfuri punctuale, ci din consistență reală.",
     highlights: [
-      "23-3 Ă®n evenimentele oficiale FTC",
+      "23-3 în evenimentele oficiale FTC",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
-      "Design Award Č™i calificare la Romania Championship",
+      "Design Award și calificare la Romania Championship",
     ],
     outro: [
-      "ĂŽn cronologia echipei, Into The Deep este genul de sezon care confirmÄ maturitatea unui program. Nu are nevoie de o singurÄ surprizÄ mare ca sÄ parÄ important; Ă®l susČ›in deja recordul, premiile Č™i coerenČ›a Ă®ntregului an.",
-      "Tocmai de aceea meritÄ descris ca un sezon elegant Č™i bine legat, Ă®n care Delta Force a combinat robotul competitiv cu o execuČ›ie constantÄ Č™i cu o identitate vizualÄ mai clarÄ ca Ă®n anii de Ă®nceput.",
+      "În cronologia echipei, Into The Deep este genul de sezon care confirmă maturitatea unui program. Nu are nevoie de o singură surpriză mare ca să pară important; îl susțin deja recordul, premiile și coerența întregului an.",
+      "Tocmai de aceea merită descris ca un sezon elegant și bine legat, în care Delta Force a combinat robotul competitiv cu o execuție constantă și cu o identitate vizuală mai clară ca în anii de început.",
     ],
     footer: "Pagina Into The Deep",
     images: placeholderSet,
@@ -490,22 +543,22 @@ Object.assign(detailPages, {
   "ftc-decode": {
     title: "Decode",
     eyebrow: "2025 - 2026 / Actual",
-    lead: "Decode este sezonul actual FTC, un joc care cere logicÄ, recunoaČ™tere de pattern-uri Č™i decizii rapide, iar pĂ˘nÄ acum Delta Force l-a transformat Ă®ntr-un nou parcurs de top pentru 17713.",
+    lead: "Decode este sezonul actual FTC, un joc care cere logică, recunoaștere de pattern-uri și decizii rapide, iar până acum Delta Force l-a transformat într-un nou parcurs de top pentru 17713.",
     intro: [
-      "ĂŽn circuitul oficial public, 17713 are momentan 17 victorii Č™i 3 Ă®nfrĂ˘ngeri Ă®n 5 evenimente. ĂŽn februarie 2026, Delta Force a cĂ˘Č™tigat West Romania League Tournament din postura de 1st Team Selected Č™i a primit Inspire Award 3rd Place.",
-      "Decode este Ă®ncÄ deschis, dar are deja suficientÄ substanČ›Ä ca sÄ fie tratat ca un sezon serios: rezultate bune, ritm competitiv Č™i un nou traseu spre Romania Championship. Tocmai pentru cÄ pagina e vie, textul sezonului trebuie sÄ lase loc Č™i pentru update-uri ulterioare.",
+      "În circuitul oficial public, 17713 are momentan 17 victorii și 3 înfrângeri în 5 evenimente. În februarie 2026, Delta Force a câștigat West Romania League Tournament din postura de 1st Team Selected și a primit Inspire Award 3rd Place.",
+      "Decode este încă deschis, dar are deja suficientă substanță ca să fie tratat ca un sezon serios: rezultate bune, ritm competitiv și un nou traseu spre Romania Championship. Tocmai pentru că pagina e vie, textul sezonului trebuie să lase loc și pentru update-uri ulterioare.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Capitolul curent, deja competitiv",
-    focusBody: "Descrierea sezonului merge pe ideea de capitol actual, dar deja validat de rezultate. Decode nu mai este doar o paginÄ pregÄtitÄ pentru viitor: are deja record puternic, titlu regional Č™i un award mare, ceea ce Ă®nseamnÄ cÄ povestea sezonului a Ă®nceput deja sÄ se scrie clar.",
+    focusBody: "Descrierea sezonului merge pe ideea de capitol actual, dar deja validat de rezultate. Decode nu mai este doar o pagină pregătită pentru viitor: are deja record puternic, titlu regional și un award mare, ceea ce înseamnă că povestea sezonului a început deja să se scrie clar.",
     highlights: [
-      "17-3 Ă®n evenimentele oficiale publicate pĂ˘nÄ acum",
+      "17-3 în evenimentele oficiale publicate până acum",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
-      "Inspire Award 3rd Place Ă®ntr-un sezon Ă®ncÄ deschis",
+      "Inspire Award 3rd Place într-un sezon încă deschis",
     ],
     outro: [
-      "Avantajul unui sezon actual este cÄ pagina poate creČ™te Ă®mpreunÄ cu echipa. Fiecare nou eveniment, fiecare iteraČ›ie de robot Č™i fiecare rezultat poate intra natural Ă®n poveste fÄrÄ sÄ parÄ forČ›at.",
-      "DacÄ ritmul se menČ›ine, Decode are toate Č™ansele sÄ Ă®nchidÄ Ă®ncÄ un sezon definitoriu pentru FTC 17713, nu doar o ediČ›ie bunÄ de tranziČ›ie Ă®ntre douÄ jocuri.",
+      "Avantajul unui sezon actual este că pagina poate crește împreună cu echipa. Fiecare nou eveniment, fiecare iterație de robot și fiecare rezultat poate intra natural în poveste fără să pară forțat.",
+      "Dacă ritmul se menține, Decode are toate șansele să închidă încă un sezon definitoriu pentru FTC 17713, nu doar o ediție bună de tranziție între două jocuri.",
     ],
     footer: "Pagina sezonului curent FTC",
     images: placeholderSet,
@@ -516,22 +569,22 @@ Object.assign(detailPages, {
   "frc-charged-up": {
     title: "Charged Up",
     eyebrow: "2023",
-    lead: "Charged Up este sezonul Ă®n care am deschis capitolul nostru FRC Č™i am arÄtat din primul an cÄ putem intra competitiv Ă®ntr-un format nou. Jocul a fost despre grid scoring, links Č™i endgame balance, iar debutul nostru a avut ritm, playoff-uri Č™i validare tehnicÄ imediatÄ.",
+    lead: "Charged Up este sezonul în care am deschis capitolul nostru FRC și am arătat din primul an că putem intra competitiv într-un format nou. Jocul a fost despre grid scoring, links și endgame balance, iar debutul nostru a avut ritm, playoff-uri și validare tehnică imediată.",
     intro: [
-      "La Bosphorus Regional 2023, am terminat calificÄrile pe locul 10, am fost alliance captain, am ajuns Regional Finalist Č™i am primit Industrial Design Award. Pentru un rookie team, a fost un semnal clar cÄ puteam intra Ă®n FRC nu doar ca sÄ Ă®nvÄČ›Äm, ci Č™i ca sÄ fim competitivi din start.",
-      "Mai tĂ˘rziu, la Texas Robotics Invitational, am urcat pĂ˘nÄ pe locul 3 Ă®n calificÄri Č™i am fost din nou alliance captain. Charged Up rÄmĂ˘ne sezonul Ă®n care ne-am construit prezenČ›a Ă®n FRC cu Ă®ncredere, ritm bun Č™i o apariČ›ie internaČ›ionalÄ foarte puternicÄ.",
+      "La Bosphorus Regional 2023, am terminat calificările pe locul 10, am fost alliance captain, am ajuns Regional Finalist și am primit Industrial Design Award. Pentru un rookie team, a fost un semnal clar că puteam intra în FRC nu doar ca să învățăm, ci și ca să fim competitivi din start.",
+      "Mai târziu, la Texas Robotics Invitational, am urcat până pe locul 3 în calificări și am fost din nou alliance captain. Charged Up rămâne sezonul în care ne-am construit prezența în FRC cu încredere, ritm bun și o apariție internațională foarte puternică.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Debutul capitolului nostru FRC",
-    focusBody: "Descrierea sezonului poate porni de la ideea de debut reuČ™it. ĂŽn Charged Up, am construit repede o identitate clarÄ: robot competitiv, playoff-uri internaČ›ionale, award tehnic Č™i un start care a fÄcut programul nostru FRC credibil din primul sezon.",
+    focusBody: "Descrierea sezonului poate porni de la ideea de debut reușit. În Charged Up, am construit repede o identitate clară: robot competitiv, playoff-uri internaționale, award tehnic și un start care a făcut programul nostru FRC credibil din primul sezon.",
     highlights: [
-      "debut internaČ›ional foarte puternic",
-      "Regional Finalist Č™i Industrial Design Award la Bosphorus Regional 2023",
-      "locul 3 Ă®n calificÄri Č™i alliance captain la Texas Robotics Invitational 2023",
+      "debut internațional foarte puternic",
+      "Regional Finalist și Industrial Design Award la Bosphorus Regional 2023",
+      "locul 3 în calificări și alliance captain la Texas Robotics Invitational 2023",
     ],
     outro: [
-      "Charged Up nu este doar Ă®nceputul cronologiei noastre FRC; este Č™i sezonul care explicÄ de ce proiectul a cÄpÄtat credibilitate atĂ˘t de repede. Am intrat Ă®n competiČ›ie mare direct cu rezultate, nu doar cu promisiune.",
-      "Ca poveste de sezon, rÄmĂ˘ne un start istoric: prima prezenČ›Ä FRC, prima validare internaČ›ionalÄ Č™i primul semn clar cÄ puteam construi un program competitiv Č™i Ă®n formatul acesta.",
+      "Charged Up nu este doar începutul cronologiei noastre FRC; este și sezonul care explică de ce proiectul a căpătat credibilitate atât de repede. Am intrat în competiție mare direct cu rezultate, nu doar cu promisiune.",
+      "Ca poveste de sezon, rămâne un start istoric: prima prezență FRC, prima validare internațională și primul semn clar că puteam construi un program competitiv și în formatul acesta.",
     ],
     footer: "Pagina Charged Up",
     images: placeholderSet,
@@ -539,22 +592,22 @@ Object.assign(detailPages, {
   "frc-crescendo": {
     title: "Crescendo",
     eyebrow: "2024",
-    lead: "Crescendo a fost sezonul notelor, al speaker-ului, al amp-ului Č™i al trap-ului, iar pentru noi a funcČ›ionat ca un an de consolidare dupÄ debutul foarte puternic din 2023.",
+    lead: "Crescendo a fost sezonul notelor, al speaker-ului, al amp-ului și al trap-ului, iar pentru noi a funcționat ca un an de consolidare după debutul foarte puternic din 2023.",
     intro: [
-      "ĂŽn datele publice de sezon, am Ă®ncheiat anul oficial cu 12 victorii Č™i 11 Ă®nfrĂ˘ngeri. Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional Č™i Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
-      "Crescendo nu are dramatismul debutului din Charged Up, dar are ceva foarte important pentru un program aflat la Ă®nceput de drum Ă®n FRC: continuitate. Am rÄmas competitivi, am fost din nou relevanČ›i Ă®n playoff-uri Č™i am confirmat cÄ progresul nostru nu depinde de un singur sezon bun.",
+      "În datele publice de sezon, am încheiat anul oficial cu 12 victorii și 11 înfrângeri. Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional și Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
+      "Crescendo nu are dramatismul debutului din Charged Up, dar are ceva foarte important pentru un program aflat la început de drum în FRC: continuitate. Am rămas competitivi, am fost din nou relevanți în playoff-uri și am confirmat că progresul nostru nu depinde de un singur sezon bun.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Ritmul unui sezon matur",
-    focusBody: "Descrierea sezonului poate merge pe ideea de consolidare. ĂŽn Crescendo am Ă®nceput sÄ arÄtÄm ca un program FRC stabil: playoff-uri constante, iteraČ›ii mai mature Č™i suficientÄ Ă®ncredere cĂ˘t sÄ conducem din nou o alianČ›Ä la Bosphorus.",
+    focusBody: "Descrierea sezonului poate merge pe ideea de consolidare. În Crescendo am început să arătăm ca un program FRC stabil: playoff-uri constante, iterații mai mature și suficientă încredere cât să conducem din nou o alianță la Bosphorus.",
     highlights: [
-      "12-11 Ă®n datele publice de sezon",
-      "playoff-uri atĂ˘t la Istanbul Regional, cĂ˘t Č™i la Bosphorus Regional",
-      "alliance captain la Bosphorus Ă®ntr-un an de consolidare FRC",
+      "12-11 în datele publice de sezon",
+      "playoff-uri atât la Istanbul Regional, cât și la Bosphorus Regional",
+      "alliance captain la Bosphorus într-un an de consolidare FRC",
     ],
     outro: [
-      "ĂŽn arhiva noastrÄ FRC, Crescendo meritÄ vÄzut ca sezonul care a Ă®ntÄrit fundaČ›ia. Nu a fost doar un follow-up dupÄ Charged Up, ci anul Ă®n care am arÄtat cÄ putem repeta prezenČ›a Ă®n playoff-uri Č™i putem rÄmĂ˘ne competitivi Ă®ntr-un context mai greu.",
-      "Ca descriere, sezonul merge foarte bine pe ideea de maturizare: mai puČ›in despre surpriza debutului Č™i mai mult despre dovada cÄ programul nostru Ă®ncepe sÄ capete continuitate realÄ.",
+      "În arhiva noastră FRC, Crescendo merită văzut ca sezonul care a întărit fundația. Nu a fost doar un follow-up după Charged Up, ci anul în care am arătat că putem repeta prezența în playoff-uri și putem rămâne competitivi într-un context mai greu.",
+      "Ca descriere, sezonul merge foarte bine pe ideea de maturizare: mai puțin despre surpriza debutului și mai mult despre dovada că programul nostru începe să capete continuitate reală.",
     ],
     footer: "Pagina Crescendo",
     images: placeholderSet,
@@ -562,22 +615,22 @@ Object.assign(detailPages, {
   "frc-reefscape": {
     title: "Reefscape",
     eyebrow: "2025",
-    lead: "Reefscape este sezonul FRC 2025 construit Ă®n jurul temei marine, cu coral, algae Č™i scoring pe reef, processor Č™i barge. Pentru noi, este un an pe care meritÄ sÄ Ă®l descriem mai prudent, fiindcÄ datele publice complete sunt mai puČ›in vizibile decĂ˘t la celelalte sezoane.",
+    lead: "Reefscape este sezonul FRC 2025 construit în jurul temei marine, cu coral, algae și scoring pe reef, processor și barge. Pentru noi, este un an pe care merită să îl descriem mai prudent, fiindcă datele publice complete sunt mai puțin vizibile decât la celelalte sezoane.",
     intro: [
-      "Din informaČ›iile publice uČ™or de urmÄrit, apariČ›ia noastrÄ din 2025 la Sunset Showdown din San Francisco s-a Ă®ncheiat cu playoff-uri din Alliance 8. Chiar dacÄ arhiva publicÄ a sezonului nu este la fel de completÄ, asta aratÄ cÄ am rÄmas activi Č™i Ă®ntr-un context internaČ›ional important.",
-      "Reefscape poate fi prezentat ca un sezon de tranziČ›ie Č™i aČ™ezare. Este capitolul care leagÄ debutul Č™i consolidarea din 2023-2024 de anul actual, iar descrierea lui meritÄ sÄ rÄmĂ˘nÄ sincerÄ: mai puČ›in despre o listÄ lungÄ de premii publice Č™i mai mult despre continuitatea programului.",
+      "Din informațiile publice ușor de urmărit, apariția noastră din 2025 la Sunset Showdown din San Francisco s-a încheiat cu playoff-uri din Alliance 8. Chiar dacă arhiva publică a sezonului nu este la fel de completă, asta arată că am rămas activi și într-un context internațional important.",
+      "Reefscape poate fi prezentat ca un sezon de tranziție și așezare. Este capitolul care leagă debutul și consolidarea din 2023-2024 de anul actual, iar descrierea lui merită să rămână sinceră: mai puțin despre o listă lungă de premii publice și mai mult despre continuitatea programului.",
     ],
     focusLabel: "Season focus",
-    focusTitle: "Un an de tranziČ›ie vizibilÄ",
-    focusBody: "Descrierea sezonului merge cel mai bine pe ideea de capitol intermediar. ĂŽn Reefscape ne-am Č›inut programul FRC activ, am rÄmas prezenČ›i Ă®n evenimente relevante Č™i am pregÄtit terenul pentru Rebuilt, chiar dacÄ nu toate rezultatele oficiale sunt la fel de uČ™or de gÄsit public.",
+    focusTitle: "Un an de tranziție vizibilă",
+    focusBody: "Descrierea sezonului merge cel mai bine pe ideea de capitol intermediar. În Reefscape ne-am ținut programul FRC activ, am rămas prezenți în evenimente relevante și am pregătit terenul pentru Rebuilt, chiar dacă nu toate rezultatele oficiale sunt la fel de ușor de găsit public.",
     highlights: [
-      "sezonul FRC 2025 cu tema coral, algae, reef Č™i barge",
-      "prezenČ›Ä publicÄ la Sunset Showdown Č™i playoff din Alliance 8",
-      "capitol de legÄturÄ Ă®ntre primii ani FRC Č™i sezonul actual",
+      "sezonul FRC 2025 cu tema coral, algae, reef și barge",
+      "prezență publică la Sunset Showdown și playoff din Alliance 8",
+      "capitol de legătură între primii ani FRC și sezonul actual",
     ],
     outro: [
-      "Uneori, un sezon este important nu doar prin lista lui de trofee, ci Č™i prin faptul cÄ Č›ine direcČ›ia programului coerentÄ. Reefscape poate fi citit exact aČ™a: un an care nu lasÄ capitolul nostru FRC sÄ se rupÄ, ci Ă®l duce mai departe spre urmÄtoarea etapÄ.",
-      "De aceea pagina lui meritÄ sÄ rÄmĂ˘nÄ Ă®n arhivÄ cu un text echilibrat: destul de concret Ă®ncĂ˘t sÄ spunÄ ce se vede public, dar suficient de onest Ă®ncĂ˘t sÄ nu inventeze o poveste mai mare decĂ˘t cea pe care o pot susČ›ine sursele.",
+      "Uneori, un sezon este important nu doar prin lista lui de trofee, ci și prin faptul că ține direcția programului coerentă. Reefscape poate fi citit exact așa: un an care nu lasă capitolul nostru FRC să se rupă, ci îl duce mai departe spre următoarea etapă.",
+      "De aceea pagina lui merită să rămână în arhivă cu un text echilibrat: destul de concret încât să spună ce se vede public, dar suficient de onest încât să nu inventeze o poveste mai mare decât cea pe care o pot susține sursele.",
     ],
     footer: "Pagina Reefscape",
     images: placeholderSet,
@@ -585,22 +638,22 @@ Object.assign(detailPages, {
   "frc-rebuilt": {
     title: "Rebuilt",
     eyebrow: "2026 / Actual",
-    lead: "Rebuilt este sezonul actual FRC, iar pĂ˘nÄ acum a Ă®nceput foarte puternic pentru noi. Tema jocului pune accent pe reconstrucČ›ie, ritm rapid Č™i adaptare, iar sezonul are deja un rezultat serios Ă®ncÄ din primul mare event public al anului.",
+    lead: "Rebuilt este sezonul actual FRC, iar până acum a început foarte puternic pentru noi. Tema jocului pune accent pe reconstrucție, ritm rapid și adaptare, iar sezonul are deja un rezultat serios încă din primul mare event public al anului.",
     intro: [
-      "La Bosphorus Regional 2026, am Ă®ncheiat calificÄrile pe locul 11, am ajuns Regional Finalist Č™i am primit Creativity Award. Pentru Ă®nceputul unui sezon Ă®ncÄ deschis, acesta este deja un semnal foarte bun: suntem competitivi, avem un robot remarcat Č™i intrÄm Ă®n prim-plan Ă®ncÄ din primele sÄptÄmĂ˘ni.",
-      "Rebuilt trebuie descris ca un sezon viu, Ă®ncÄ Ă®n construcČ›ie, dar deja validat de rezultate. Tocmai asta Ă®l face interesant: pagina poate urmÄri Ă®n timp real cum creČ™te anul, de la primul finalist finish pĂ˘nÄ la urmÄtoarele iteraČ›ii Č™i competiČ›ii.",
+      "La Bosphorus Regional 2026, am încheiat calificările pe locul 11, am ajuns Regional Finalist și am primit Creativity Award. Pentru începutul unui sezon încă deschis, acesta este deja un semnal foarte bun: suntem competitivi, avem un robot remarcat și intrăm în prim-plan încă din primele săptămâni.",
+      "Rebuilt trebuie descris ca un sezon viu, încă în construcție, dar deja validat de rezultate. Tocmai asta îl face interesant: pagina poate urmări în timp real cum crește anul, de la primul finalist finish până la următoarele iterații și competiții.",
     ],
     focusLabel: "Season focus",
-    focusTitle: "Capitolul nostru curent Ă®n FRC",
-    focusBody: "Descrierea sezonului trebuie sÄ porneascÄ de la ce existÄ deja: finalist finish la Bosphorus, Creativity Award Č™i un ranking bun Ă®ntr-un camp cu adversari puternici. Restul paginii poate creČ™te natural cu update-uri, dar baza sezonului este deja una credibilÄ Č™i competitivÄ.",
+    focusTitle: "Capitolul nostru curent în FRC",
+    focusBody: "Descrierea sezonului trebuie să pornească de la ce există deja: finalist finish la Bosphorus, Creativity Award și un ranking bun într-un camp cu adversari puternici. Restul paginii poate crește natural cu update-uri, dar baza sezonului este deja una credibilă și competitivă.",
     highlights: [
-      "locul 11 dupÄ calificÄri la Bosphorus Regional 2026",
-      "Regional Finalist Ă®n primul mare event public al sezonului",
-      "Creativity Award Ă®ntr-un an care abia Ă®ncepe",
+      "locul 11 după calificări la Bosphorus Regional 2026",
+      "Regional Finalist în primul mare event public al sezonului",
+      "Creativity Award într-un an care abia începe",
     ],
     outro: [
-      "ĂŽn cronologia noastrÄ FRC, Rebuilt poate deveni foarte uČ™or sezonul care confirmÄ complet maturizarea programului. Un start cu finalist finish Č™i award tehnic aratÄ deja cÄ nu mai suntem doar o apariČ›ie interesantÄ, ci o prezenČ›Ä constantÄ Ă®n discuČ›ia competitivÄ.",
-      "Pentru cÄ anul este Ă®ncÄ deschis, descrierea lui trebuie sÄ lase loc Č™i pentru ce urmeazÄ. Exact asta face pagina acum: fixeazÄ ce existÄ public pĂ˘nÄ azi, fÄrÄ sÄ Ă®nchidÄ artificial povestea sezonului.",
+      "În cronologia noastră FRC, Rebuilt poate deveni foarte ușor sezonul care confirmă complet maturizarea programului. Un start cu finalist finish și award tehnic arată deja că nu mai suntem doar o apariție interesantă, ci o prezență constantă în discuția competitivă.",
+      "Pentru că anul este încă deschis, descrierea lui trebuie să lase loc și pentru ce urmează. Exact asta face pagina acum: fixează ce există public până azi, fără să închidă artificial povestea sezonului.",
     ],
     footer: "Pagina sezonului curent FRC",
     images: placeholderSet,
@@ -611,22 +664,22 @@ Object.assign(detailPages, {
   "fgc-2023": {
     title: "Singapore",
     eyebrow: "First Global Challenge 2023",
-    lead: "First Global Challenge 2023 din Singapore nu este doar o paginÄ separatÄ Ă®n arhiva Delta Force, ci momentul Ă®n care echipa a reprezentat RomĂ˘nia Ă®ntr-un cadru internaČ›ional dedicat colaborÄrii prin roboticÄ.",
+    lead: "First Global Challenge 2023 din Singapore nu este doar o pagină separată în arhiva Delta Force, ci momentul în care echipa a reprezentat România într-un cadru internațional dedicat colaborării prin robotică.",
     intro: [
-      "Participarea din Singapore a adus Delta Force Ă®ntr-un context diferit faČ›Ä de FTC sau FRC: mai mult accent pe reprezentare naČ›ionalÄ, pe schimb de idei Č™i pe dimensiunea globalÄ a programului FIRST. Tocmai de aceea, FGC meritÄ descris separat, nu comprimat Ă®ntr-o notÄ scurtÄ la final de site.",
-      "RelatÄrile publice despre Team RomĂ˘nia au vorbit despre douÄ medalii Č™i mai multe distincČ›ii speciale, Ă®ntre care Innovation in Engineering, Al-Khwarizmi Outstanding Supporter, Safety Award Č™i Social Media Award. Pentru Delta Force, asta Ă®nseamnÄ cÄ pagina FGC poate arÄta atĂ˘t competiČ›ie, cĂ˘t Č™i impact internaČ›ional real.",
+      "Participarea din Singapore a adus Delta Force într-un context diferit față de FTC sau FRC: mai mult accent pe reprezentare națională, pe schimb de idei și pe dimensiunea globală a programului FIRST. Tocmai de aceea, FGC merită descris separat, nu comprimat într-o notă scurtă la final de site.",
+      "Relatările publice despre Team România au vorbit despre două medalii și mai multe distincții speciale, între care Innovation in Engineering, Al-Khwarizmi Outstanding Supporter, Safety Award și Social Media Award. Pentru Delta Force, asta înseamnă că pagina FGC poate arăta atât competiție, cât și impact internațional real.",
     ],
     focusLabel: "Story focus",
-    focusTitle: "RomĂ˘nia pe scena globalÄ",
-    focusBody: "Descrierea sezonului trebuie sÄ lege douÄ lucruri: partea tehnicÄ a competiČ›iei Č™i partea umanÄ a reprezentÄrii. Singapore a fost un moment Ă®n care Delta Force a ieČ™it din formatul obiČ™nuit al sezoanelor Č™i a apÄrut ca parte dintr-o poveste mai mare, cea a RomĂ˘niei Ă®ntr-o competiČ›ie globalÄ de roboticÄ.",
+    focusTitle: "România pe scena globală",
+    focusBody: "Descrierea sezonului trebuie să lege două lucruri: partea tehnică a competiției și partea umană a reprezentării. Singapore a fost un moment în care Delta Force a ieșit din formatul obișnuit al sezoanelor și a apărut ca parte dintr-o poveste mai mare, cea a României într-o competiție globală de robotică.",
     highlights: [
-      "Delta Force a reprezentat RomĂ˘nia la First Global Challenge 2023 Ă®n Singapore",
-      "douÄ medalii Č™i mai multe distincČ›ii speciale menČ›ionate public pentru Team RomĂ˘nia",
-      "un capitol internaČ›ional diferit de FTC Č™i FRC, dar esenČ›ial pentru identitatea echipei",
+      "Delta Force a reprezentat România la First Global Challenge 2023 în Singapore",
+      "două medalii și mai multe distincții speciale menționate public pentru Team România",
+      "un capitol internațional diferit de FTC și FRC, dar esențial pentru identitatea echipei",
     ],
     outro: [
-      "FGC 2023 meritÄ tratat ca un feature internaČ›ional, nu ca o anexÄ la celelalte programe. Este genul de experienČ›Ä care spune ceva important despre nivelul la care a ajuns Delta Force ca echipÄ Č™i despre Ă®ncrederea primitÄ pentru a reprezenta Č›ara Ă®ntr-un astfel de context.",
-      "Descrierea sezonului poate Ă®nchide foarte bine ideea asta: Singapore nu a fost doar o deplasare importantÄ, ci o validare a faptului cÄ Delta Force poate conta Č™i Ă®ntr-o competiČ›ie unde miza este atĂ˘t performanČ›a, cĂ˘t Č™i colaborarea dintre Č›Äri.",
+      "FGC 2023 merită tratat ca un feature internațional, nu ca o anexă la celelalte programe. Este genul de experiență care spune ceva important despre nivelul la care a ajuns Delta Force ca echipă și despre încrederea primită pentru a reprezenta țara într-un astfel de context.",
+      "Descrierea sezonului poate închide foarte bine ideea asta: Singapore nu a fost doar o deplasare importantă, ci o validare a faptului că Delta Force poate conta și într-o competiție unde miza este atât performanța, cât și colaborarea dintre țări.",
     ],
     footer: "Pagina First Global Challenge 2023",
     images: placeholderSet,
@@ -634,22 +687,22 @@ Object.assign(detailPages, {
   "events-invitationals": {
     title: "Invitationale",
     eyebrow: "Invitationals",
-    lead: "Invitationalele meritÄ pagina lor fiindcÄ spun o altÄ laturÄ a echipei: competiČ›ii premium, contexte internaČ›ionale Č™i experienČ›e care nu Ă®ncap natural Ă®ntr-un singur sezon, dar care conteazÄ mult Ă®n povestea Delta Force.",
+    lead: "Invitationalele merită pagina lor fiindcă spun o altă latură a echipei: competiții premium, contexte internaționale și experiențe care nu încap natural într-un singur sezon, dar care contează mult în povestea Delta Force.",
     intro: [
-      "Pentru Delta Force, douÄ dintre cele mai relevante exemple sunt Maryland Tech Invitational Ă®n FTC Č™i Texas Robotics Invitational Ă®n FRC. Sunt evenimente care adunÄ echipe puternice, ridicÄ nivelul competitiv Č™i oferÄ un tip diferit de validare faČ›Ä de traseul standard din sezon.",
-      "Maryland Tech Invitational a venit dupÄ parcursul uriaČ™ din Freight Frenzy, iar Texas Robotics Invitational a confirmat foarte repede forČ›a debutului FRC 9001. Tocmai de aceea, invitationalele nu ar trebui sÄ fie pierdute printre carduri de sezon; ele meritÄ un loc distinct Ă®n site.",
+      "Pentru Delta Force, două dintre cele mai relevante exemple sunt Maryland Tech Invitational în FTC și Texas Robotics Invitational în FRC. Sunt evenimente care adună echipe puternice, ridică nivelul competitiv și oferă un tip diferit de validare față de traseul standard din sezon.",
+      "Maryland Tech Invitational a venit după parcursul uriaș din Freight Frenzy, iar Texas Robotics Invitational a confirmat foarte repede forța debutului FRC 9001. Tocmai de aceea, invitationalele nu ar trebui să fie pierdute printre carduri de sezon; ele merită un loc distinct în site.",
     ],
     focusLabel: "Event focus",
-    focusTitle: "CompetiČ›ii care ies din tipar",
-    focusBody: "Descrierea secČ›iunii poate merge pe ideea de nivel extins de competiČ›ie. Invitationalele aratÄ cum Delta Force a ieČ™it din circuitul de bazÄ Č™i a intrat Ă®n evenimente unde comparaČ›ia se face direct cu echipe foarte puternice, Ă®ntr-un cadru care pune accent atĂ˘t pe performanČ›Ä, cĂ˘t Č™i pe reputaČ›ie.",
+    focusTitle: "Competiții care ies din tipar",
+    focusBody: "Descrierea secțiunii poate merge pe ideea de nivel extins de competiție. Invitationalele arată cum Delta Force a ieșit din circuitul de bază și a intrat în evenimente unde comparația se face direct cu echipe foarte puternice, într-un cadru care pune accent atât pe performanță, cât și pe reputație.",
     highlights: [
       "Maryland Tech Invitational ca reper important pentru FTC 17713",
       "Texas Robotics Invitational ca reper major pentru FRC 9001",
-      "competiČ›ii speciale care aratÄ nivelul internaČ›ional al echipei",
+      "competiții speciale care arată nivelul internațional al echipei",
     ],
     outro: [
-      "ĂŽn arhivÄ, astfel de pagini sunt utile tocmai pentru cÄ rup monotonia cronologiei. Ele aratÄ momentele Ă®n care Delta Force a intrat Ă®n scene mai largi, cu presiune mai mare Č™i cu adversari care au ridicat standardul de competiČ›ie.",
-      "Ca descriere, invitationalele funcČ›ioneazÄ cel mai bine dacÄ sunt prezentate ca borne internaČ›ionale: evenimente care nu aparČ›in strict unui campionat, dar care spun foarte bine unde se aflÄ echipa faČ›Ä de un context mai mare.",
+      "În arhivă, astfel de pagini sunt utile tocmai pentru că rup monotonia cronologiei. Ele arată momentele în care Delta Force a intrat în scene mai largi, cu presiune mai mare și cu adversari care au ridicat standardul de competiție.",
+      "Ca descriere, invitationalele funcționează cel mai bine dacă sunt prezentate ca borne internaționale: evenimente care nu aparțin strict unui campionat, dar care spun foarte bine unde se află echipa față de un context mai mare.",
     ],
     footer: "Pagina pentru invitationale",
     images: placeholderSet,
@@ -660,24 +713,24 @@ const rewriteNarration = (text) => {
   if (typeof text !== "string") return text;
 
   return text
-    .replace(/\bFTC 17713 a\b/g, "echipa noastrÄ a")
-    .replace(/\bFRC 9001 a\b/g, "echipa noastrÄ a")
-    .replace(/\b17713 a\b/g, "echipa noastrÄ a")
-    .replace(/\b9001 a\b/g, "echipa noastrÄ a")
-    .replace(/\barhiva Delta Force\b/g, "arhiva noastrÄ")
-    .replace(/\bpovestea Delta Force\b/g, "povestea noastrÄ")
+    .replace(/\bFTC 17713 a\b/g, "echipa noastră a")
+    .replace(/\bFRC 9001 a\b/g, "echipa noastră a")
+    .replace(/\b17713 a\b/g, "echipa noastră a")
+    .replace(/\b9001 a\b/g, "echipa noastră a")
+    .replace(/\barhiva Delta Force\b/g, "arhiva noastră")
+    .replace(/\bpovestea Delta Force\b/g, "povestea noastră")
     .replace(/\bnumele Delta Force\b/g, "numele echipei noastre")
     .replace(/\bunei echipe ca Delta Force\b/g, "echipei noastre")
     .replace(/\bPentru Delta Force\b/g, "Pentru noi")
-    .replace(/\bpentru Delta Force\b/g, "pentru echipa noastrÄ")
+    .replace(/\bpentru Delta Force\b/g, "pentru echipa noastră")
     .replace(/\bLa Delta Force\b/g, "La noi")
     .replace(/\bla Delta Force\b/g, "la noi")
-    .replace(/\bDelta Force a\b/g, "echipa noastrÄ a")
-    .replace(/\bDelta Force\b/g, "echipa noastrÄ")
+    .replace(/\bDelta Force a\b/g, "echipa noastră a")
+    .replace(/\bDelta Force\b/g, "echipa noastră")
     .replace(/\bFTC 17713\b/g, "programul nostru FTC")
     .replace(/\bFRC 9001\b/g, "programul nostru FRC")
-    .replace(/\b17713\b/g, "echipa noastrÄ")
-    .replace(/\b9001\b/g, "echipa noastrÄ")
+    .replace(/\b17713\b/g, "echipa noastră")
+    .replace(/\b9001\b/g, "echipa noastră")
     .replace(/\s{2,}/g, " ")
     .trim();
 };
@@ -964,66 +1017,66 @@ const applyPageTextOverrides = (collection, overrides) => {
 
 applyPageTextOverrides(detailPages, {
   "ftc-freight-frenzy": {
-    lead: "Freight Frenzy a fost sezonul Ă®n care echipa noastrÄ a trecut din statutul de echipÄ foarte bunÄ la statutul de campioanÄ mondialÄ FTC. Jocul a fost despre freight, duck carousel Č™i warehouse cycles, iar sezonul oficial s-a Ă®ncheiat la Houston, cu titlul mondial cĂ˘Č™tigat din postura de alliance captain.",
+    lead: "Freight Frenzy a fost sezonul în care echipa noastră a trecut din statutul de echipă foarte bună la statutul de campioană mondială FTC. Jocul a fost despre freight, duck carousel și warehouse cycles, iar sezonul oficial s-a încheiat la Houston, cu titlul mondial câștigat din postura de alliance captain.",
     highlights: [
-      "18 victorii Ă®n evenimentele oficiale FTC din sezon",
+      "18 victorii în evenimentele oficiale FTC din sezon",
       "Inspire Award 2nd Place la Romania National Championship",
-      "Franklin Division winner Č™i FIRST World Championship winner la Houston",
+      "Franklin Division winner și FIRST World Championship winner la Houston",
     ],
   },
   "ftc-power-play": {
     intro: [
-      "Echipa noastrÄ a Ă®ncheiat sezonul oficial cu 11 victorii. ĂŽn prima parte a anului a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevÄrata explozie a venit la Romania National Championship.",
-      "La naČ›ionalÄ, echipa noastrÄ a terminat pe locul 1 dupÄ calificÄri, a intrat Ă®n playoff-uri ca Finalist Alliance Captain Č™i a primit Design Award. Power Play a arÄtat foarte bine cum o echipÄ poate urca Ă®n timpul sezonului Č™i poate Ă®nchide anul mult peste aČ™teptÄrile iniČ›iale.",
+      "Echipa noastră a încheiat sezonul oficial cu 11 victorii. În prima parte a anului a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevărata explozie a venit la Romania National Championship.",
+      "La națională, echipa noastră a terminat pe locul 1 după calificări, a intrat în playoff-uri ca Finalist Alliance Captain și a primit Design Award. Power Play a arătat foarte bine cum o echipă poate urca în timpul sezonului și poate închide anul mult peste așteptările inițiale.",
     ],
     highlights: [
-      "11 victorii Ă®n circuitul oficial Power Play",
-      "Locul 1 dupÄ calificÄri la Romania National Championship",
-      "Finalist Alliance Captain Č™i Design Award la naČ›ionalÄ",
+      "11 victorii în circuitul oficial Power Play",
+      "Locul 1 după calificări la Romania National Championship",
+      "Finalist Alliance Captain și Design Award la națională",
     ],
   },
   "ftc-centerstage": {
     intro: [
-      "ĂŽn datele oficiale FTC, echipa noastrÄ a terminat sezonul cu 20 de victorii Ă®n 5 evenimente. La RO #3 TimiČ™oara, echipa a obČ›inut Design Award Č™i a fost Finalist Alliance - 1st Team Selected, semn cÄ robotul Č™i execuČ›ia din meciuri mergeau Ă®n direcČ›ia bunÄ.",
-      "Centerstage a fost Č™i un sezon cu mult potenČ›ial vizual: backdrop scoring, drone launch Č™i o prezentare mai curatÄ a Ă®ntregii munci. Pentru echipa noastrÄ, anul acesta aratÄ un program FTC mai matur Č™i mai coerent Ă®n toate direcČ›iile lui.",
+      "În datele oficiale FTC, echipa noastră a terminat sezonul cu 20 de victorii în 5 evenimente. La RO #3 Timișoara, echipa a obținut Design Award și a fost Finalist Alliance - 1st Team Selected, semn că robotul și execuția din meciuri mergeau în direcția bună.",
+      "Centerstage a fost și un sezon cu mult potențial vizual: backdrop scoring, drone launch și o prezentare mai curată a întregii munci. Pentru echipa noastră, anul acesta arată un program FTC mai matur și mai coerent în toate direcțiile lui.",
     ],
     highlights: [
-      "20 de victorii Ă®n evenimentele oficiale FTC",
-      "Design Award la RO #3 TimiČ™oara",
-      "Finalist Alliance - 1st Team Selected Ă®ntr-un sezon mult mai stabil",
+      "20 de victorii în evenimentele oficiale FTC",
+      "Design Award la RO #3 Timișoara",
+      "Finalist Alliance - 1st Team Selected într-un sezon mult mai stabil",
     ],
   },
   "ftc-into-the-deep": {
     intro: [
-      "Echipa noastrÄ a Ă®ncheiat anul cu 23 de victorii Ă®n 7 evenimente oficiale. La Romania West League Tournament, echipa noastrÄ a cĂ˘Č™tigat din postura de 1st Team Selected Č™i a luat Č™i Design Award, apoi Č™i-a continuat parcursul cÄtre Romania Championship.",
-      "Into The Deep a fost sezonul Ă®n care robotul a pÄrut foarte controlat, iar ritmul de competiČ›ie a rÄmas constant de la un event la altul. Din punct de vedere al arhivei FTC, este un sezon uČ™or de descris ca fiind compact, clar Č™i foarte competitiv.",
+      "Echipa noastră a încheiat anul cu 23 de victorii în 7 evenimente oficiale. La Romania West League Tournament, echipa noastră a câștigat din postura de 1st Team Selected și a luat și Design Award, apoi și-a continuat parcursul către Romania Championship.",
+      "Into The Deep a fost sezonul în care robotul a părut foarte controlat, iar ritmul de competiție a rămas constant de la un event la altul. Din punct de vedere al arhivei FTC, este un sezon ușor de descris ca fiind compact, clar și foarte competitiv.",
     ],
     highlights: [
-      "23 de victorii Ă®n evenimentele oficiale FTC",
+      "23 de victorii în evenimentele oficiale FTC",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
-      "Design Award Č™i calificare la Romania Championship",
+      "Design Award și calificare la Romania Championship",
     ],
   },
   "ftc-decode": {
     intro: [
-      "ĂŽn circuitul oficial public, echipa noastrÄ are momentan 17 victorii Ă®n 5 evenimente. ĂŽn februarie 2026, echipa noastrÄ a cĂ˘Č™tigat West Romania League Tournament din postura de 1st Team Selected Č™i a primit Inspire Award 3rd Place.",
-      "Decode este Ă®ncÄ deschis, dar are deja suficientÄ substanČ›Ä ca sÄ fie tratat ca un sezon serios: rezultate bune, ritm competitiv Č™i un nou traseu spre Romania Championship. Tocmai pentru cÄ pagina e vie, textul sezonului trebuie sÄ lase loc Č™i pentru update-uri ulterioare.",
+      "În circuitul oficial public, echipa noastră are momentan 17 victorii în 5 evenimente. În februarie 2026, echipa noastră a câștigat West Romania League Tournament din postura de 1st Team Selected și a primit Inspire Award 3rd Place.",
+      "Decode este încă deschis, dar are deja suficientă substanță ca să fie tratat ca un sezon serios: rezultate bune, ritm competitiv și un nou traseu spre Romania Championship. Tocmai pentru că pagina e vie, textul sezonului trebuie să lase loc și pentru update-uri ulterioare.",
     ],
     highlights: [
-      "17 victorii Ă®n evenimentele oficiale publicate pĂ˘nÄ acum",
+      "17 victorii în evenimentele oficiale publicate până acum",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
-      "Inspire Award 3rd Place Ă®ntr-un sezon Ă®ncÄ deschis",
+      "Inspire Award 3rd Place într-un sezon încă deschis",
     ],
   },
   "frc-crescendo": {
     intro: [
-      "ĂŽn datele publice de sezon, am Ă®ncheiat anul oficial cu 12 victorii. Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional Č™i Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
-      "Crescendo nu are dramatismul debutului din Charged Up, dar are ceva foarte important pentru un program aflat la Ă®nceput de drum Ă®n FRC: continuitate. Am rÄmas competitivi, am fost din nou relevanČ›i Ă®n playoff-uri Č™i am confirmat cÄ progresul nostru nu depinde de un singur sezon bun.",
+      "În datele publice de sezon, am încheiat anul oficial cu 12 victorii. Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional și Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
+      "Crescendo nu are dramatismul debutului din Charged Up, dar are ceva foarte important pentru un program aflat la început de drum în FRC: continuitate. Am rămas competitivi, am fost din nou relevanți în playoff-uri și am confirmat că progresul nostru nu depinde de un singur sezon bun.",
     ],
     highlights: [
-      "12 victorii Ă®n datele publice de sezon",
-      "Playoff-uri atĂ˘t la Istanbul Regional, cĂ˘t Č™i la Bosphorus Regional",
-      "Alliance captain la Bosphorus Ă®ntr-un an de consolidare FRC",
+      "12 victorii în datele publice de sezon",
+      "Playoff-uri atât la Istanbul Regional, cât și la Bosphorus Regional",
+      "Alliance captain la Bosphorus într-un an de consolidare FRC",
     ],
   },
 });
@@ -1097,150 +1150,150 @@ applyPageTextOverrides(detailPagesEn, {
 const seasonalResearchRo = {
   "ftc-freight-frenzy": {
     themeKicker: "Tema sezonului",
-    themeTitle: "Freight, ducks Č™i warehouse cycles",
+    themeTitle: "Freight, ducks și warehouse cycles",
     themeBody:
-      "FREIGHT FRENZY a fost jocul Ă®n care alianČ›ele colectau freight, activau duck carousel Č™i Ă®ncÄrcau hub-urile, apoi Ă®nchideau cu warehouse parking Č™i capping. Sezonul a premiat ritmul bun de ciclat, controlul finalului de meci Č™i consistenČ›a pe tot terenul.",
-    awardsKicker: "Premii Č™i rezultate",
+      "FREIGHT FRENZY a fost jocul în care alianțele colectau freight, activau duck carousel și încărcau hub-urile, apoi închideau cu warehouse parking și capping. Sezonul a premiat ritmul bun de ciclat, controlul finalului de meci și consistența pe tot terenul.",
+    awardsKicker: "Premii și rezultate",
     awardsTitle: "Reperele noastre din sezon",
     awardsIntro:
-      "Pe listÄrile oficiale FTC Events, pentru 2021 apar aceste repere importante pentru echipa noastrÄ:",
+      "Pe listările oficiale FTC Events, pentru 2021 apar aceste repere importante pentru echipa noastră:",
     awardsList: [
       "FIRST Championship Winning Alliance - Captain la Houston",
       "Franklin Division Winning Alliance - Captain la FIRST Championship",
       "Inspire Award 2nd Place la Romania National Championship",
-      "Design Award la RO #1 Regionala TimiČ™oara & BucureČ™ti",
+      "Design Award la RO #1 Regionala Timișoara & București",
       "Innovate Award la RU Remote Qualifier",
     ],
   },
   "ftc-power-play": {
     themeKicker: "Tema sezonului",
-    themeTitle: "Conuri, junction-uri Č™i control de final",
+    themeTitle: "Conuri, junction-uri și control de final",
     themeBody:
-      "POWERPLAY a fost jocul conurilor Č™i al junction-urilor, cu accent pe autonomous bazat pe signal sleeve, scoring pe Ă®nÄlČ›imi diferite Č™i un endgame Ă®n care controlul terenului conta enorm. A fost un sezon Ă®n care precizia Č™i traseele curate fÄceau diferenČ›a.",
-    awardsKicker: "Premii Č™i rezultate",
+      "POWERPLAY a fost jocul conurilor și al junction-urilor, cu accent pe autonomous bazat pe signal sleeve, scoring pe înălțimi diferite și un endgame în care controlul terenului conta enorm. A fost un sezon în care precizia și traseele curate făceau diferența.",
+    awardsKicker: "Premii și rezultate",
     awardsTitle: "Reperele noastre din sezon",
     awardsIntro:
-      "Din datele oficiale FTC Events Č™i din rezultatele finale de sezon, acestea sunt bornele care ies cel mai clar Ă®n faČ›Ä:",
+      "Din datele oficiale FTC Events și din rezultatele finale de sezon, acestea sunt bornele care ies cel mai clar în față:",
     awardsList: [
       "Innovate Award 3rd Place la RO BUCHAREST #1",
       "Finalist Alliance - Captain la Romania National Championship",
       "Design Award la Romania National Championship",
-      "Locul 1 dupÄ calificÄri la Romania National Championship",
+      "Locul 1 după calificări la Romania National Championship",
     ],
   },
   "ftc-centerstage": {
     themeKicker: "Tema sezonului",
-    themeTitle: "Pixels, backdrop Č™i drone",
+    themeTitle: "Pixels, backdrop și drone",
     themeBody:
-      "CENTERSTAGE a mutat jocul spre plasarea de pixels pe backdrop, control bun al ciclurilor Č™i un endgame memorabil cu drone launch. Sezonul a cerut fineČ›e Ă®n scoring Č™i coordonare foarte bunÄ Ă®ntre autonomous Č™i driver control.",
-    awardsKicker: "Premii Č™i rezultate",
+      "CENTERSTAGE a mutat jocul spre plasarea de pixels pe backdrop, control bun al ciclurilor și un endgame memorabil cu drone launch. Sezonul a cerut finețe în scoring și coordonare foarte bună între autonomous și driver control.",
+    awardsKicker: "Premii și rezultate",
     awardsTitle: "Reperele noastre din sezon",
     awardsIntro:
-      "Pentru 2023, listarea oficialÄ FTC Events confirmÄ aceste rezultate cheie pentru echipa noastrÄ:",
+      "Pentru 2023, listarea oficială FTC Events confirmă aceste rezultate cheie pentru echipa noastră:",
     awardsList: [
-      "Design Award la RO #3 TimiČ™oara",
-      "Finalist Alliance - 1st Team Selected la RO #3 TimiČ™oara",
-      "Record oficial de 20-7 Ă®n 5 evenimente FTC",
+      "Design Award la RO #3 Timișoara",
+      "Finalist Alliance - 1st Team Selected la RO #3 Timișoara",
+      "Record oficial de 20-7 în 5 evenimente FTC",
     ],
   },
   "ftc-into-the-deep": {
     themeKicker: "Tema sezonului",
-    themeTitle: "Samples, specimens Č™i ascent",
+    themeTitle: "Samples, specimens și ascent",
     themeBody:
-      "INTO THE DEEP a dus jocul FTC Ă®ntr-o zonÄ subacvaticÄ, cu accent pe samples, specimens Č™i ascent. Sezonul a recompensat controlul fin al robotului, scoring-ul curat Č™i un ritm constant de la un meci la altul.",
-    awardsKicker: "Premii Č™i rezultate",
+      "INTO THE DEEP a dus jocul FTC într-o zonă subacvatică, cu accent pe samples, specimens și ascent. Sezonul a recompensat controlul fin al robotului, scoring-ul curat și un ritm constant de la un meci la altul.",
+    awardsKicker: "Premii și rezultate",
     awardsTitle: "Reperele noastre din sezon",
     awardsIntro:
-      "Pe pagina oficialÄ FTC Events pentru 2024 apar urmÄtoarele rezultate Č™i premii pentru echipa noastrÄ:",
+      "Pe pagina oficială FTC Events pentru 2024 apar următoarele rezultate și premii pentru echipa noastră:",
     awardsList: [
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
       "Design Award la West Romania League Tournament",
-      "PrezenČ›Ä la Romania Championship 2025",
+      "Prezență la Romania Championship 2025",
     ],
   },
   "ftc-decode": {
     themeKicker: "Tema sezonului",
-    themeTitle: "LogicÄ, pattern-uri Č™i decizii rapide",
+    themeTitle: "Logică, pattern-uri și decizii rapide",
     themeBody:
-      "DECODE pune accent pe lecturÄ bunÄ a terenului, pattern-uri Č™i decizii rapide, Ă®ntr-un format Ă®n care consistenČ›a dintre autonomous Č™i driver control conteazÄ enorm. Este un joc care cere claritate, vitezÄ Č™i adaptare foarte bunÄ pe parcursul meciului.",
-    awardsKicker: "Premii Č™i rezultate",
-    awardsTitle: "Reperele noastre de pĂ˘nÄ acum",
+      "DECODE pune accent pe lectură bună a terenului, pattern-uri și decizii rapide, într-un format în care consistența dintre autonomous și driver control contează enorm. Este un joc care cere claritate, viteză și adaptare foarte bună pe parcursul meciului.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre de până acum",
     awardsIntro:
-      "Sezonul este Ă®ncÄ deschis, dar FTC Events listeazÄ deja cĂ˘teva rezultate importante pentru echipa noastrÄ:",
+      "Sezonul este încă deschis, dar FTC Events listează deja câteva rezultate importante pentru echipa noastră:",
     awardsList: [
       "Winning Alliance - 1st Team Selected la Romania West League Tournament",
       "Inspire Award 3rd Place la Romania West League Tournament",
-      "PrezenČ›Ä listatÄ la Romania Championship 2026",
+      "Prezență listată la Romania Championship 2026",
     ],
   },
   "frc-charged-up": {
     themeKicker: "Tema sezonului",
-    themeTitle: "Conuri, cuburi, links Č™i charging station",
+    themeTitle: "Conuri, cuburi, links și charging station",
     themeBody:
-      "CHARGED UP a fost jocul grilelor cu conuri Č™i cuburi, Ă®n care alianČ›ele construiau links Č™i cÄutau dock sau engage pe charging station Ă®n endgame. A fost un sezon care a premiat robotul versatil Č™i o execuČ›ie calmÄ sub presiune.",
-    awardsKicker: "Premii Č™i rezultate",
+      "CHARGED UP a fost jocul grilelor cu conuri și cuburi, în care alianțele construiau links și căutau dock sau engage pe charging station în endgame. A fost un sezon care a premiat robotul versatil și o execuție calmă sub presiune.",
+    awardsKicker: "Premii și rezultate",
     awardsTitle: "Reperele noastre din sezon",
     awardsIntro:
-      "Pe FRC Events, debutul nostru din 2023 este legat Ă®n primul rĂ˘nd de Bosphorus Regional:",
+      "Pe FRC Events, debutul nostru din 2023 este legat în primul rând de Bosphorus Regional:",
     awardsList: [
       "Regional Finalists la Bosphorus Regional 2023",
       "Industrial Design Award la Bosphorus Regional 2023",
-      "Debutul oficial al echipei noastre Ă®n FIRST Robotics Competition",
+      "Debutul oficial al echipei noastre în FIRST Robotics Competition",
     ],
   },
   "frc-crescendo": {
     themeKicker: "Tema sezonului",
-    themeTitle: "Notes, Speaker, Amp Č™i Trap",
+    themeTitle: "Notes, Speaker, Amp și Trap",
     themeBody:
-      "CRESCENDO a fost jocul notelor, cu scoring Ă®n Speaker Č™i Amp, plus Trap Č™i climb pe Chain Ă®n endgame. Sezonul a pus accent pe flow de meci, alimentare rapidÄ Č™i execuČ›ie coerentÄ a finalului.",
-    awardsKicker: "Premii Č™i rezultate",
+      "CRESCENDO a fost jocul notelor, cu scoring în Speaker și Amp, plus Trap și climb pe Chain în endgame. Sezonul a pus accent pe flow de meci, alimentare rapidă și execuție coerentă a finalului.",
+    awardsKicker: "Premii și rezultate",
     awardsTitle: "Reperele noastre din sezon",
     awardsIntro:
-      "Pentru 2024, FRC Events nu listeazÄ premii oficiale, dar confirmÄ clar cĂ˘teva rezultate importante:",
+      "Pentru 2024, FRC Events nu listează premii oficiale, dar confirmă clar câteva rezultate importante:",
     awardsList: [
-      "Playoff appearance la Ä°stanbul Regional 2024",
-      "Locul 10 din 51 dupÄ calificÄri la Bosphorus Regional 2024",
+      "Playoff appearance la Istanbul Regional 2024",
+      "Locul 10 din 51 după calificări la Bosphorus Regional 2024",
       "Captain of Alliance 7 la Bosphorus Regional 2024",
     ],
   },
   "frc-reefscape": {
     themeKicker: "Tema sezonului",
-    themeTitle: "Coral, algae Č™i scoring pe reef",
+    themeTitle: "Coral, algae și scoring pe reef",
     themeBody:
-      "REEFSCAPE a dus jocul FRC Ă®ntr-un decor marin, cu coral Č™i algae plasate pe reef, processor Č™i barge. Tema a fost construitÄ Ă®n jurul unui flux de joc dinamic, cu accent pe poziČ›ionare Č™i prioritizarea corectÄ a obiectivelor.",
-    awardsKicker: "Premii Č™i rezultate",
+      "REEFSCAPE a dus jocul FRC într-un decor marin, cu coral și algae plasate pe reef, processor și barge. Tema a fost construită în jurul unui flux de joc dinamic, cu accent pe poziționare și prioritizarea corectă a obiectivelor.",
+    awardsKicker: "Premii și rezultate",
     awardsTitle: "Ce apare public pentru sezon",
     awardsIntro:
-      "Aici am pÄstrat formularea onestÄ, strict dupÄ ce apare public Ă®n sursele oficiale:",
+      "Aici am păstrat formularea onestă, strict după ce apare public în sursele oficiale:",
     awardsList: [
-      "Pe pagina oficialÄ FRC Events, Team 9001 este listatÄ cu sezoanele 2023, 2024 Č™i 2026",
+      "Pe pagina oficială FRC Events, Team 9001 este listată cu sezoanele 2023, 2024 și 2026",
       "Nu apare un sezon oficial 2025 listat pentru Team 9001",
-      "Din aceastÄ cauzÄ, nu existÄ premii oficiale publice de sezon pe care sÄ le pot atribui onest paginii Reefscape",
+      "Din această cauză, nu există premii oficiale publice de sezon pe care să le pot atribui onest paginii Reefscape",
     ],
   },
   "frc-rebuilt": {
     themeKicker: "Tema sezonului",
-    themeTitle: "Fuel cells, panouri de service Č™i dock/climb",
+    themeTitle: "Fuel cells, panouri de service și dock/climb",
     themeBody:
-      "REBUILT, conform materialelor oficiale FRC 2026, combinÄ fuel cells, montare de panouri Ă®n zonele de service Č™i un endgame de dock sau climb. Este un joc orientat spre ritm, adaptare rapidÄ Č™i reconstrucČ›ie eficientÄ a infrastructurii de pe teren.",
-    awardsKicker: "Premii Č™i rezultate",
-    awardsTitle: "Reperele noastre de pĂ˘nÄ acum",
+      "REBUILT, conform materialelor oficiale FRC 2026, combină fuel cells, montare de panouri în zonele de service și un endgame de dock sau climb. Este un joc orientat spre ritm, adaptare rapidă și reconstrucție eficientă a infrastructurii de pe teren.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre de până acum",
     awardsIntro:
-      "Sezonul este Ă®ncÄ Ă®n mers, dar Ă®n listÄrile publice oficiale apare deja acest rezultat important:",
+      "Sezonul este încă în mers, dar în listările publice oficiale apare deja acest rezultat important:",
     awardsList: [
       "Regional Finalists la Bosphorus Regional 2026",
-      "Sezon activ, cu rezultate publice Ă®ncÄ actualizabile pe FRC Events",
+      "Sezon activ, cu rezultate publice încă actualizabile pe FRC Events",
     ],
   },
   "fgc-2023": {
-    themeKicker: "Tema competiČ›iei",
-    themeTitle: "Hydrogen Horizons Č™i energia curatÄ",
+    themeKicker: "Tema competiției",
+    themeTitle: "Hydrogen Horizons și energia curată",
     themeBody:
-      "La FIRST Global Challenge 2023, tema oficialÄ a fost Â«Hydrogen as a Clean Energy CarrierÂ», iar jocul Hydrogen Horizons cerea alianČ›elor internaČ›ionale sÄ producÄ, stocheze, transporte Č™i converteascÄ hidrogenul Ă®n alte forme de energie. A fost o competiČ›ie construitÄ direct pe ideea de colaborare globalÄ pentru un viitor energetic mai curat.",
-    awardsKicker: "Medalii Č™i premii",
+      "La FIRST Global Challenge 2023, tema oficială a fost «Hydrogen as a Clean Energy Carrier», iar jocul Hydrogen Horizons cerea alianțelor internaționale să producă, stocheze, transporte și convertească hidrogenul în alte forme de energie. A fost o competiție construită direct pe ideea de colaborare globală pentru un viitor energetic mai curat.",
+    awardsKicker: "Medalii și premii",
     awardsTitle: "Reperele noastre din Singapore",
     awardsIntro:
-      "ĂŽn sursele publice despre Team RomĂ˘nia apar aceste distincČ›ii pentru participarea noastrÄ la FGC 2023:",
+      "În sursele publice despre Team România apar aceste distincții pentru participarea noastră la FGC 2023:",
     awardsList: [
       "Medalie de argint pentru Al-Khwarizmi Award for Outstanding Supporter",
       "Medalie de bronz pentru Ustad Ahmad Lahori Award for Innovation in Engineering",
@@ -1354,7 +1407,7 @@ const seasonalResearchEn = {
     awardsIntro:
       "For 2024, FRC Events does not list judged awards, but it does confirm these important competitive results:",
     awardsList: [
-      "Playoff appearance at Ä°stanbul Regional 2024",
+      "Playoff appearance at Istanbul Regional 2024",
       "10th out of 51 after qualifications at Bosphorus Regional 2024",
       "Captain of Alliance 7 at Bosphorus Regional 2024",
     ],
@@ -1392,7 +1445,7 @@ const seasonalResearchEn = {
     themeKicker: "Competition theme",
     themeTitle: "Hydrogen Horizons and clean energy",
     themeBody:
-      "At FIRST Global Challenge 2023, the official theme was â€śHydrogen as a Clean Energy Carrier,â€ť and the Hydrogen Horizons game asked international alliances to produce, store, transport, and convert hydrogen into other forms of energy. It was a competition built directly around global collaboration for a cleaner energy future.",
+      "At FIRST Global Challenge 2023, the official theme was \"Hydrogen as a Clean Energy Carrier,\" and the Hydrogen Horizons game asked international alliances to produce, store, transport, and convert hydrogen into other forms of energy. It was a competition built directly around global collaboration for a cleaner energy future.",
     awardsKicker: "Medals and awards",
     awardsTitle: "Our key markers in Singapore",
     awardsIntro:
@@ -1411,37 +1464,37 @@ applyPageTextOverrides(detailPagesEn, seasonalResearchEn);
 
 applyPageTextOverrides(detailPages, {
   "frc-reefscape": {
-    lead: "Reefscape este sezonul FRC 2025 construit pe tema coral, algae Č™i scoring pe reef, processor Č™i barge. Pentru pagina noastrÄ am ales o formulare onestÄ, fiindcÄ pe FRC Events nu apare un sezon oficial 2025 listat pentru Team 9001.",
+    lead: "Reefscape este sezonul FRC 2025 construit pe tema coral, algae și scoring pe reef, processor și barge. Pentru pagina noastră am ales o formulare onestă, fiindcă pe FRC Events nu apare un sezon oficial 2025 listat pentru Team 9001.",
     intro: [
-      "Materialele oficiale ale jocului descriu foarte clar tema marinÄ Č™i obiectivele de scoring, dar Ă®n arhiva publicÄ FRC Events echipa noastrÄ apare cu sezoanele 2023, 2024 Č™i 2026.",
-      "Din cauza asta, pagina Reefscape trebuie cititÄ mai degrabÄ ca un capitol de context Č™i identitate vizualÄ decĂ˘t ca un sezon cu premii oficiale publice confirmate. Am preferat sÄ pÄstrÄm varianta sincerÄ, nu sÄ umplem spaČ›iul cu rezultate neconfirmate.",
+      "Materialele oficiale ale jocului descriu foarte clar tema marină și obiectivele de scoring, dar în arhiva publică FRC Events echipa noastră apare cu sezoanele 2023, 2024 și 2026.",
+      "Din cauza asta, pagina Reefscape trebuie citită mai degrabă ca un capitol de context și identitate vizuală decât ca un sezon cu premii oficiale publice confirmate. Am preferat să păstrăm varianta sinceră, nu să umplem spațiul cu rezultate neconfirmate.",
     ],
-    focusTitle: "Un sezon tratat onest Ă®n arhivÄ",
+    focusTitle: "Un sezon tratat onest în arhivă",
     focusBody:
-      "Pentru Reefscape am pÄstrat doar ce se poate susČ›ine public: tema oficialÄ a jocului Č™i faptul cÄ Team 9001 nu are un sezon 2025 listat pe FRC Events. Restul paginii poate funcČ›iona ca reper vizual Č™i de cronologie, fÄrÄ sÄ inventeze premii sau rezultate.",
+      "Pentru Reefscape am păstrat doar ce se poate susține public: tema oficială a jocului și faptul că Team 9001 nu are un sezon 2025 listat pe FRC Events. Restul paginii poate funcționa ca reper vizual și de cronologie, fără să inventeze premii sau rezultate.",
     highlights: [
-      "Tema oficialÄ FRC 2025: coral, algae, reef, processor Č™i barge",
-      "Team 9001 nu apare cu un sezon 2025 pe pagina publicÄ FRC Events",
-      "Nicio listÄ de premii publice nu este adÄugatÄ fÄrÄ sursÄ oficialÄ",
+      "Tema oficială FRC 2025: coral, algae, reef, processor și barge",
+      "Team 9001 nu apare cu un sezon 2025 pe pagina publică FRC Events",
+      "Nicio listă de premii publice nu este adăugată fără sursă oficială",
     ],
   },
   "frc-rebuilt": {
-    lead: "Rebuilt este sezonul actual FRC 2026, iar materialele oficiale Ă®l descriu ca un joc despre fuel cells, zone de service Č™i dock/climb. ĂŽn sursele publice FRC Events verificate acum, rezultatul confirmat pentru echipa noastrÄ este Regional Finalists la Bosphorus Regional.",
+    lead: "Rebuilt este sezonul actual FRC 2026, iar materialele oficiale îl descriu ca un joc despre fuel cells, zone de service și dock/climb. În sursele publice FRC Events verificate acum, rezultatul confirmat pentru echipa noastră este Regional Finalists la Bosphorus Regional.",
     intro: [
-      "Listarea publicÄ oficialÄ disponibilÄ pentru Bosphorus Regional 2026 aratÄ cÄ echipa noastrÄ a ajuns Regional Finalists, ceea ce face deja startul sezonului unul puternic Č™i credibil.",
-      "Pentru cÄ anul este Ă®ncÄ deschis, pagina lasÄ loc pentru update-uri viitoare fÄrÄ sÄ fixeze premii sau clasÄri care nu apar Ă®ncÄ public Ă®n sursa oficialÄ verificatÄ. AČ™a pÄstrÄm totul corect Č™i uČ™or de actualizat pe mÄsurÄ ce sezonul avanseazÄ.",
+      "Listarea publică oficială disponibilă pentru Bosphorus Regional 2026 arată că echipa noastră a ajuns Regional Finalists, ceea ce face deja startul sezonului unul puternic și credibil.",
+      "Pentru că anul este încă deschis, pagina lasă loc pentru update-uri viitoare fără să fixeze premii sau clasări care nu apar încă public în sursa oficială verificată. Așa păstrăm totul corect și ușor de actualizat pe măsură ce sezonul avansează.",
     ],
-    focusTitle: "Start puternic, sezon Ă®ncÄ deschis",
+    focusTitle: "Start puternic, sezon încă deschis",
     focusBody:
-      "PĂ˘nÄ acum, reperul public confirmat este finish-ul de Regional Finalists la Bosphorus Regional 2026. Restul paginii rÄmĂ˘ne pregÄtit pentru update-uri viitoare, dar fÄrÄ sÄ fixeze premii sau clasÄri care nu apar Ă®ncÄ Ă®n sursa oficialÄ verificatÄ.",
+      "Până acum, reperul public confirmat este finish-ul de Regional Finalists la Bosphorus Regional 2026. Restul paginii rămâne pregătit pentru update-uri viitoare, dar fără să fixeze premii sau clasări care nu apar încă în sursa oficială verificată.",
     highlights: [
       "Regional Finalists la Bosphorus Regional 2026",
-      "Jocul oficial 2026 combinÄ fuel cells, zone de service Č™i dock/climb",
-      "Pagina rÄmĂ˘ne deschisÄ pentru update-uri pe mÄsurÄ ce sezonul avanseazÄ",
+      "Jocul oficial 2026 combină fuel cells, zone de service și dock/climb",
+      "Pagina rămâne deschisă pentru update-uri pe măsură ce sezonul avansează",
     ],
     outro: [
-      "ĂŽn cronologia noastrÄ FRC, Rebuilt poate deveni foarte uČ™or sezonul care confirmÄ complet maturizarea programului. Un start cu finalist finish aratÄ deja cÄ suntem o prezenČ›Ä competitivÄ serioasÄ Č™i constantÄ.",
-      "Pentru cÄ anul este Ă®ncÄ deschis, descrierea lui trebuie sÄ lase loc Č™i pentru ce urmeazÄ. Exact asta face pagina acum: fixeazÄ ce existÄ public pĂ˘nÄ azi, fÄrÄ sÄ Ă®nchidÄ artificial povestea sezonului.",
+      "În cronologia noastră FRC, Rebuilt poate deveni foarte ușor sezonul care confirmă complet maturizarea programului. Un start cu finalist finish arată deja că suntem o prezență competitivă serioasă și constantă.",
+      "Pentru că anul este încă deschis, descrierea lui trebuie să lase loc și pentru ce urmează. Exact asta face pagina acum: fixează ce există public până azi, fără să închidă artificial povestea sezonului.",
     ],
   },
 });
@@ -1491,7 +1544,7 @@ const renderDetailNav = () => {
 
   detailHeader.innerHTML = `
     <nav class="nav-shell">
-      <a class="brand" href="index.html#home" aria-label="Pagina principalÄ Delta Force">
+      <a class="brand" href="index.html#home" aria-label="Pagina principală Delta Force">
         <img class="brand-logo" src="assets/images/brand/logo-copy.png" alt="Delta Force logo">
         <span class="brand-copy">
           <strong>DELTA FORCE</strong>
@@ -1510,7 +1563,7 @@ const renderDetailNav = () => {
         <a href="index.html#frc" data-nav-link="frc">FRC</a>
         <a href="index.html#fgc" data-nav-link="fgc">FGC</a>
         <a href="index.html#contact" data-nav-link="contact">Contact</a>
-        <button class="language-toggle" type="button" aria-pressed="false" aria-label="SchimbÄ Ă®n englezÄ" title="SchimbÄ Ă®n englezÄ">
+        <button class="language-toggle" type="button" aria-pressed="false" aria-label="Schimbă în engleză" title="Schimbă în engleză">
           <img class="language-flag-image" src="assets/images/flags/romania.png" alt="" aria-hidden="true">
         </button>
       </div>
@@ -1640,23 +1693,25 @@ const renderDetailPage = (language) => {
     </div>
 
     <div class="footer-socials" aria-label="Canale sociale Delta Force">
-      <button class="footer-social-button" type="button" aria-label="Facebook" title="Facebook">
+      <a class="footer-social-button" href="https://www.facebook.com/DeltaForceFTC" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
         <img class="footer-social-icon footer-social-icon-fb" src="assets/images/social/fb.png" alt="" aria-hidden="true">
-      </button>
-      <button class="footer-social-button" type="button" aria-label="Instagram" title="Instagram">
+      </a>
+      <a class="footer-social-button" href="https://www.instagram.com/delta_force_robotics/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
         <img class="footer-social-icon footer-social-icon-ig" src="assets/images/social/ig.png" alt="" aria-hidden="true">
-      </button>
-      <button class="footer-social-button" type="button" aria-label="LinkedIn" title="LinkedIn">
+      </a>
+      <a class="footer-social-button" href="https://ro.linkedin.com/company/delta-force-robotics" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
         <img class="footer-social-icon footer-social-icon-linkedin" src="assets/images/social/linked.png" alt="" aria-hidden="true">
-      </button>
-      <button class="footer-social-button" type="button" aria-label="YouTube" title="YouTube">
+      </a>
+      <a class="footer-social-button" href="https://www.youtube.com/@deltaforcerobotics" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
         <img class="footer-social-icon footer-social-icon-yt" src="assets/images/social/yt.png" alt="" aria-hidden="true">
-      </button>
+      </a>
     </div>
   `;
 
   document.title = `${page.title} | Delta Force Robotics`;
   bindDetailGallery(images, ui);
+  repairRenderedText(detailMain);
+  repairRenderedText(detailFooter);
 };
 
 let detailLightboxRefs = null;
@@ -1814,6 +1869,8 @@ const applyDetailLanguage = (language) => {
   }
 
   renderDetailPage(language);
+  repairRenderedText(detailHeader);
+  repairRenderedText(document.body);
 
   try {
     window.localStorage.setItem("delta-language", language);
@@ -1898,4 +1955,5 @@ applyDetailLanguage(storedLanguage === "en" ? "en" : "ro");
 updateDetailScrollState();
 window.addEventListener("scroll", updateDetailScrollState, { passive: true });
 window.addEventListener("resize", updateDetailScrollState);
+
 
