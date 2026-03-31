@@ -436,10 +436,10 @@ const detailPages = {
     ],
     footer: "Pagina First Global Challenge 2023",
     images: [
-      "assets/images/covers/fgc/firstglobalcover.png",
-      "assets/images/covers/fgc/firstglobalcover.png",
-      "assets/images/covers/fgc/firstglobalcover.png",
-      "assets/images/covers/fgc/firstglobalcover.png",
+      "assets/images/seasons/fgc/488663888_1235853795209343_5647302160916325797_n.jpg",
+      "assets/images/seasons/fgc/488886419_1235854051875984_553860228816359191_n.jpg",
+      "assets/images/seasons/fgc/488946625_1235853808542675_8151699016110283011_n.jpg",
+      "assets/images/seasons/fgc/488973815_1235853798542676_5707563153055258266_n.jpg",
     ],
   },
   "events-premier": {
@@ -784,10 +784,10 @@ Object.assign(detailPages, {
     ],
     footer: "Pagina First Global Challenge 2023",
     images: [
-      "assets/images/covers/fgc/firstglobalcover.png",
-      "assets/images/covers/fgc/firstglobalcover.png",
-      "assets/images/covers/fgc/firstglobalcover.png",
-      "assets/images/covers/fgc/firstglobalcover.png",
+      "assets/images/seasons/fgc/488663888_1235853795209343_5647302160916325797_n.jpg",
+      "assets/images/seasons/fgc/488886419_1235854051875984_553860228816359191_n.jpg",
+      "assets/images/seasons/fgc/488946625_1235853808542675_8151699016110283011_n.jpg",
+      "assets/images/seasons/fgc/488973815_1235853798542676_5707563153055258266_n.jpg",
     ],
   },
   "events-invitationals": {
