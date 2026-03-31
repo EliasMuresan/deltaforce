@@ -56,6 +56,7 @@ const fgcFactThree = document.querySelector(".fgc-fact-three");
 const fgcCta = document.querySelector(".fgc-cta");
 const contactEyebrow = document.querySelector(".contact-eyebrow");
 const contactTitle = document.querySelector(".contact-title");
+const contactSupportLink = document.querySelector(".contact-support-link");
 const contactCopy = document.querySelector(".contact-copy");
 const contactForm = document.getElementById("contact-form");
 const contactLabelName = document.querySelector(".contact-label-name");
@@ -199,13 +200,10 @@ const translations = {
     hero: {
       static: "CONSTRUIM",
       words: [
-        "ROBOȚI",
-        "ECHIPE",
-        "AUTONOMII",
         "ALIANȚE",
-        "COMUNITATE",
         "LIDERI",
         "CAMPIONI",
+        "COMUNITATE",
         "VIITOR",
       ],
       logoAlt: "Sigla Delta Force",
@@ -254,6 +252,7 @@ const translations = {
     contact: {
       eyebrow: "Contact",
       title: "Contactează-ne",
+      supportCta: "Susține-ne",
       copy:
         "Dacă vrei să colaborezi cu echipa, să ne susții sau să afli mai multe despre activitatea noastră, ne poți scrie direct aici.",
       formName: "Nume",
@@ -323,14 +322,11 @@ const translations = {
     hero: {
       static: "WE BUILD",
       words: [
-        "ROBOTS",
-        "DRIVE TEAMS",
-        "AUTONOMOUS RUNS",
         "ALLIANCES",
-        "COMMUNITY",
         "LEADERS",
         "CHAMPIONS",
-        "FUTURES",
+        "COMMUNITY",
+        "FUTURE",
       ],
       logoAlt: "Delta Force logo",
     },
@@ -378,6 +374,7 @@ const translations = {
     contact: {
       eyebrow: "Contact",
       title: "Contact us",
+      supportCta: "Support us",
       copy:
         "If you want to collaborate with the team, support us, or learn more about our work, you can message us directly here.",
       formName: "Name",
@@ -795,6 +792,7 @@ const applyLanguage = (language) => {
 
   contactEyebrow && (contactEyebrow.textContent = copy.contact.eyebrow);
   contactTitle && (contactTitle.textContent = copy.contact.title);
+  contactSupportLink && (contactSupportLink.textContent = copy.contact.supportCta);
   contactCopy && (contactCopy.textContent = copy.contact.copy);
   contactLabelName && (contactLabelName.textContent = copy.contact.formName);
   contactLabelEmail && (contactLabelEmail.textContent = copy.contact.formEmail);

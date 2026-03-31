@@ -781,6 +781,18 @@ body.lightbox-open {
   margin-bottom: 34px;
 }
 
+.contact-heading {
+  max-width: none;
+}
+
+.contact-heading-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
 .section-heading-centered {
   max-width: 960px;
   margin-left: auto;
@@ -804,6 +816,45 @@ body.lightbox-open {
   line-height: 1.04;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+}
+
+.contact-heading-row .contact-title {
+  margin: 0;
+}
+
+.contact-support-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 163, 71, 0.34);
+  background: linear-gradient(135deg, rgba(236, 88, 0, 0.96), rgba(255, 143, 42, 0.92));
+  color: #fff6ef;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 14px 30px rgba(236, 88, 0, 0.18);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.contact-support-link:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(255, 112, 20, 0.98), rgba(255, 157, 58, 0.94));
+  border-color: rgba(255, 163, 71, 0.58);
+  box-shadow: 0 18px 34px rgba(236, 88, 0, 0.24);
+}
+
+.contact-support-link:focus-visible {
+  outline: 2px solid rgba(255, 208, 168, 0.94);
+  outline-offset: 4px;
 }
 
 .section-heading p:last-child,
@@ -1886,6 +1937,12 @@ body.lightbox-open {
   gap: 4px;
 }
 
+.footer-copyright {
+  color: rgba(255, 236, 221, 0.54);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
 .footer strong {
   display: block;
   margin-bottom: 4px;
@@ -2423,6 +2480,16 @@ body.is-loaded .hero-content {
     flex: 0 0 auto;
   }
 
+  .contact-heading-row {
+    align-items: flex-start;
+  }
+
+  .contact-support-link {
+    min-height: 48px;
+    padding: 0 18px;
+    font-size: 0.86rem;
+  }
+
   .nav-links.is-open {
     opacity: 1;
     transform: translateY(0);
@@ -2466,10 +2533,12 @@ body.is-loaded .hero-content {
 
   .footer {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .footer-socials {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .brand-logo {

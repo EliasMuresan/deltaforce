@@ -8,6 +8,8 @@ const navMenu = document.querySelector(".nav-links");
 const navLinks = [...document.querySelectorAll(".nav-links a")];
 const languageToggle = document.querySelector(".language-toggle");
 const metaDescription = document.querySelector('meta[name="description"]');
+const ibanCopyButton = document.querySelector("[data-iban-copy]");
+const ibanNote = document.querySelector(".support-iban-note");
 
 const mojibakePairs = [
   [String.fromCodePoint(0x00C4, 0x201A), "Ă"],
@@ -114,15 +116,15 @@ const translations = {
       eyebrow: "DRUMUL SPRE MONDIALĂ",
       title: "Susținerea ta contează",
       copy:
-        "Fiecare sponsorizare, redirecționare de impozit sau donație ne ajută să reprezentăm mai departe Delta Force și România pe scena internațională.",
+        "Fiecare sponsorizare, redirecționare de impozit sau donație ne ajută să ajungem la mondială și să reprezentăm mai departe Delta Force și România.",
       pillOne: "SPONSORIZARE",
       pillTwo: "FORMULAR 230",
       pillThree: "PAYPAL ȘI IBAN",
       imageAlt: "Echipa Delta Force",
       panelEyebrow: "DELTA FORCE / TEAM ROMANIA",
-      panelTitle: "Susține parcursul nostru internațional",
+      panelTitle: "Susține parcursul nostru pentru Campionatul Mondial din Houston",
       panelCopy:
-        "Pe această pagină găsești toate variantele prin care ne poți fi alături: sponsorizare, Formular 230, PayPal și transfer bancar.",
+        "Pe această pagină găsești toate variantele prin care ne poți ajuta să ajungem la Campionatul Mondial din Houston, între 29 aprilie și 2 mai: sponsorizare, Formular 230, PayPal și transfer bancar.",
     },
     actions: {
       eyebrow: "OPȚIUNI DE SUSȚINERE",
@@ -150,16 +152,18 @@ const translations = {
       eyebrow: "DONAȚII RAPIDE",
       title: "PayPal",
       copy:
-        "Butonul direct către PayPal va fi conectat aici, ca varianta cea mai rapidă pentru donații individuale.",
-      button: "Link PayPal în curând",
-      note: "Adăugăm linkul de donație imediat ce ni-l trimiți.",
+        "Poți folosi și opțiunea PayPal pentru donații individuale, ca variantă rapidă de susținere.",
+      button: "Donează prin PayPal",
+      note: "Linkul final PayPal va fi conectat aici.",
     },
     iban: {
       eyebrow: "TRANSFER BANCAR",
       title: "IBAN",
-      copy: "Vom afișa aici coordonatele complete pentru transfer imediat ce le primim.",
-      value: "IBAN-ul va fi adăugat aici imediat ce ne trimiți datele.",
-      note: "Până atunci ne poți scrie pentru orice întrebare legată de susținere.",
+      copy: "Poți susține direct prin transfer bancar în contul nostru în RON.",
+      value: "IBAN RON: RO73BTRLRONCRT0I19750701",
+      note: "Apasă pe IBAN ca să-l copiezi instant.",
+      copied: "IBAN copiat în clipboard.",
+      copyFailed: "Nu am putut copia automat. Îl poți copia manual.",
     },
   },
   en: {
@@ -188,15 +192,15 @@ const translations = {
       eyebrow: "THE ROAD TO WORLDS",
       title: "Your support matters",
       copy:
-        "Every sponsorship, tax redirection, or donation helps us continue representing Delta Force and Romania on the international stage.",
+        "Every sponsorship, tax redirection, or donation helps us reach Worlds and keep representing Delta Force and Romania.",
       pillOne: "SPONSORSHIP",
       pillTwo: "FORM 230",
       pillThree: "PAYPAL AND IBAN",
       imageAlt: "Delta Force team",
       panelEyebrow: "DELTA FORCE / TEAM ROMANIA",
-      panelTitle: "Support our international journey",
+      panelTitle: "Support our road to the World Championship in Houston",
       panelCopy:
-        "This page brings together every way you can help us: sponsorships, Form 230, PayPal, and bank transfers.",
+        "This page brings together every way you can help us reach the World Championship in Houston, between April 29 and May 2: sponsorships, Form 230, PayPal, and bank transfers.",
     },
     actions: {
       eyebrow: "WAYS TO SUPPORT",
@@ -224,16 +228,18 @@ const translations = {
       eyebrow: "FAST DONATIONS",
       title: "PayPal",
       copy:
-        "The direct PayPal button will be connected here as the fastest option for individual donations.",
-      button: "PayPal link coming soon",
-      note: "We will add the donation link as soon as we receive it.",
+        "You can also use PayPal for individual donations, as a fast way to support us.",
+      button: "Donate via PayPal",
+      note: "The final PayPal link will be connected here.",
     },
     iban: {
       eyebrow: "BANK TRANSFER",
       title: "IBAN",
-      copy: "We will display the full transfer coordinates here as soon as we receive them.",
-      value: "The IBAN details will be added here as soon as you send them over.",
-      note: "Until then, you can email us for any question related to support.",
+      copy: "You can support us directly by bank transfer to our RON account.",
+      value: "RON IBAN: RO73BTRLRONCRT0I19750701",
+      note: "Click the IBAN to copy it instantly.",
+      copied: "IBAN copied to clipboard.",
+      copyFailed: "We could not copy it automatically. You can copy it manually.",
     },
   },
 };
@@ -243,6 +249,7 @@ Object.keys(translations).forEach((language) => {
 });
 
 let currentLanguage = "ro";
+let ibanNoteResetTimeout = null;
 
 const getTranslationValue = (source, path) =>
   path.split(".").reduce((value, key) => value?.[key], source);
@@ -306,6 +313,40 @@ const applyLanguage = (language) => {
   if (metaDescription) {
     metaDescription.setAttribute("content", repairMojibakeString(metaDescription.getAttribute("content") ?? ""));
   }
+};
+
+const fallbackCopyText = async (value) => {
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  textarea.style.pointerEvents = "none";
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand("copy");
+  } finally {
+    textarea.remove();
+  }
+};
+
+const setIbanNoteMessage = (message, copied = false) => {
+  if (!ibanNote || !message) return;
+
+  if (ibanNoteResetTimeout) {
+    window.clearTimeout(ibanNoteResetTimeout);
+  }
+
+  ibanNote.textContent = message;
+  ibanCopyButton?.classList.toggle("is-copied", copied);
+
+  ibanNoteResetTimeout = window.setTimeout(() => {
+    const copy = translations[currentLanguage] ?? translations.ro;
+    ibanNote.textContent = copy.iban.note;
+    ibanCopyButton?.classList.remove("is-copied");
+  }, 2200);
 };
 
 const showTopbar = () => {
@@ -386,6 +427,25 @@ document.addEventListener("keydown", (event) => {
 window.addEventListener("resize", () => {
   if (window.innerWidth > 860) {
     closeNavMenu();
+  }
+});
+
+ibanCopyButton?.addEventListener("click", async () => {
+  const rawIban = ibanCopyButton.dataset.ibanRaw ?? "";
+  if (!rawIban) return;
+
+  const copy = translations[currentLanguage] ?? translations.ro;
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(rawIban);
+    } else {
+      await fallbackCopyText(rawIban);
+    }
+
+    setIbanNoteMessage(copy.iban.copied, true);
+  } catch {
+    setIbanNoteMessage(copy.iban.copyFailed, false);
   }
 });
 

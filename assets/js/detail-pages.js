@@ -162,7 +162,7 @@ const detailPages = {
   "ftc-freight-frenzy": {
     title: "Freight Frenzy",
     eyebrow: "2021 - 2022",
-    lead: "Freight Frenzy a fost sezonul in care Delta Force a trecut definitiv din zona de promisiune in elita FTC: 17713 a incheiat circuitul oficial cu 18 victorii si 5 infrangeri, iar povestea s-a terminat la Houston, cu titlul mondial castigat din postura de alliance captain.",
+    lead: "Freight Frenzy a fost sezonul in care Delta Force a trecut definitiv din zona de promisiune in elita FTC, iar povestea s-a terminat la Houston, cu titlul mondial castigat din postura de alliance captain.",
     intro: [
       "Jocul a fost despre freight, duck carousel si warehouse cycles, iar pentru Delta Force a fost testul perfect de maturitate. In Romania, echipa a urcat pana pe locul 4 la National Championship si a primit Inspire Award 2nd Place, validand un parcurs deja foarte solid.",
       "La FIRST Championship, Delta Force a castigat mai intai Franklin Division si apoi campionatul mondial, tot ca alliance captain. Pentru o echipa fondata in 2018, Freight Frenzy ramane sezonul care a fixat standardul de ambitie al intregului program FTC.",
@@ -171,7 +171,7 @@ const detailPages = {
     focusTitle: "De la Nationala la Houston",
     focusBody: "Pagina asta merita sa urmareasca trecerea de la parcursul din Romania la run-ul din Houston: calificarea prin Inspire Award, consistenta in playoffs si statutul de World Championship Winning Alliance Captain.",
     highlights: [
-      "18-5 in evenimentele oficiale FTC din sezon",
+      "sezonul care a dus echipa pana la titlul mondial FTC",
       "Inspire Award 2nd Place la Romania National Championship",
       "Franklin Division winner si FIRST World Championship winner la Houston",
     ],
@@ -192,14 +192,14 @@ const detailPages = {
     eyebrow: "2022 - 2023",
     lead: "Power Play a dus jocul spre precizie, junction cycles si endgame control, iar pentru Delta Force a fost sezonul in care echipa a aratat cat de mult poate creste intre primul qualifier si nationala.",
     intro: [
-      "17713 a incheiat sezonul oficial cu 11 victorii si 8 infrangeri. La RO022 Bucharest #1 a plecat cu Innovate Award 3rd Place, iar la Romania National Championship a schimbat complet ritmul, urcand pana pe primul loc dupa calificari.",
+      "La RO022 Bucharest #1 a plecat cu Innovate Award 3rd Place, iar la Romania National Championship a schimbat complet ritmul, urcand pana pe primul loc dupa calificari.",
       "Finalul a venit cu Finalist Alliance Captain si Design Award la nationala, semn ca Delta Force nu a fost doar competitiva pe teren, ci si foarte coerenta in solutia tehnica prezentata juriului.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Sezonul saltului de consistenta",
     focusBody: "Power Play poate fi spus ca un sezon al progresului clar: de la un qualifier dificil la un National Championship incheiat pe primul loc dupa ranking, cu Design Award si o finala jucata din postura de alliance captain.",
     highlights: [
-      "11-8 in circuitul oficial Power Play",
+      "progres clar de la inceputul sezonului pana la nationala",
       "locul 1 dupa calificari la Romania National Championship",
       "Finalist Alliance Captain si Design Award la nationala",
     ],
@@ -208,21 +208,26 @@ const detailPages = {
       "Ca pagina, merita sa combine rezultatele nationale cu partea de precizie tehnica a jocului, pentru ca exact acolo s-a vazut diferenta fata de anul anterior.",
     ],
     footer: "Pagina Power Play",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/power-play/pozasus.png",
+      "assets/images/seasons/ftc/power-play/poza1.png",
+      "assets/images/seasons/ftc/power-play/poza2.png",
+      "assets/images/seasons/ftc/power-play/poza3.png",
+    ],
   },
   "ftc-centerstage": {
     title: "Centerstage",
     eyebrow: "2023 - 2024",
     lead: "Centerstage a adus in joc pixels, backdrop-uri si drone, iar pentru Delta Force a fost un sezon in care robotul, prezentarea si consistenta de competitie au inceput sa se lege foarte bine.",
     intro: [
-      "In datele oficiale FTC, 17713 a terminat sezonul cu 20 de victorii si 7 infrangeri in 5 evenimente. La RO #3 Timisoara, echipa a obtinut Design Award si a ajuns Finalist Alliance - 1st Team Selected, confirmand ca sezonul avea directie si identitate.",
+      "In datele oficiale FTC, sezonul se vede ca unul stabil si competitiv. La RO #3 Timisoara, echipa a obtinut Design Award si a ajuns Finalist Alliance - 1st Team Selected, confirmand ca sezonul avea directie si identitate.",
       "Centerstage a fost si anul in care pagina unei echipe ca Delta Force merita mai mult decat o simpla lista de rezultate: a fost un sezon cu mult potential vizual, cu momente bune de competitie si cu o imagine de ansamblu mai matura.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Un sezon cu imagine clara",
     focusBody: "Centerstage poate fi prezentat ca sezonul in care Delta Force a inceput sa lege mai bine performanta, designul si felul in care isi spune povestea. Design Award-ul de la Timisoara e cel mai bun marker pentru asta.",
     highlights: [
-      "20-7 in evenimentele oficiale FTC",
+      "un sezon FTC mult mai stabil si mai coerent",
       "Design Award la RO #3 Timisoara",
       "Finalist Alliance - 1st Team Selected intr-un sezon mult mai stabil",
     ],
@@ -231,21 +236,26 @@ const detailPages = {
       "Daca Freight Frenzy a fost explozia, iar Power Play a fost saltul de consistenta, Centerstage este capitolul in care Delta Force a inceput sa arate ca o echipa complet formata.",
     ],
     footer: "Pagina Centerstage",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/centerstage/poza3.png",
+      "assets/images/seasons/ftc/centerstage/pozasus.png",
+      "assets/images/seasons/ftc/centerstage/poza1.png",
+      "assets/images/seasons/ftc/centerstage/490020934_1241141231347266_8045885203163806937_n.jpg",
+    ],
   },
   "ftc-into-the-deep": {
     title: "Into The Deep",
     eyebrow: "2024 - 2025",
     lead: "Into The Deep a venit cu un joc subacvatic, centrat pe samples, specimens si ascent, iar pentru Delta Force a fost unul dintre cele mai curate sezoane FTC de pana acum.",
     intro: [
-      "17713 a incheiat anul cu 23 de victorii si doar 3 infrangeri in 7 evenimente oficiale. La Romania West League Tournament, Delta Force a castigat competitia din postura de 1st Team Selected si a luat si Design Award, apoi a mers mai departe la Romania Championship.",
+      "Sezonul a adus Winning Alliance - 1st Team Selected la Romania West League Tournament, plus Design Award si continuarea parcursului spre Romania Championship.",
       "Sezonul a aratat foarte bine si ca rezultate, si ca ritm. Into The Deep poate fi prezentat ca anul in care echipa a combinat eficienta robotului cu o imagine de sezon mult mai matura si mai clara.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Unul dintre cele mai solide sezoane FTC",
-    focusBody: "Into The Deep merita spus ca un sezon foarte eficient: record puternic, titlu in West Romania League Tournament, Design Award si continuitate suficienta cat sa impinga echipa din nou spre nationala.",
+    focusBody: "Into The Deep merita spus ca un sezon foarte eficient: titlu in West Romania League Tournament, Design Award si continuitate suficienta cat sa impinga echipa din nou spre nationala.",
     highlights: [
-      "23-3 in evenimentele oficiale FTC",
+      "un sezon FTC foarte solid si foarte constant",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
       "Design Award si calificare la Romania Championship",
     ],
@@ -254,21 +264,26 @@ const detailPages = {
       "Daca alegi bine imaginile, poti arata aici exact acel mix dintre control, consistenta si atmosfera de sezon care a facut anul sa para atat de compact.",
     ],
     footer: "Pagina Into The Deep",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/into-the-deep/pozasus.png",
+      "assets/images/seasons/ftc/into-the-deep/poza1.png",
+      "assets/images/seasons/ftc/into-the-deep/poza2.png",
+      "assets/images/seasons/ftc/into-the-deep/poza 4.jpg",
+    ],
   },
   "ftc-decode": {
     title: "Decode",
     eyebrow: "2025 - 2026 / Actual",
     lead: "Decode este sezonul actual FTC, un joc construit in jurul logicii, al pattern-urilor si al deciziilor rapide, iar pana acum Delta Force l-a transformat intr-un nou parcurs de top.",
     intro: [
-      "In circuitul oficial public, 17713 are momentan 17 victorii si 3 infrangeri in 5 evenimente. In februarie 2026, Delta Force a castigat West Romania League Tournament din postura de 1st Team Selected si a adaugat Inspire Award 3rd Place.",
+      "In februarie 2026, Delta Force a castigat West Romania League Tournament din postura de 1st Team Selected si a adaugat Inspire Award 3rd Place.",
       "Rezultatele au dus echipa mai departe la Romania Championship, iar pagina sezonului poate urmari foarte bine tocmai partea asta de evolutie in timp real: build, iteratii, competitii si update-uri adaugate pe masura ce apar.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Capitolul curent, deja competitiv",
-    focusBody: "Decode nu mai este doar o pagina de tinut la cald pentru update-uri viitoare. Exista deja un record puternic, un titlu regional si un Inspire Award, asa ca sezonul are de pe acum suficienta substanta pentru un recap serios.",
+    focusBody: "Decode nu mai este doar o pagina de tinut la cald pentru update-uri viitoare. Exista deja un titlu regional si un Inspire Award, asa ca sezonul are de pe acum suficienta substanta pentru un recap serios.",
     highlights: [
-      "17-3 in evenimentele oficiale publicate pana acum",
+      "un start de sezon foarte puternic in circuitul oficial",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
       "Inspire Award 3rd Place intr-un sezon inca deschis",
     ],
@@ -277,7 +292,12 @@ const detailPages = {
       "Pe masura ce anul se inchide, Decode are toate sansele sa devina inca un sezon definitoriu pentru FTC 17713, nu doar un capitol de tranzitie intre doua editii de joc.",
     ],
     footer: "Pagina sezonului curent FTC",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/decode/656304203_1547461490715237_4511597264223828386_n.jpg",
+      "assets/images/seasons/ftc/decode/656427074_1547461567381896_8806735372544043729_n.jpg",
+      "assets/images/seasons/ftc/decode/657058095_1547461434048576_7836651942840798479_n.jpg",
+      "assets/images/seasons/ftc/decode/657751376_1547461387381914_2996004331729914204_n.jpg",
+    ],
   },
   "frc-charged-up": {
     title: "Charged Up",
@@ -300,7 +320,12 @@ const detailPages = {
       "Charged Up poate ramane un prim capitol puternic daca selectezi cadrele care spun cel mai bine tranzitia echipei spre FRC si energia acelui debut.",
     ],
     footer: "Pagina Charged Up",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/frc/chargedup/487298647_1229456009182455_22415458488962185_n.jpg",
+      "assets/images/seasons/frc/chargedup/487318503_1229455962515793_4196183636731009039_n.jpg",
+      "assets/images/seasons/frc/chargedup/487498789_1229455949182461_3407560342455036532_n.jpg",
+      "assets/images/seasons/frc/chargedup/488314795_1233556828772373_5062552466815585559_n.jpg",
+    ],
   },
   "frc-crescendo": {
     title: "Crescendo",
@@ -323,7 +348,15 @@ const detailPages = {
       "Poate ramane una dintre cele mai curate pagini din arhiva daca alegi cadre mari, lasi textul scurt si folosesti imaginile doar unde chiar sustin povestea.",
     ],
     footer: "Pagina Crescendo",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/frc/crescendo/490715245_1243077684486954_8828388110118578536_n.jpg",
+      "assets/images/seasons/frc/crescendo/490456538_1243077497820306_9172991513049478018_n.jpg",
+      "assets/images/seasons/frc/crescendo/491350280_1243077557820300_8761649256036690104_n.jpg",
+      {
+        src: "assets/images/seasons/frc/crescendo/490361664_1243077704486952_2726261351600295164_n.jpg",
+        position: "50% 100%",
+      },
+    ],
   },
   "frc-reefscape": {
     title: "Reefscape",
@@ -346,7 +379,12 @@ const detailPages = {
       "Poti inchide cu un paragraf care fixeaza ce a adus Reefscape nou si cum se vede sezonul in contextul capitolelor FRC ale echipei.",
     ],
     footer: "Pagina Reefscape",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/frc/reefscape/dsad (1).png",
+      "assets/images/seasons/frc/reefscape/dsad (2).png",
+      "assets/images/seasons/frc/reefscape/dsad (3).png",
+      "assets/images/seasons/frc/reefscape/dsad.png",
+    ],
   },
   "frc-rebuilt": {
     title: "Rebuilt",
@@ -369,7 +407,12 @@ const detailPages = {
       "Pentru un sezon activ, asta inseamna mai putin timp pierdut pe aranjare si mai mult timp pus in selectia de imagini si in povestea reala a anului.",
     ],
     footer: "Pagina sezonului curent FRC",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/frc/rebuilt/WhatsApp Image 2026-03-30 at 23.01.54.jpeg",
+      "assets/images/seasons/frc/rebuilt/WhatsApp Image 2026-03-30 at 23.08.07 (3).jpeg",
+      "assets/images/seasons/frc/rebuilt/WhatsApp Image 2026-03-30 at 23.08.07 (4).jpeg",
+      "assets/images/seasons/frc/rebuilt/WhatsApp Image 2026-03-30 at 23.08.07 (5).jpeg",
+    ],
   },
   "fgc-2023": {
     title: "Singapore",
@@ -392,7 +435,12 @@ const detailPages = {
       "Cand vei pune fotografiile reale, poti crea foarte usor o naratiune care trece de la pregatire la competitie si apoi la impactul pe care l-a avut experienta asupra echipei.",
     ],
     footer: "Pagina First Global Challenge 2023",
-    images: placeholderSet,
+    images: [
+      "assets/images/covers/fgc/firstglobalcover.png",
+      "assets/images/covers/fgc/firstglobalcover.png",
+      "assets/images/covers/fgc/firstglobalcover.png",
+      "assets/images/covers/fgc/firstglobalcover.png",
+    ],
   },
   "events-premier": {
     title: "Evenimente Premier",
@@ -415,7 +463,12 @@ const detailPages = {
       "Pe termen lung, secțiunea poate deveni un loc bun pentru cele mai vizibile momente publice ale echipei, fără să încarce sezoanele FTC, FRC sau FGC.",
     ],
     footer: "Pagina de evenimente premier",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/power-play/pozasus.png",
+      "assets/images/seasons/ftc/power-play/poza1.png",
+      "assets/images/seasons/ftc/power-play/poza2.png",
+      "assets/images/seasons/ftc/power-play/poza3.png",
+    ],
   },
   "events-invitationals": {
     title: "Invitationale",
@@ -438,7 +491,12 @@ const detailPages = {
       "Asa, fiecare invitational poate sa para o experienta distincta in arhiva, nu doar un mic add-on pierdut intre celelalte capitole.",
     ],
     footer: "Pagina pentru invitationale",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/centerstage/poza1.png",
+      "assets/images/seasons/ftc/centerstage/poza1.png",
+      "assets/images/covers/ftc/centerstage.png",
+      "assets/images/seasons/ftc/centerstage/poza1.png",
+    ],
   },
 };
 
@@ -446,7 +504,7 @@ Object.assign(detailPages, {
   "ftc-freight-frenzy": {
     title: "Freight Frenzy",
     eyebrow: "2021 - 2022",
-    lead: "Freight Frenzy a fost sezonul în care Delta Force a trecut din statutul de echipă foarte bună la statutul de campioană mondială FTC. Jocul a fost despre freight, duck carousel și warehouse cycles, iar 17713 a încheiat anul oficial cu 18 victorii și 5 înfrângeri.",
+    lead: "Freight Frenzy a fost sezonul în care Delta Force a trecut din statutul de echipă foarte bună la statutul de campioană mondială FTC. Jocul a fost despre freight, duck carousel și warehouse cycles, iar sezonul s-a închis cu run-ul care a dus echipa până la titlul mondial.",
     intro: [
       "În România, Delta Force a ajuns până în zona de top a campionatului național și a primit Inspire Award 2nd Place, un semn clar că echipa nu impresiona doar prin meciuri, ci și prin robot, documentație, outreach și prezentare tehnică.",
       "La Houston, povestea a urcat la nivelul maxim: 17713 a câștigat Franklin Division și apoi FIRST World Championship, din postura de alliance captain. Pentru Delta Force, Freight Frenzy rămâne sezonul care a stabilit standardul real al programului FTC.",
@@ -455,7 +513,7 @@ Object.assign(detailPages, {
     focusTitle: "De la Națională la Houston",
     focusBody: "Partea centrală a sezonului este tranziția de la performanța națională la run-ul internațional din Houston. Freight Frenzy a fost anul în care Delta Force a dovedit că poate construi un robot de top, poate susține presiunea playoff-urilor și poate închide sezonul cu cel mai mare rezultat posibil în FTC.",
     highlights: [
-      "18-5 în evenimentele oficiale FTC din sezon",
+      "sezonul care a dus echipa până la titlul mondial FTC",
       "Inspire Award 2nd Place la Romania National Championship",
       "Franklin Division winner și FIRST World Championship winner la Houston",
     ],
@@ -476,14 +534,14 @@ Object.assign(detailPages, {
     eyebrow: "2022 - 2023",
     lead: "Power Play a fost sezonul conurilor, al junction-urilor și al controlului de final, iar pentru Delta Force a devenit anul în care progresul dintre începutul sezonului și națională s-a văzut cel mai clar.",
     intro: [
-      "17713 a încheiat sezonul oficial cu 11 victorii și 8 înfrângeri. În prima parte a anului a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevărata explozie a venit la Romania National Championship.",
+      "În prima parte a anului, echipa a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevărata explozie a venit la Romania National Championship.",
       "La națională, Delta Force a terminat pe locul 1 după calificări, a intrat în playoff-uri ca Finalist Alliance Captain și a primit Design Award. Power Play a arătat foarte bine cum o echipă poate urca în timpul sezonului și poate închide anul mult peste așteptările inițiale.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Sezonul saltului de consistență",
     focusBody: "Descrierea sezonului merge pe ideea de precizie și creștere. Power Play nu a fost doar despre scor pe junctions și endgame control, ci despre felul în care Delta Force a ajustat robotul și jocul de echipă până a ajuns să domine ranking-ul de la națională.",
     highlights: [
-      "11-8 în circuitul oficial Power Play",
+      "progres clar de la începutul sezonului până la națională",
       "locul 1 după calificări la Romania National Championship",
       "Finalist Alliance Captain și Design Award la națională",
     ],
@@ -492,21 +550,26 @@ Object.assign(detailPages, {
       "Este și unul dintre cele mai bune exemple pentru ideea de progres intern: nu doar rezultat final bun, ci și un traseu clar de la iterații și ajustări către o formă de top exact când conta mai mult.",
     ],
     footer: "Pagina Power Play",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/power-play/pozasus.png",
+      "assets/images/seasons/ftc/power-play/poza1.png",
+      "assets/images/seasons/ftc/power-play/poza2.png",
+      "assets/images/seasons/ftc/power-play/poza3.png",
+    ],
   },
   "ftc-centerstage": {
     title: "Centerstage",
     eyebrow: "2023 - 2024",
     lead: "Centerstage a fost sezonul pixelilor, al backdrop-ului și al dronei, iar pentru Delta Force a funcționat ca un an în care jocul, designul robotului și felul în care echipa se prezenta au început să se lege foarte bine.",
     intro: [
-      "În datele oficiale FTC, 17713 a terminat sezonul cu 20 de victorii și 7 înfrângeri în 5 evenimente. La RO #3 Timișoara, echipa a obținut Design Award și a fost Finalist Alliance - 1st Team Selected, semn că robotul și execuția din meciuri mergeau în direcția bună.",
+      "În datele oficiale FTC, sezonul se vede ca unul stabil și competitiv. La RO #3 Timișoara, echipa a obținut Design Award și a fost Finalist Alliance - 1st Team Selected, semn că robotul și execuția din meciuri mergeau în direcția bună.",
       "Centerstage a fost și un sezon cu mult potențial vizual: backdrop scoring, drone launch și o prezentare mai curată a întregii munci. Pentru Delta Force, anul acesta arată un program FTC mai matur și mai coerent în toate direcțiile lui.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Un sezon cu imagine clară",
     focusBody: "Descrierea sezonului poate merge pe ideea de maturizare a identității de echipă. Centerstage nu a fost doar un an bun de competiție, ci și unul în care Delta Force a arătat mai clar cum îmbină performanța, designul robotului și felul în care își comunică munca.",
     highlights: [
-      "20-7 în evenimentele oficiale FTC",
+      "un sezon FTC mult mai stabil și mai coerent",
       "Design Award la RO #3 Timisoara",
       "Finalist Alliance - 1st Team Selected într-un sezon mult mai stabil",
     ],
@@ -515,44 +578,54 @@ Object.assign(detailPages, {
       "Dacă Freight Frenzy este sezonul breakthrough, iar Power Play este sezonul progresului, Centerstage este anul în care Delta Force începe să arate ca o echipă complet formată și foarte conștientă de identitatea ei.",
     ],
     footer: "Pagina Centerstage",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/centerstage/poza3.png",
+      "assets/images/seasons/ftc/centerstage/pozasus.png",
+      "assets/images/seasons/ftc/centerstage/poza1.png",
+      "assets/images/seasons/ftc/centerstage/490020934_1241141231347266_8045885203163806937_n.jpg",
+    ],
   },
   "ftc-into-the-deep": {
     title: "Into The Deep",
     eyebrow: "2024 - 2025",
     lead: "Into The Deep a dus jocul FTC într-o zonă subacvatică, cu samples, specimens și ascent, iar pentru Delta Force a devenit unul dintre cele mai solide și mai eficiente sezoane de până acum.",
     intro: [
-      "17713 a încheiat anul cu 23 de victorii și doar 3 înfrângeri în 7 evenimente oficiale. La Romania West League Tournament, Delta Force a câștigat din postura de 1st Team Selected și a luat și Design Award, apoi și-a continuat parcursul către Romania Championship.",
+      "Sezonul a adus Winning Alliance - 1st Team Selected la Romania West League Tournament, plus Design Award și continuarea parcursului către Romania Championship.",
       "Into The Deep a fost sezonul în care robotul a părut foarte controlat, iar ritmul de competiție a rămas constant de la un event la altul. Din punct de vedere al arhivei FTC, este un sezon ușor de descris ca fiind compact, clar și foarte competitiv.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Unul dintre cele mai solide sezoane FTC",
-    focusBody: "Descrierea sezonului poate sta pe ideea de control și constanță. Into The Deep a avut un record excelent, un turneu regional câștigat, Design Award și suficientă stabilitate cât să confirme că Delta Force nu trăiește doar din vârfuri punctuale, ci din consistență reală.",
+    focusBody: "Descrierea sezonului poate sta pe ideea de control și constanță. Into The Deep a adus un turneu regional câștigat, Design Award și suficientă stabilitate cât să confirme că Delta Force nu trăiește doar din vârfuri punctuale, ci din consistență reală.",
     highlights: [
-      "23-3 în evenimentele oficiale FTC",
+      "un sezon FTC foarte solid și foarte constant",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
       "Design Award și calificare la Romania Championship",
     ],
     outro: [
-      "În cronologia echipei, Into The Deep este genul de sezon care confirmă maturitatea unui program. Nu are nevoie de o singură surpriză mare ca să pară important; îl susțin deja recordul, premiile și coerența întregului an.",
+      "În cronologia echipei, Into The Deep este genul de sezon care confirmă maturitatea unui program. Nu are nevoie de o singură surpriză mare ca să pară important; îl susțin deja premiile și coerența întregului an.",
       "Tocmai de aceea merită descris ca un sezon elegant și bine legat, în care Delta Force a combinat robotul competitiv cu o execuție constantă și cu o identitate vizuală mai clară ca în anii de început.",
     ],
     footer: "Pagina Into The Deep",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/into-the-deep/pozasus.png",
+      "assets/images/seasons/ftc/into-the-deep/poza1.png",
+      "assets/images/seasons/ftc/into-the-deep/poza2.png",
+      "assets/images/seasons/ftc/into-the-deep/poza 4.jpg",
+    ],
   },
   "ftc-decode": {
     title: "Decode",
     eyebrow: "2025 - 2026 / Actual",
     lead: "Decode este sezonul actual FTC, un joc care cere logică, recunoaștere de pattern-uri și decizii rapide, iar până acum Delta Force l-a transformat într-un nou parcurs de top pentru 17713.",
     intro: [
-      "În circuitul oficial public, 17713 are momentan 17 victorii și 3 înfrângeri în 5 evenimente. În februarie 2026, Delta Force a câștigat West Romania League Tournament din postura de 1st Team Selected și a primit Inspire Award 3rd Place.",
+      "În februarie 2026, Delta Force a câștigat West Romania League Tournament din postura de 1st Team Selected și a primit Inspire Award 3rd Place.",
       "Decode este încă deschis, dar are deja suficientă substanță ca să fie tratat ca un sezon serios: rezultate bune, ritm competitiv și un nou traseu spre Romania Championship. Tocmai pentru că pagina e vie, textul sezonului trebuie să lase loc și pentru update-uri ulterioare.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Capitolul curent, deja competitiv",
-    focusBody: "Descrierea sezonului merge pe ideea de capitol actual, dar deja validat de rezultate. Decode nu mai este doar o pagină pregătită pentru viitor: are deja record puternic, titlu regional și un award mare, ceea ce înseamnă că povestea sezonului a început deja să se scrie clar.",
+    focusBody: "Descrierea sezonului merge pe ideea de capitol actual, dar deja validat de rezultate. Decode nu mai este doar o pagină pregătită pentru viitor: are deja titlu regional și un award mare, ceea ce înseamnă că povestea sezonului a început deja să se scrie clar.",
     highlights: [
-      "17-3 în evenimentele oficiale publicate până acum",
+      "un start de sezon foarte puternic în circuitul oficial",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
       "Inspire Award 3rd Place într-un sezon încă deschis",
     ],
@@ -561,7 +634,12 @@ Object.assign(detailPages, {
       "Dacă ritmul se menține, Decode are toate șansele să închidă încă un sezon definitoriu pentru FTC 17713, nu doar o ediție bună de tranziție între două jocuri.",
     ],
     footer: "Pagina sezonului curent FTC",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/ftc/decode/656304203_1547461490715237_4511597264223828386_n.jpg",
+      "assets/images/seasons/ftc/decode/656427074_1547461567381896_8806735372544043729_n.jpg",
+      "assets/images/seasons/ftc/decode/657058095_1547461434048576_7836651942840798479_n.jpg",
+      "assets/images/seasons/ftc/decode/657751376_1547461387381914_2996004331729914204_n.jpg",
+    ],
   },
 });
 
@@ -587,21 +665,26 @@ Object.assign(detailPages, {
       "Ca poveste de sezon, rămâne un start istoric: prima prezență FRC, prima validare internațională și primul semn clar că puteam construi un program competitiv și în formatul acesta.",
     ],
     footer: "Pagina Charged Up",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/frc/chargedup/487298647_1229456009182455_22415458488962185_n.jpg",
+      "assets/images/seasons/frc/chargedup/487318503_1229455962515793_4196183636731009039_n.jpg",
+      "assets/images/seasons/frc/chargedup/487498789_1229455949182461_3407560342455036532_n.jpg",
+      "assets/images/seasons/frc/chargedup/488314795_1233556828772373_5062552466815585559_n.jpg",
+    ],
   },
   "frc-crescendo": {
     title: "Crescendo",
     eyebrow: "2024",
     lead: "Crescendo a fost sezonul notelor, al speaker-ului, al amp-ului și al trap-ului, iar pentru noi a funcționat ca un an de consolidare după debutul foarte puternic din 2023.",
     intro: [
-      "În datele publice de sezon, am încheiat anul oficial cu 12 victorii și 11 înfrângeri. Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional și Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
+      "Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional și Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
       "Crescendo nu are dramatismul debutului din Charged Up, dar are ceva foarte important pentru un program aflat la început de drum în FRC: continuitate. Am rămas competitivi, am fost din nou relevanți în playoff-uri și am confirmat că progresul nostru nu depinde de un singur sezon bun.",
     ],
     focusLabel: "Season focus",
     focusTitle: "Ritmul unui sezon matur",
     focusBody: "Descrierea sezonului poate merge pe ideea de consolidare. În Crescendo am început să arătăm ca un program FRC stabil: playoff-uri constante, iterații mai mature și suficientă încredere cât să conducem din nou o alianță la Bosphorus.",
     highlights: [
-      "12-11 în datele publice de sezon",
+      "playoff-uri și continuitate într-un sezon de consolidare",
       "playoff-uri atât la Istanbul Regional, cât și la Bosphorus Regional",
       "alliance captain la Bosphorus într-un an de consolidare FRC",
     ],
@@ -610,30 +693,43 @@ Object.assign(detailPages, {
       "Ca descriere, sezonul merge foarte bine pe ideea de maturizare: mai puțin despre surpriza debutului și mai mult despre dovada că programul nostru începe să capete continuitate reală.",
     ],
     footer: "Pagina Crescendo",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/frc/crescendo/490715245_1243077684486954_8828388110118578536_n.jpg",
+      "assets/images/seasons/frc/crescendo/490456538_1243077497820306_9172991513049478018_n.jpg",
+      "assets/images/seasons/frc/crescendo/491350280_1243077557820300_8761649256036690104_n.jpg",
+      {
+        src: "assets/images/seasons/frc/crescendo/490361664_1243077704486952_2726261351600295164_n.jpg",
+        position: "50% 100%",
+      },
+    ],
   },
   "frc-reefscape": {
     title: "Reefscape",
     eyebrow: "2025",
-    lead: "Reefscape este sezonul FRC 2025 construit în jurul temei marine, cu coral, algae și scoring pe reef, processor și barge. Pentru noi, este un an pe care merită să îl descriem mai prudent, fiindcă datele publice complete sunt mai puțin vizibile decât la celelalte sezoane.",
+    lead: "Reefscape este sezonul FRC 2025 construit în jurul temei marine, cu coral, algae și scoring pe reef, processor și barge. Pentru noi, rămâne sezonul în care am participat la Sunset Showdown în San Francisco și am ajuns până în semifinale.",
     intro: [
-      "Din informațiile publice ușor de urmărit, apariția noastră din 2025 la Sunset Showdown din San Francisco s-a încheiat cu playoff-uri din Alliance 8. Chiar dacă arhiva publică a sezonului nu este la fel de completă, asta arată că am rămas activi și într-un context internațional important.",
-      "Reefscape poate fi prezentat ca un sezon de tranziție și așezare. Este capitolul care leagă debutul și consolidarea din 2023-2024 de anul actual, iar descrierea lui merită să rămână sinceră: mai puțin despre o listă lungă de premii publice și mai mult despre continuitatea programului.",
+      "Participarea la Sunset Showdown din San Francisco a dat un reper clar sezonului nostru Reefscape: am intrat în playoff-uri și am mers până în semifinale într-un eveniment internațional puternic.",
+      "De aceea, Reefscape nu trebuie citit ca un simplu capitol de tranziție. Este sezonul care arată continuitate, prezență internațională și faptul că programul nostru FRC a rămas competitiv între anii de consolidare și sezonul actual.",
     ],
     focusLabel: "Season focus",
-    focusTitle: "Un an de tranziție vizibilă",
-    focusBody: "Descrierea sezonului merge cel mai bine pe ideea de capitol intermediar. În Reefscape ne-am ținut programul FRC activ, am rămas prezenți în evenimente relevante și am pregătit terenul pentru Rebuilt, chiar dacă nu toate rezultatele oficiale sunt la fel de ușor de găsit public.",
+    focusTitle: "San Francisco și un parcurs până în semifinale",
+    focusBody: "Descrierea sezonului merge cel mai bine pe combinația dintre tema oficială a jocului și rezultatul nostru de la Sunset Showdown. Reefscape a ținut programul activ, vizibil și competitiv, iar semifinalele din San Francisco dau paginii un reper concret și memorabil.",
     highlights: [
-      "sezonul FRC 2025 cu tema coral, algae, reef și barge",
-      "prezență publică la Sunset Showdown și playoff din Alliance 8",
-      "capitol de legătură între primii ani FRC și sezonul actual",
+      "participare la Sunset Showdown în San Francisco",
+      "parcurs până în semifinale",
+      "sezon care a ținut programul FRC activ și competitiv",
     ],
     outro: [
-      "Uneori, un sezon este important nu doar prin lista lui de trofee, ci și prin faptul că ține direcția programului coerentă. Reefscape poate fi citit exact așa: un an care nu lasă capitolul nostru FRC să se rupă, ci îl duce mai departe spre următoarea etapă.",
-      "De aceea pagina lui merită să rămână în arhivă cu un text echilibrat: destul de concret încât să spună ce se vede public, dar suficient de onest încât să nu inventeze o poveste mai mare decât cea pe care o pot susține sursele.",
+      "Reefscape merită păstrat în arhivă ca sezonul care a dus echipa într-un nou context internațional și a arătat că programul își păstrează nivelul competitiv între Crescendo și Rebuilt.",
+      "Cu tema lui distinctă și cu semifinalele din San Francisco, pagina Reefscape stă mult mai bine în cronologie ca un capitol clar al evoluției noastre FRC, nu ca o simplă punte între două sezoane.",
     ],
     footer: "Pagina Reefscape",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/frc/reefscape/dsad (1).png",
+      "assets/images/seasons/frc/reefscape/dsad (2).png",
+      "assets/images/seasons/frc/reefscape/dsad (3).png",
+      "assets/images/seasons/frc/reefscape/dsad.png",
+    ],
   },
   "frc-rebuilt": {
     title: "Rebuilt",
@@ -656,7 +752,12 @@ Object.assign(detailPages, {
       "Pentru că anul este încă deschis, descrierea lui trebuie să lase loc și pentru ce urmează. Exact asta face pagina acum: fixează ce există public până azi, fără să închidă artificial povestea sezonului.",
     ],
     footer: "Pagina sezonului curent FRC",
-    images: placeholderSet,
+    images: [
+      "assets/images/seasons/frc/rebuilt/WhatsApp Image 2026-03-30 at 23.01.54.jpeg",
+      "assets/images/seasons/frc/rebuilt/WhatsApp Image 2026-03-30 at 23.08.07 (3).jpeg",
+      "assets/images/seasons/frc/rebuilt/WhatsApp Image 2026-03-30 at 23.08.07 (4).jpeg",
+      "assets/images/seasons/frc/rebuilt/WhatsApp Image 2026-03-30 at 23.08.07 (5).jpeg",
+    ],
   },
 });
 
@@ -682,7 +783,12 @@ Object.assign(detailPages, {
       "Descrierea sezonului poate închide foarte bine ideea asta: Singapore nu a fost doar o deplasare importantă, ci o validare a faptului că Delta Force poate conta și într-o competiție unde miza este atât performanța, cât și colaborarea dintre țări.",
     ],
     footer: "Pagina First Global Challenge 2023",
-    images: placeholderSet,
+    images: [
+      "assets/images/covers/fgc/firstglobalcover.png",
+      "assets/images/covers/fgc/firstglobalcover.png",
+      "assets/images/covers/fgc/firstglobalcover.png",
+      "assets/images/covers/fgc/firstglobalcover.png",
+    ],
   },
   "events-invitationals": {
     title: "Invitationale",
@@ -754,7 +860,7 @@ const detailPagesEn = {
   "ftc-freight-frenzy": {
     title: "Freight Frenzy",
     eyebrow: "2021 - 2022",
-    lead: "Freight Frenzy was the season when our team moved from being a strong FTC contender to becoming a world champion. The game centered on freight, the duck carousel, and warehouse cycles, and we closed the official season with an 18-5 record.",
+    lead: "Freight Frenzy was the season when our team moved from being a strong FTC contender to becoming a world champion. The game centered on freight, the duck carousel, and warehouse cycles, and the season closed with the run that carried us to a world title.",
     intro: [
       "In Romania, our team reached the top tier of the national championship and earned Inspire Award 2nd Place, a clear sign that we were standing out not only in matches, but also through the robot, documentation, outreach, and technical presentation.",
       "In Houston, the story reached its peak: our team won Franklin Division and then the FIRST World Championship as alliance captain. Freight Frenzy remains the season that set the real standard for our FTC program.",
@@ -762,7 +868,7 @@ const detailPagesEn = {
     focusTitle: "From Nationals To Houston",
     focusBody: "The core of the season is the transition from strong national results to an international run in Houston. Freight Frenzy was the year we proved we could build a top robot, handle playoff pressure, and finish with the biggest result possible in FTC.",
     highlights: [
-      "18-5 in official FTC events",
+      "the season that carried us all the way to the FTC world title",
       "Inspire Award 2nd Place at Romania National Championship",
       "Franklin Division winner and FIRST World Championship winner in Houston",
     ],
@@ -777,13 +883,13 @@ const detailPagesEn = {
     eyebrow: "2022 - 2023",
     lead: "Power Play was the season of cones, junctions, and endgame control, and for our team it became the year when the progress from the start of the season to nationals was the easiest to see.",
     intro: [
-      "We finished the official season with 11 wins and 8 losses. Early in the year we collected solid markers, including Innovate Award 3rd Place at RO022 Bucharest #1, but the real jump came at Romania National Championship.",
+      "Early in the year we collected solid markers, including Innovate Award 3rd Place at RO022 Bucharest #1, but the real jump came at Romania National Championship.",
       "At nationals, our team finished first after qualifications, entered playoffs as Finalist Alliance Captain, and earned the Design Award. Power Play showed how much a team can grow during a season and still peak when it matters most.",
     ],
     focusTitle: "The Season Of Consistency",
     focusBody: "This season works best as a story about precision and growth. Power Play was not only about junction scoring and endgame control, but about how we refined both the robot and our teamwork until we were leading the rankings at nationals.",
     highlights: [
-      "11-8 in the official Power Play circuit",
+      "clear growth from the start of the season to nationals",
       "1st after qualifications at Romania National Championship",
       "Finalist Alliance Captain and Design Award at nationals",
     ],
@@ -798,13 +904,13 @@ const detailPagesEn = {
     eyebrow: "2023 - 2024",
     lead: "Centerstage was the season of pixels, the backdrop, and the drone, and for our team it felt like the year when gameplay, robot design, and the way we presented ourselves finally started to connect.",
     intro: [
-      "In the official FTC data, we finished the season with 20 wins and 7 losses across 5 events. At RO #3 Timisoara, we earned the Design Award and became Finalist Alliance - 1st Team Selected, a sign that the robot and our match execution were moving in the right direction.",
+      "In the official FTC data, the season reads as stable and competitive. At RO #3 Timisoara, we earned the Design Award and became Finalist Alliance - 1st Team Selected, a sign that the robot and our match execution were moving in the right direction.",
       "Centerstage also had strong visual potential: backdrop scoring, the drone launch, and a cleaner presentation of the work behind the season. For us, it represents a more mature and more coherent FTC program.",
     ],
     focusTitle: "A Season With A Clear Image",
     focusBody: "The season works well as a story about identity taking shape. Centerstage was not only a good competition year, but also a year in which we showed more clearly how performance, robot design, and communication can work together.",
     highlights: [
-      "20-7 in official FTC events",
+      "a steadier and more coherent FTC season overall",
       "Design Award at RO #3 Timisoara",
       "Finalist Alliance - 1st Team Selected in a much steadier season",
     ],
@@ -819,18 +925,18 @@ const detailPagesEn = {
     eyebrow: "2024 - 2025",
     lead: "Into The Deep pushed FTC into an underwater game built around samples, specimens, and ascent, and for our team it became one of the strongest and most efficient seasons we have had so far.",
     intro: [
-      "We ended the year with 23 wins and only 3 losses in 7 official events. At West Romania League Tournament, our team won as Winning Alliance - 1st Team Selected, also earning the Design Award before moving on to Romania Championship.",
+      "The season brought Winning Alliance - 1st Team Selected at West Romania League Tournament, plus the Design Award and a continued run toward Romania Championship.",
       "Into The Deep was the season in which the robot looked controlled and the pace of competition stayed consistent from one event to the next. In our FTC archive, it reads as a compact, clear, and highly competitive year.",
     ],
     focusTitle: "One Of Our Strongest FTC Seasons",
-    focusBody: "The season is best described through control and consistency. Into The Deep delivered an excellent record, a regional title, a Design Award, and enough stability to confirm that our team is built on more than isolated peaks.",
+    focusBody: "The season is best described through control and consistency. Into The Deep delivered a regional title, a Design Award, and enough stability to confirm that our team is built on more than isolated peaks.",
     highlights: [
-      "23-3 in official FTC events",
+      "a very solid and very consistent FTC season",
       "Winning Alliance - 1st Team Selected at West Romania League Tournament",
       "Design Award and qualification to Romania Championship",
     ],
     outro: [
-      "In the team timeline, Into The Deep is the kind of season that confirms the maturity of a program. It does not need a single dramatic surprise to feel important, because the record, awards, and cohesion already support it.",
+      "In the team timeline, Into The Deep is the kind of season that confirms the maturity of a program. It does not need a single dramatic surprise to feel important, because the awards and cohesion already support it.",
       "That is why it works well as an elegant, tightly connected season page, one where a competitive robot, steady execution, and a clearer visual identity all come together.",
     ],
     footer: "FTC season archive",
@@ -840,13 +946,13 @@ const detailPagesEn = {
     eyebrow: "2025 - 2026 / Current",
     lead: "Decode is the current FTC season, a game built around logic, pattern recognition, and quick decisions, and so far our team has turned it into another top-level run.",
     intro: [
-      "In the public official circuit, we currently hold a 17-3 record across 5 events. In February 2026, our team won West Romania League Tournament as Winning Alliance - 1st Team Selected and also received Inspire Award 3rd Place.",
+      "In February 2026, our team won West Romania League Tournament as Winning Alliance - 1st Team Selected and also received Inspire Award 3rd Place.",
       "Decode is still open, but it already has enough substance to be treated like a serious season: strong results, a competitive rhythm, and a new path toward Romania Championship. Because the page is still alive, the structure should leave room for later updates.",
     ],
     focusTitle: "The Current Chapter, Already Competitive",
-    focusBody: "The season works best as a current chapter already validated by results. Decode is no longer only a placeholder page for future updates: it already has a strong record, a regional title, and a major award, which means the story is already underway.",
+    focusBody: "The season works best as a current chapter already validated by results. Decode is no longer only a placeholder page for future updates: it already has a regional title and a major award, which means the story is already underway.",
     highlights: [
-      "17-3 in the official events published so far",
+      "a very strong start in the official circuit",
       "Winning Alliance - 1st Team Selected at West Romania League Tournament",
       "Inspire Award 3rd Place in a season that is still open",
     ],
@@ -882,13 +988,13 @@ const detailPagesEn = {
     eyebrow: "2024",
     lead: "Crescendo was the season of notes, the speaker, the amp, and the trap, and for us it worked as a year of consolidation after a very strong 2023 debut.",
     intro: [
-      "In the public season data, we finished the official year with 12 wins and 11 losses. We reached playoffs at both major regionals of the year, Istanbul Regional and Bosphorus Regional, and at Bosphorus we were alliance captain again.",
+      "We reached playoffs at both major regionals of the year, Istanbul Regional and Bosphorus Regional, and at Bosphorus we were alliance captain again.",
       "Crescendo does not have the drama of the Charged Up debut, but it has something very important for a young FRC program: continuity. We stayed competitive, remained relevant in playoffs, and showed that our progress does not depend on a single strong season.",
     ],
     focusTitle: "The Rhythm Of A Mature Season",
     focusBody: "The season works best as a consolidation chapter. In Crescendo, we started to look like a stable FRC program: steady playoff appearances, more mature iterations, and enough confidence to lead another alliance at Bosphorus.",
     highlights: [
-      "12-11 in the public season data",
+      "playoffs and continuity in a consolidation season",
       "Playoff appearances at both Istanbul Regional and Bosphorus Regional",
       "Alliance captain at Bosphorus in a year of FRC consolidation",
     ],
@@ -901,21 +1007,21 @@ const detailPagesEn = {
   "frc-reefscape": {
     title: "Reefscape",
     eyebrow: "2025",
-    lead: "Reefscape is the 2025 FRC season built around a marine theme, with coral, algae, and scoring on the reef, processor, and barge. For us, it is a year that deserves a more careful description, because the full public record is less visible than in the other seasons.",
+    lead: "Reefscape is the 2025 FRC season built around a marine theme, with coral, algae, and scoring on the reef, processor, and barge. For us, it is the season in which we competed at Sunset Showdown in San Francisco and reached the semifinals.",
     intro: [
-      "From the public information that is easier to track, our 2025 appearance at Sunset Showdown in San Francisco ended with playoffs from Alliance 8. Even if the public archive is not as complete, it still shows that we remained active in an important international setting.",
-      "Reefscape can be presented as a season of transition and positioning. It connects the debut and consolidation of 2023-2024 to the current year, and the description should stay honest: less about a long list of public awards, more about continuity.",
+      "Our appearance at Sunset Showdown in San Francisco gives Reefscape a clear competitive marker: we reached the semifinals in a strong international event.",
+      "That is why Reefscape should not read like a simple transition chapter. It is the season that shows continuity, international presence, and the fact that our FRC program stayed competitive between the consolidation years and the current season.",
     ],
-    focusTitle: "A Visible Transition Year",
-    focusBody: "This season works best as an intermediate chapter. In Reefscape, we kept the FRC program active, stayed present in relevant events, and prepared the ground for Rebuilt, even if not every official result is equally easy to trace publicly.",
+    focusTitle: "San Francisco and a run to the semifinals",
+    focusBody: "This season works best through the combination of the official game theme and our result at Sunset Showdown. Reefscape kept the program active, visible, and competitive, and the semifinal run in San Francisco gives the page a clear and memorable anchor.",
     highlights: [
-      "The 2025 FRC season built around coral, algae, reef, and barge",
-      "Public appearance at Sunset Showdown and playoffs from Alliance 8",
-      "A bridge chapter between the first FRC years and the current season",
+      "participation at Sunset Showdown in San Francisco",
+      "a run to the semifinals",
+      "a season that kept the FRC program active and competitive",
     ],
     outro: [
-      "Sometimes a season matters not only because of trophies, but because it keeps the direction of the program coherent. Reefscape can be read exactly like that: a year that keeps our FRC chapter moving toward the next stage.",
-      "That is why the page deserves an honest, balanced text: concrete enough to reflect what is public, but measured enough not to invent a story bigger than the evidence supports.",
+      "Reefscape deserves a place in the archive as the season that took the team into another international setting and showed that the program could keep its competitive level between Crescendo and Rebuilt.",
+      "With its distinct game theme and the semifinal run in San Francisco, Reefscape reads much better as a clear chapter in our FRC evolution than as a simple bridge between two seasons.",
     ],
     footer: "FRC season archive",
   },
@@ -1019,62 +1125,62 @@ applyPageTextOverrides(detailPages, {
   "ftc-freight-frenzy": {
     lead: "Freight Frenzy a fost sezonul în care echipa noastră a trecut din statutul de echipă foarte bună la statutul de campioană mondială FTC. Jocul a fost despre freight, duck carousel și warehouse cycles, iar sezonul oficial s-a încheiat la Houston, cu titlul mondial câștigat din postura de alliance captain.",
     highlights: [
-      "18 victorii în evenimentele oficiale FTC din sezon",
+      "sezonul care a dus echipa până la titlul mondial FTC",
       "Inspire Award 2nd Place la Romania National Championship",
       "Franklin Division winner și FIRST World Championship winner la Houston",
     ],
   },
   "ftc-power-play": {
     intro: [
-      "Echipa noastră a încheiat sezonul oficial cu 11 victorii. În prima parte a anului a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevărata explozie a venit la Romania National Championship.",
+      "În prima parte a anului, echipa noastră a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevărata explozie a venit la Romania National Championship.",
       "La națională, echipa noastră a terminat pe locul 1 după calificări, a intrat în playoff-uri ca Finalist Alliance Captain și a primit Design Award. Power Play a arătat foarte bine cum o echipă poate urca în timpul sezonului și poate închide anul mult peste așteptările inițiale.",
     ],
     highlights: [
-      "11 victorii în circuitul oficial Power Play",
+      "progres clar de la începutul sezonului până la națională",
       "Locul 1 după calificări la Romania National Championship",
       "Finalist Alliance Captain și Design Award la națională",
     ],
   },
   "ftc-centerstage": {
     intro: [
-      "În datele oficiale FTC, echipa noastră a terminat sezonul cu 20 de victorii în 5 evenimente. La RO #3 Timișoara, echipa a obținut Design Award și a fost Finalist Alliance - 1st Team Selected, semn că robotul și execuția din meciuri mergeau în direcția bună.",
+      "În datele oficiale FTC, sezonul nostru se vede ca unul stabil și competitiv. La RO #3 Timișoara, echipa a obținut Design Award și a fost Finalist Alliance - 1st Team Selected, semn că robotul și execuția din meciuri mergeau în direcția bună.",
       "Centerstage a fost și un sezon cu mult potențial vizual: backdrop scoring, drone launch și o prezentare mai curată a întregii munci. Pentru echipa noastră, anul acesta arată un program FTC mai matur și mai coerent în toate direcțiile lui.",
     ],
     highlights: [
-      "20 de victorii în evenimentele oficiale FTC",
+      "un sezon FTC mult mai stabil și mai coerent",
       "Design Award la RO #3 Timișoara",
       "Finalist Alliance - 1st Team Selected într-un sezon mult mai stabil",
     ],
   },
   "ftc-into-the-deep": {
     intro: [
-      "Echipa noastră a încheiat anul cu 23 de victorii în 7 evenimente oficiale. La Romania West League Tournament, echipa noastră a câștigat din postura de 1st Team Selected și a luat și Design Award, apoi și-a continuat parcursul către Romania Championship.",
+      "Sezonul a adus Winning Alliance - 1st Team Selected la Romania West League Tournament, plus Design Award și continuarea parcursului către Romania Championship.",
       "Into The Deep a fost sezonul în care robotul a părut foarte controlat, iar ritmul de competiție a rămas constant de la un event la altul. Din punct de vedere al arhivei FTC, este un sezon ușor de descris ca fiind compact, clar și foarte competitiv.",
     ],
     highlights: [
-      "23 de victorii în evenimentele oficiale FTC",
+      "un sezon FTC foarte solid și foarte constant",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
       "Design Award și calificare la Romania Championship",
     ],
   },
   "ftc-decode": {
     intro: [
-      "În circuitul oficial public, echipa noastră are momentan 17 victorii în 5 evenimente. În februarie 2026, echipa noastră a câștigat West Romania League Tournament din postura de 1st Team Selected și a primit Inspire Award 3rd Place.",
+      "În februarie 2026, echipa noastră a câștigat West Romania League Tournament din postura de 1st Team Selected și a primit Inspire Award 3rd Place.",
       "Decode este încă deschis, dar are deja suficientă substanță ca să fie tratat ca un sezon serios: rezultate bune, ritm competitiv și un nou traseu spre Romania Championship. Tocmai pentru că pagina e vie, textul sezonului trebuie să lase loc și pentru update-uri ulterioare.",
     ],
     highlights: [
-      "17 victorii în evenimentele oficiale publicate până acum",
+      "un start de sezon foarte puternic în circuitul oficial",
       "Winning Alliance - 1st Team Selected la West Romania League Tournament",
       "Inspire Award 3rd Place într-un sezon încă deschis",
     ],
   },
   "frc-crescendo": {
     intro: [
-      "În datele publice de sezon, am încheiat anul oficial cu 12 victorii. Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional și Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
+      "Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional și Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
       "Crescendo nu are dramatismul debutului din Charged Up, dar are ceva foarte important pentru un program aflat la început de drum în FRC: continuitate. Am rămas competitivi, am fost din nou relevanți în playoff-uri și am confirmat că progresul nostru nu depinde de un singur sezon bun.",
     ],
     highlights: [
-      "12 victorii în datele publice de sezon",
+      "playoff-uri și continuitate într-un sezon de consolidare",
       "Playoff-uri atât la Istanbul Regional, cât și la Bosphorus Regional",
       "Alliance captain la Bosphorus într-un an de consolidare FRC",
     ],
@@ -1085,62 +1191,62 @@ applyPageTextOverrides(detailPagesEn, {
   "ftc-freight-frenzy": {
     lead: "Freight Frenzy was the season when our team moved from being a strong FTC contender to becoming a world champion. The game centered on freight, the duck carousel, and warehouse cycles, and the official season ended in Houston with a world title won as alliance captain.",
     highlights: [
-      "18 wins in official FTC events",
+      "the season that carried us all the way to the FTC world title",
       "Inspire Award 2nd Place at Romania National Championship",
       "Franklin Division winner and FIRST World Championship winner in Houston",
     ],
   },
   "ftc-power-play": {
     intro: [
-      "We finished the official season with 11 wins. Early in the year we collected solid markers, including Innovate Award 3rd Place at RO022 Bucharest #1, but the real jump came at Romania National Championship.",
+      "Early in the year we collected solid markers, including Innovate Award 3rd Place at RO022 Bucharest #1, but the real jump came at Romania National Championship.",
       "At nationals, our team finished first after qualifications, entered playoffs as Finalist Alliance Captain, and earned the Design Award. Power Play showed how much a team can grow during a season and still peak when it matters most.",
     ],
     highlights: [
-      "11 wins in the official Power Play circuit",
+      "clear growth from the start of the season to nationals",
       "1st after qualifications at Romania National Championship",
       "Finalist Alliance Captain and Design Award at nationals",
     ],
   },
   "ftc-centerstage": {
     intro: [
-      "In the official FTC data, we finished the season with 20 wins across 5 events. At RO #3 Timisoara, we earned the Design Award and became Finalist Alliance - 1st Team Selected, a sign that the robot and our match execution were moving in the right direction.",
+      "In the official FTC data, the season reads as stable and competitive. At RO #3 Timisoara, we earned the Design Award and became Finalist Alliance - 1st Team Selected, a sign that the robot and our match execution were moving in the right direction.",
       "Centerstage also had strong visual potential: backdrop scoring, the drone launch, and a cleaner presentation of the work behind the season. For us, it represents a more mature and more coherent FTC program.",
     ],
     highlights: [
-      "20 wins in official FTC events",
+      "a steadier and more coherent FTC season overall",
       "Design Award at RO #3 Timisoara",
       "Finalist Alliance - 1st Team Selected in a much steadier season",
     ],
   },
   "ftc-into-the-deep": {
     intro: [
-      "We ended the year with 23 wins in 7 official events. At West Romania League Tournament, our team won as Winning Alliance - 1st Team Selected, also earning the Design Award before moving on to Romania Championship.",
+      "The season brought Winning Alliance - 1st Team Selected at West Romania League Tournament, plus the Design Award and a continued run toward Romania Championship.",
       "Into The Deep was the season in which the robot looked controlled and the pace of competition stayed consistent from one event to the next. In our FTC archive, it reads as a compact, clear, and highly competitive year.",
     ],
     highlights: [
-      "23 wins in official FTC events",
+      "a very solid and very consistent FTC season",
       "Winning Alliance - 1st Team Selected at West Romania League Tournament",
       "Design Award and qualification to Romania Championship",
     ],
   },
   "ftc-decode": {
     intro: [
-      "In the public official circuit, we currently have 17 wins across 5 events. In February 2026, our team won West Romania League Tournament as Winning Alliance - 1st Team Selected and also received Inspire Award 3rd Place.",
+      "In February 2026, our team won West Romania League Tournament as Winning Alliance - 1st Team Selected and also received Inspire Award 3rd Place.",
       "Decode is still open, but it already has enough substance to be treated like a serious season: strong results, a competitive rhythm, and a new path toward Romania Championship. Because the page is still alive, the structure should leave room for later updates.",
     ],
     highlights: [
-      "17 wins in the official events published so far",
+      "a very strong start in the official circuit",
       "Winning Alliance - 1st Team Selected at West Romania League Tournament",
       "Inspire Award 3rd Place in a season that is still open",
     ],
   },
   "frc-crescendo": {
     intro: [
-      "In the public season data, we finished the official year with 12 wins. We reached playoffs at both major regionals of the year, Istanbul Regional and Bosphorus Regional, and at Bosphorus we were alliance captain again.",
+      "We reached playoffs at both major regionals of the year, Istanbul Regional and Bosphorus Regional, and at Bosphorus we were alliance captain again.",
       "Crescendo does not have the drama of the Charged Up debut, but it has something very important for a young FRC program: continuity. We stayed competitive, remained relevant in playoffs, and showed that our progress does not depend on a single strong season.",
     ],
     highlights: [
-      "12 wins in the public season data",
+      "playoffs and continuity in a consolidation season",
       "Playoff appearances at both Istanbul Regional and Bosphorus Regional",
       "Alliance captain at Bosphorus in a year of FRC consolidation",
     ],
@@ -1193,7 +1299,7 @@ const seasonalResearchRo = {
     awardsList: [
       "Design Award la RO #3 Timișoara",
       "Finalist Alliance - 1st Team Selected la RO #3 Timișoara",
-      "Record oficial de 20-7 în 5 evenimente FTC",
+      "Prezență competitivă în 5 evenimente FTC",
     ],
   },
   "ftc-into-the-deep": {
@@ -1262,13 +1368,13 @@ const seasonalResearchRo = {
     themeBody:
       "REEFSCAPE a dus jocul FRC într-un decor marin, cu coral și algae plasate pe reef, processor și barge. Tema a fost construită în jurul unui flux de joc dinamic, cu accent pe poziționare și prioritizarea corectă a obiectivelor.",
     awardsKicker: "Premii și rezultate",
-    awardsTitle: "Ce apare public pentru sezon",
+    awardsTitle: "Reperele noastre din sezon",
     awardsIntro:
-      "Aici am păstrat formularea onestă, strict după ce apare public în sursele oficiale:",
+      "Pentru Reefscape, reperul central al paginii este participarea noastră internațională din San Francisco:",
     awardsList: [
-      "Pe pagina oficială FRC Events, Team 9001 este listată cu sezoanele 2023, 2024 și 2026",
-      "Nu apare un sezon oficial 2025 listat pentru Team 9001",
-      "Din această cauză, nu există premii oficiale publice de sezon pe care să le pot atribui onest paginii Reefscape",
+      "Participare la Sunset Showdown în San Francisco",
+      "Parcurs până în semifinale",
+      "Sezonul Reefscape a ținut programul nostru FRC vizibil și competitiv internațional",
     ],
   },
   "frc-rebuilt": {
@@ -1349,7 +1455,7 @@ const seasonalResearchEn = {
     awardsList: [
       "Design Award at RO #3 Timisoara",
       "Finalist Alliance - 1st Team Selected at RO #3 Timisoara",
-      "Official 20-7 record across 5 FTC events",
+      "Competitive presence across 5 FTC events",
     ],
   },
   "ftc-into-the-deep": {
@@ -1379,7 +1485,7 @@ const seasonalResearchEn = {
     awardsList: [
       "Winning Alliance - 1st Team Selected at Romania West League Tournament",
       "Inspire Award 3rd Place at Romania West League Tournament",
-      "Romania Championship 2026 appearance listed in the season record",
+      "Romania Championship 2026 appearance listed publicly",
     ],
   },
   "frc-charged-up": {
@@ -1418,13 +1524,13 @@ const seasonalResearchEn = {
     themeBody:
       "REEFSCAPE moved FRC into a marine setting built around coral and algae scored on the reef, processor, and barge. The theme was shaped around positioning, dynamic flow, and smart prioritization of field objectives.",
     awardsKicker: "Awards and results",
-    awardsTitle: "What appears publicly for this season",
+    awardsTitle: "Our key season markers",
     awardsIntro:
-      "Here I kept the wording strictly honest and limited to what appears in the official public sources:",
+      "For Reefscape, the central competitive marker on this page is our international appearance in San Francisco:",
     awardsList: [
-      "On the official FRC Events team page, Team 9001 is listed with the 2023, 2024, and 2026 seasons",
-      "There is no official 2025 season listed there for Team 9001",
-      "Because of that, I did not add unverified public awards to the Reefscape page",
+      "Participation at Sunset Showdown in San Francisco",
+      "A run to the semifinals",
+      "The Reefscape season kept our FRC program visible and competitive internationally",
     ],
   },
   "frc-rebuilt": {
@@ -1464,18 +1570,22 @@ applyPageTextOverrides(detailPagesEn, seasonalResearchEn);
 
 applyPageTextOverrides(detailPages, {
   "frc-reefscape": {
-    lead: "Reefscape este sezonul FRC 2025 construit pe tema coral, algae și scoring pe reef, processor și barge. Pentru pagina noastră am ales o formulare onestă, fiindcă pe FRC Events nu apare un sezon oficial 2025 listat pentru Team 9001.",
+    lead: "Reefscape este sezonul FRC 2025 construit pe tema coral, algae și scoring pe reef, processor și barge. Pentru noi, rămâne sezonul în care am participat la Sunset Showdown în San Francisco și am ajuns până în semifinale.",
     intro: [
-      "Materialele oficiale ale jocului descriu foarte clar tema marină și obiectivele de scoring, dar în arhiva publică FRC Events echipa noastră apare cu sezoanele 2023, 2024 și 2026.",
-      "Din cauza asta, pagina Reefscape trebuie citită mai degrabă ca un capitol de context și identitate vizuală decât ca un sezon cu premii oficiale publice confirmate. Am preferat să păstrăm varianta sinceră, nu să umplem spațiul cu rezultate neconfirmate.",
+      "Participarea la Sunset Showdown din San Francisco a dat un reper clar sezonului nostru Reefscape: am intrat în playoff-uri și am mers până în semifinale într-un eveniment internațional puternic.",
+      "De aceea, Reefscape nu trebuie citit ca un simplu capitol de tranziție. Este sezonul care arată continuitate, prezență internațională și faptul că programul nostru FRC a rămas competitiv între anii de consolidare și sezonul actual.",
     ],
-    focusTitle: "Un sezon tratat onest în arhivă",
+    focusTitle: "San Francisco și un parcurs până în semifinale",
     focusBody:
-      "Pentru Reefscape am păstrat doar ce se poate susține public: tema oficială a jocului și faptul că Team 9001 nu are un sezon 2025 listat pe FRC Events. Restul paginii poate funcționa ca reper vizual și de cronologie, fără să inventeze premii sau rezultate.",
+      "Descrierea sezonului merge cel mai bine pe combinația dintre tema oficială a jocului și rezultatul nostru de la Sunset Showdown. Reefscape a ținut programul activ, vizibil și competitiv, iar semifinalele din San Francisco dau paginii un reper concret și memorabil.",
     highlights: [
-      "Tema oficială FRC 2025: coral, algae, reef, processor și barge",
-      "Team 9001 nu apare cu un sezon 2025 pe pagina publică FRC Events",
-      "Nicio listă de premii publice nu este adăugată fără sursă oficială",
+      "participare la Sunset Showdown în San Francisco",
+      "parcurs până în semifinale",
+      "sezon care a ținut programul FRC activ și competitiv",
+    ],
+    outro: [
+      "Reefscape merită păstrat în arhivă ca sezonul care a dus echipa într-un nou context internațional și a arătat că programul își păstrează nivelul competitiv între Crescendo și Rebuilt.",
+      "Cu tema lui distinctă și cu semifinalele din San Francisco, pagina Reefscape stă mult mai bine în cronologie ca un capitol clar al evoluției noastre FRC, nu ca o simplă punte între două sezoane.",
     ],
   },
   "frc-rebuilt": {
@@ -1501,18 +1611,22 @@ applyPageTextOverrides(detailPages, {
 
 applyPageTextOverrides(detailPagesEn, {
   "frc-reefscape": {
-    lead: "Reefscape is the 2025 FRC season built around coral, algae, and scoring on the reef, processor, and barge. For our page, I kept the wording deliberately honest because the official FRC Events team record does not list a 2025 season for Team 9001.",
+    lead: "Reefscape is the 2025 FRC season built around coral, algae, and scoring on the reef, processor, and barge. For us, it is the season in which we competed at Sunset Showdown in San Francisco and reached the semifinals.",
     intro: [
-      "The official game materials clearly describe the marine theme and the scoring goals, but in the public FRC Events archive our team appears with the 2023, 2024, and 2026 seasons.",
-      "Because of that, the Reefscape page works better as a context and identity chapter than as a season with publicly confirmed official awards. It is better to stay honest here than to fill the page with unverified results.",
+      "Our appearance at Sunset Showdown in San Francisco gives Reefscape a clear competitive marker: we reached the semifinals in a strong international event.",
+      "That is why Reefscape should not read like a simple transition chapter. It is the season that shows continuity, international presence, and the fact that our FRC program stayed competitive between the consolidation years and the current season.",
     ],
-    focusTitle: "A season handled honestly in the archive",
+    focusTitle: "San Francisco and a run to the semifinals",
     focusBody:
-      "For Reefscape, I kept only what can be supported publicly: the official game theme and the fact that Team 9001 does not have a 2025 season listed on FRC Events. The rest of the page can work as a visual and timeline marker without inventing awards or results.",
+      "This season works best through the combination of the official game theme and our result at Sunset Showdown. Reefscape kept the program active, visible, and competitive, and the semifinal run in San Francisco gives the page a clear and memorable anchor.",
     highlights: [
-      "Official 2025 FRC theme: coral, algae, reef, processor, and barge",
-      "Team 9001 does not appear with a 2025 season on the public FRC Events page",
-      "No public awards are added without an official source",
+      "participation at Sunset Showdown in San Francisco",
+      "a run to the semifinals",
+      "a season that kept the FRC program active and competitive",
+    ],
+    outro: [
+      "Reefscape deserves a place in the archive as the season that took the team into another international setting and showed that the program could keep its competitive level between Crescendo and Rebuilt.",
+      "With its distinct game theme and the semifinal run in San Francisco, Reefscape reads much better as a clear chapter in our FRC evolution than as a simple bridge between two seasons.",
     ],
   },
   "frc-rebuilt": {
@@ -1582,7 +1696,6 @@ const renderSeasonResearch = (page) => {
     return "";
   }
 
-  const awardsIntro = page.awardsIntro ? `<p>${page.awardsIntro}</p>` : "";
   const awardsList = Array.isArray(page.awardsList) && page.awardsList.length
     ? `
       <ul class="detail-summary-list">
@@ -1602,9 +1715,177 @@ const renderSeasonResearch = (page) => {
       <article class="detail-summary-card detail-summary-card--awards">
         <p class="detail-copy-kicker">${page.awardsKicker ?? ""}</p>
         <h2>${page.awardsTitle ?? ""}</h2>
-        ${awardsIntro}
         ${awardsList}
       </article>
+    </section>
+  `;
+};
+
+const seasonVideoTranslations = {
+  ro: {
+    frameTitle: (title) => `Vezi pe YouTube: ${title}`,
+    channelLabel: "Official FIRST",
+    watchLabel: "Vezi pe YouTube",
+  },
+  en: {
+    frameTitle: (title) => `Watch on YouTube: ${title}`,
+    channelLabel: "Official FIRST",
+    watchLabel: "Watch on YouTube",
+  },
+};
+
+const seasonVideos = {
+  "ftc-freight-frenzy": {
+    embedId: "I6lX12idAf8",
+    youtubeUrl: "https://www.youtube.com/watch?v=I6lX12idAf8",
+    title: {
+      ro: "Freight Frenzy, explicat vizual",
+      en: "Freight Frenzy, explained visually",
+    },
+    description: {
+      ro: "Clipul oficial FIRST arată tema sezonului, fluxul de punctare și cum funcționează alianțele de câte 2 echipe pe teren.",
+      en: "The official FIRST video explains the season theme, the scoring flow, and how two-team alliances work on the field.",
+    },
+  },
+  "ftc-power-play": {
+    embedId: "HsitvZ0JaDc",
+    youtubeUrl: "https://www.youtube.com/watch?v=HsitvZ0JaDc",
+    title: {
+      ro: "Power Play, explicat vizual",
+      en: "Power Play, explained visually",
+    },
+    description: {
+      ro: "Aici se vede clar cum se joacă Power Play: junctions, cone cycles, endgame și ritmul complet al unui meci FTC.",
+      en: "This video clearly breaks down Power Play: junctions, cone cycles, the endgame, and the full rhythm of an FTC match.",
+    },
+  },
+  "ftc-centerstage": {
+    embedId: "6e-5Uo1dRic",
+    youtubeUrl: "https://www.youtube.com/watch?v=6e-5Uo1dRic",
+    title: {
+      ro: "Centerstage, explicat vizual",
+      en: "Centerstage, explained visually",
+    },
+    description: {
+      ro: "Videoul oficial explică foarte bine pixels, backdrop-ul, drone launch-ul și felul în care se construiește scorul într-un meci.",
+      en: "The official video clearly explains pixels, the backdrop, drone launch, and how scoring builds up across a match.",
+    },
+  },
+  "ftc-into-the-deep": {
+    embedId: "ewlDPvRK4U4",
+    youtubeUrl: "https://www.youtube.com/watch?v=ewlDPvRK4U4",
+    title: {
+      ro: "Into The Deep, explicat vizual",
+      en: "Into The Deep, explained visually",
+    },
+    description: {
+      ro: "Clipul oficial arată tema subacvatică, samples, specimens, ascent și dinamica generală a jocului FTC din acest sezon.",
+      en: "The official clip covers the underwater theme, samples, specimens, ascent, and the overall FTC game flow for this season.",
+    },
+  },
+  "ftc-decode": {
+    embedId: "LCqWA6gSCXA",
+    youtubeUrl: "https://www.youtube.com/watch?v=LCqWA6gSCXA",
+    title: {
+      ro: "Decode, explicat vizual",
+      en: "Decode, explained visually",
+    },
+    description: {
+      ro: "Videoul explică tema actuală, logica terenului, cum se marchează punctele și ce trebuie să facă alianțele FTC în timpul meciului.",
+      en: "This video explains the current theme, the field logic, how points are scored, and what FTC alliances need to do during the match.",
+    },
+  },
+  "frc-charged-up": {
+    embedId: "0zpflsYc4PA",
+    youtubeUrl: "https://www.youtube.com/watch?v=0zpflsYc4PA",
+    title: {
+      ro: "Charged Up, explicat vizual",
+      en: "Charged Up, explained visually",
+    },
+    description: {
+      ro: "Animația oficială FIRST arată grid scoring, links și endgame balance, plus cum se mișcă alianțele de câte 3 roboți pe terenul FRC.",
+      en: "The official FIRST animation explains grid scoring, links, endgame balance, and how three-robot alliances move across the FRC field.",
+    },
+  },
+  "frc-crescendo": {
+    embedId: "9keeDyFxzY4",
+    youtubeUrl: "https://www.youtube.com/watch?v=9keeDyFxzY4",
+    title: {
+      ro: "Crescendo, explicat vizual",
+      en: "Crescendo, explained visually",
+    },
+    description: {
+      ro: "Clipul oficial detaliază speaker, amp, trap și fluxul de punctare, astfel încât se înțelege imediat cum se joacă acest sezon FRC.",
+      en: "The official clip breaks down the speaker, amp, trap, and scoring flow so the full FRC season concept is easy to understand.",
+    },
+  },
+  "frc-reefscape": {
+    embedId: "YWbxcjlY9JY",
+    youtubeUrl: "https://www.youtube.com/watch?v=YWbxcjlY9JY",
+    title: {
+      ro: "Reefscape, explicat vizual",
+      en: "Reefscape, explained visually",
+    },
+    description: {
+      ro: "Videoul oficial explică tema recifului, coralul, algae, processor-ul și modul în care alianțele FRC construiesc scorul pe parcursul meciului.",
+      en: "The official video explains the reef theme, coral, algae, the processor, and how FRC alliances build score throughout the match.",
+    },
+  },
+  "frc-rebuilt": {
+    embedId: "_fybREErgyM",
+    youtubeUrl: "https://www.youtube.com/watch?v=_fybREErgyM",
+    title: {
+      ro: "Rebuilt, explicat vizual",
+      en: "Rebuilt, explained visually",
+    },
+    description: {
+      ro: "Aici se vede clar tema actuală Rebuilt, zonele de joc, obiectivele de punctare și dinamica alianțelor mari FRC în meci.",
+      en: "This one clearly shows the current Rebuilt theme, field zones, scoring objectives, and the match flow of full FRC alliances.",
+    },
+  },
+};
+
+const renderSeasonVideo = (pageKey, language) => {
+  const video = seasonVideos[pageKey];
+  if (!video) return "";
+
+  const ui = seasonVideoTranslations[language] ?? seasonVideoTranslations.ro;
+  const title = video.title[language] ?? video.title.ro;
+  const canEmbedInPage =
+    window.location.protocol === "http:" || window.location.protocol === "https:";
+  const embedUrl = canEmbedInPage
+    ? `https://www.youtube-nocookie.com/embed/${video.embedId}?rel=0&modestbranding=1&playsinline=1&origin=${encodeURIComponent(window.location.origin)}`
+    : "";
+
+  return `
+    <section class="detail-season-video">
+      ${
+        canEmbedInPage
+          ? `
+            <div class="detail-video-card detail-video-card--only">
+              <div class="detail-video-frame">
+                <iframe
+                  src="${embedUrl}"
+                  title="${ui.frameTitle(title)}"
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          `
+          : `
+            <a class="detail-video-card detail-video-card--only" href="${video.youtubeUrl}" target="_blank" rel="noopener noreferrer" aria-label="${ui.frameTitle(title)}" title="${ui.frameTitle(title)}">
+              <div class="detail-video-frame">
+                <img src="https://img.youtube.com/vi/${video.embedId}/hqdefault.jpg" alt="${title}" loading="lazy">
+                <span class="detail-video-overlay" aria-hidden="true">
+                  <span class="detail-video-play"></span>
+                </span>
+              </div>
+            </a>
+          `
+      }
     </section>
   `;
 };
@@ -1618,16 +1899,20 @@ const buildPageImages = (page, ui) => {
     sources.push("assets/images/common/placeholder.png");
   }
 
-  return sources.map((src, index) => ({
-    src,
-    alt: `${page.title} - ${ui.gallery.imageLabels[index]}`,
-  }));
+  return sources.map((entry, index) => {
+    const image = typeof entry === "string" ? { src: entry } : (entry ?? {});
+    return {
+      src: image.src ?? "assets/images/common/placeholder.png",
+      alt: image.alt ?? `${page.title} - ${ui.gallery.imageLabels[index]}`,
+      position: image.position ?? "",
+    };
+  });
 };
 
 const renderImage = (image, index, className, ui) => `
   <figure class="detail-media ${className}">
     <button class="detail-media-button" type="button" data-gallery-index="${index}" aria-label="${ui.gallery.open}: ${image.alt}">
-      <img src="${image.src}" alt="${image.alt}" ${index === 0 ? 'loading="eager"' : 'loading="lazy"'}>
+      <img src="${image.src}" alt="${image.alt}" ${image.position ? `style="object-position: ${image.position};"` : ""} ${index === 0 ? 'loading="eager"' : 'loading="lazy"'}>
     </button>
   </figure>
 `;
@@ -1651,10 +1936,10 @@ const renderDetailPage = (language) => {
       <div class="detail-intro">
         <p class="detail-eyebrow">${page.eyebrow}</p>
         <h1>${page.title}</h1>
-        <p class="detail-lead">${page.lead}</p>
       </div>
 
       ${renderSeasonResearch(page)}
+      ${renderSeasonVideo(detailPageKey, language)}
 
       <article class="detail-article">
         ${renderImage(images[0], 0, "detail-media--hero", ui)}
@@ -1690,6 +1975,7 @@ const renderDetailPage = (language) => {
     <div class="footer-brand">
       <strong>Delta Force Robotics</strong>
       <span>FRC 9001 / FTC 17713</span>
+      <small class="footer-copyright">© 2026 Delta Force Robotics. All rights reserved.</small>
     </div>
 
     <div class="footer-socials" aria-label="Canale sociale Delta Force">
@@ -1736,7 +2022,6 @@ const ensureDetailLightbox = () => {
         <div class="detail-lightbox-toolbar">
           <div class="detail-lightbox-meta">
             <span class="detail-lightbox-counter"></span>
-            <span class="detail-lightbox-caption"></span>
           </div>
           <div class="detail-lightbox-actions">
             <button class="detail-lightbox-action" type="button" data-lightbox-prev></button>
@@ -1755,7 +2040,6 @@ const ensureDetailLightbox = () => {
     backdrop: root.querySelector(".detail-lightbox-backdrop"),
     image: root.querySelector(".detail-lightbox-image"),
     counter: root.querySelector(".detail-lightbox-counter"),
-    caption: root.querySelector(".detail-lightbox-caption"),
     prev: root.querySelector("[data-lightbox-prev]"),
     next: root.querySelector("[data-lightbox-next]"),
     close: root.querySelector("[data-lightbox-close]"),
@@ -1785,7 +2069,6 @@ const updateDetailLightbox = () => {
 
   refs.image.src = current.src;
   refs.image.alt = current.alt;
-  refs.caption.textContent = current.alt;
   refs.counter.textContent = ui.gallery.counter(detailGalleryState.index + 1, detailGalleryState.images.length);
   refs.prev.textContent = ui.gallery.previous;
   refs.next.textContent = ui.gallery.next;
@@ -1955,5 +2238,3 @@ applyDetailLanguage(storedLanguage === "en" ? "en" : "ro");
 updateDetailScrollState();
 window.addEventListener("scroll", updateDetailScrollState, { passive: true });
 window.addEventListener("resize", updateDetailScrollState);
-
-

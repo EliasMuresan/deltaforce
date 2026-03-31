@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css?v=20260331-contactbutton-fillall">
-  <link rel="stylesheet" href="../assets/css/sustine.css?v=20260331-encodingfix">
+  <link rel="stylesheet" href="../assets/css/sustine.css?v=20260401-footer-center">
 </head>
 <body class="support-page">
   <div class="scroll-progress" aria-hidden="true"></div>
@@ -58,20 +58,6 @@
   <main class="support-main">
     <section class="support-hero-section">
       <div class="support-hero-shell reveal">
-        <article class="support-hero-copy-card">
-          <p class="eyebrow support-hero-eyebrow" data-i18n="hero.eyebrow">DRUMUL SPRE MONDIALĂ</p>
-          <h1 class="support-hero-title" data-i18n="hero.title">Susținerea ta contează</h1>
-          <p class="support-hero-copy" data-i18n="hero.copy">
-            Fiecare sponsorizare, redirecționare de impozit sau donație ne ajută să reprezentăm mai departe Delta Force și România pe scena internațională.
-          </p>
-
-          <div class="support-pill-row" aria-label="Opțiuni de susținere">
-            <span class="program-fact" data-i18n="hero.pillOne">SPONSORIZARE</span>
-            <span class="program-fact" data-i18n="hero.pillTwo">FORMULAR 230</span>
-            <span class="program-fact" data-i18n="hero.pillThree">PAYPAL ȘI IBAN</span>
-          </div>
-        </article>
-
         <article class="support-highlight-card">
           <div class="support-highlight-media">
             <img
@@ -81,14 +67,19 @@
               loading="lazy"
               data-i18n-alt="hero.imageAlt"
             >
-            <span class="support-highlight-badge" data-i18n="hero.panelEyebrow">DELTA FORCE / TEAM ROMANIA</span>
           </div>
 
           <div class="support-highlight-copy">
-            <h2 data-i18n="hero.panelTitle">Susține parcursul nostru internațional</h2>
+            <p class="eyebrow support-hero-eyebrow" data-i18n="hero.eyebrow">DRUMUL SPRE MONDIALĂ</p>
+            <h2 data-i18n="hero.panelTitle">Susține parcursul nostru pentru Campionatul Mondial din Houston</h2>
             <p data-i18n="hero.panelCopy">
-              Pe această pagină găsești toate variantele prin care ne poți fi alături: sponsorizare, Formular 230, PayPal și transfer bancar.
+              Pe această pagină găsești toate variantele prin care ne poți ajuta să ajungem la Campionatul Mondial din Houston, între 29 aprilie și 2 mai: sponsorizare, Formular 230, PayPal și transfer bancar.
             </p>
+            <div class="support-pill-row" aria-label="Opțiuni de susținere">
+              <span class="program-fact" data-i18n="hero.pillOne">SPONSORIZARE</span>
+              <span class="program-fact" data-i18n="hero.pillTwo">FORMULAR 230</span>
+              <span class="program-fact" data-i18n="hero.pillThree">PAYPAL ȘI IBAN</span>
+            </div>
           </div>
         </article>
       </div>
@@ -132,17 +123,17 @@
           </p>
         </article>
 
-        <article class="support-card support-card-muted reveal">
+        <article class="support-card reveal">
           <p class="support-card-eyebrow" data-i18n="paypal.eyebrow">DONAȚII RAPIDE</p>
           <h3 class="support-card-title" data-i18n="paypal.title">PayPal</h3>
           <p class="support-card-copy" data-i18n="paypal.copy">
-            Butonul direct către PayPal va fi conectat aici, ca varianta cea mai rapidă pentru donații individuale.
+            Poți folosi și opțiunea PayPal pentru donații individuale, ca variantă rapidă de susținere.
           </p>
-          <button class="support-card-button is-disabled" type="button" disabled data-i18n="paypal.button">
-            Link PayPal în curând
+          <button class="support-card-button support-paypal-button" type="button" data-i18n="paypal.button">
+            Donează prin PayPal
           </button>
           <p class="support-card-note" data-i18n="paypal.note">
-            Adăugăm linkul de donație imediat ce ni-l trimiți.
+            Linkul final PayPal va fi conectat aici.
           </p>
         </article>
       </div>
@@ -154,16 +145,16 @@
           <p class="eyebrow" data-i18n="iban.eyebrow">TRANSFER BANCAR</p>
           <h2 data-i18n="iban.title">IBAN</h2>
           <p data-i18n="iban.copy">
-            Vom afișa aici coordonatele complete pentru transfer imediat ce le primim.
+            Poți susține direct prin transfer bancar în contul nostru în RON.
           </p>
         </div>
 
         <div class="support-iban-card">
-          <div class="support-iban-value" data-i18n="iban.value">
-            IBAN-ul va fi adăugat aici imediat ce ne trimiți datele.
-          </div>
+          <button class="support-iban-value" type="button" data-i18n="iban.value" data-iban-copy data-iban-raw="RO73BTRLRONCRT0I19750701">
+            IBAN RON: RO73BTRLRONCRT0I19750701
+          </button>
           <p class="support-iban-note" data-i18n="iban.note">
-            Până atunci ne poți scrie pentru orice întrebare legată de susținere.
+            Apasă pe IBAN ca să-l copiezi instant.
           </p>
             <a class="support-contact-link" href="mailto:contact@deltaforce.ro">contact@deltaforce.ro</a>
         </div>
@@ -175,6 +166,7 @@
     <div class="footer-brand">
       <strong>Delta Force Robotics</strong>
       <span>FRC 9001 / FTC 17713</span>
+      <small class="footer-copyright">© 2026 Delta Force Robotics. All rights reserved.</small>
     </div>
 
     <div class="footer-socials" aria-label="Canale sociale Delta Force">
@@ -194,7 +186,7 @@
   </footer>
 
   <script src="https://formular230.ro/share/2576aeec94"></script>
-  <script src="../assets/js/sustine.js?v=20260331-encodingfix"></script>
+  <script src="../assets/js/sustine.js?v=20260401-footer-center"></script>
 </body>
 </html>
 
