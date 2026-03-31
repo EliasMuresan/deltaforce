@@ -1,0 +1,10 @@
+edge-headless-profile/
+Crashpad/
+CrashpadMetrics-active.pma
+
+*-check.png
+detail-check.png
+home-check.png
+
+*.dmp
+*.tmp
