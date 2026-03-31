@@ -1,0 +1,320 @@
+.support-main {
+  padding-top: 112px;
+}
+
+.support-hero-section {
+  width: var(--container);
+  margin: 0 auto;
+  padding: 28px 0 24px;
+}
+
+.support-hero-shell,
+.support-transfer-shell {
+  display: grid;
+  gap: 22px;
+}
+
+.support-hero-shell {
+  grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
+  align-items: stretch;
+}
+
+.support-hero-copy-card,
+.support-highlight-card,
+.support-card,
+.support-iban-card {
+  border: 1px solid var(--line);
+  border-top-color: rgba(236, 88, 0, 0.3);
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(35, 21, 15, 0.92), rgba(16, 10, 8, 0.98)),
+    radial-gradient(circle at top left, rgba(255, 169, 94, 0.08), transparent 40%);
+  box-shadow: var(--shadow);
+}
+
+.support-hero-copy-card {
+  padding: 34px;
+  display: grid;
+  align-content: center;
+  gap: 18px;
+}
+
+.support-hero-eyebrow {
+  color: rgba(255, 205, 164, 0.78);
+}
+
+.support-hero-title,
+.support-highlight-copy h2,
+.support-card-title,
+.support-transfer-copy h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.support-hero-title {
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+}
+
+.support-hero-copy,
+.support-highlight-copy p,
+.support-card-copy,
+.support-card-note,
+.support-transfer-copy p:last-child,
+.support-iban-note {
+  margin: 0;
+  color: var(--muted-strong);
+  line-height: 1.72;
+}
+
+.support-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.support-highlight-card {
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: minmax(280px, 1fr) auto;
+}
+
+.support-highlight-media {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.support-highlight-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 4, 3, 0.16) 0%, rgba(7, 4, 3, 0.08) 34%, rgba(7, 4, 3, 0.74) 100%);
+}
+
+.support-highlight-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.support-highlight-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 163, 71, 0.26);
+  border-radius: 999px;
+  background: rgba(20, 10, 7, 0.76);
+  color: #fff4ea;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.support-highlight-copy {
+  padding: 26px 28px 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.support-highlight-copy h2,
+.support-transfer-copy h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+}
+
+.support-actions-section {
+  padding-top: 54px;
+}
+
+.support-heading {
+  margin-bottom: 28px;
+}
+
+.support-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.support-card {
+  padding: 28px;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.support-card-muted {
+  background:
+    linear-gradient(145deg, rgba(28, 19, 14, 0.94), rgba(15, 10, 8, 0.98)),
+    radial-gradient(circle at top left, rgba(255, 169, 94, 0.06), transparent 40%);
+}
+
+.support-card-eyebrow {
+  margin: 0;
+  color: var(--accent-light);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.support-card-title {
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+}
+
+.support-card-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 163, 71, 0.34);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 143, 66, 0.96), rgba(236, 88, 0, 0.96));
+  color: #fff8f2;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.support-card-button:hover,
+.support-card-button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(236, 88, 0, 0.2);
+  filter: brightness(1.03);
+  outline: none;
+}
+
+.support-card-button.is-disabled,
+.support-card-button:disabled {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 236, 221, 0.56);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+}
+
+.support-transfer-section {
+  padding-top: 40px;
+}
+
+.support-transfer-shell {
+  grid-template-columns: minmax(0, 0.88fr) minmax(320px, 1.12fr);
+  align-items: stretch;
+}
+
+.support-transfer-copy {
+  padding: 18px 8px 18px 0;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+
+.support-iban-card {
+  padding: 28px;
+  display: grid;
+  gap: 16px;
+  background:
+    linear-gradient(145deg, rgba(37, 22, 16, 0.96), rgba(16, 10, 8, 0.98)),
+    radial-gradient(circle at top left, rgba(255, 169, 94, 0.08), transparent 40%);
+}
+
+.support-iban-value {
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 163, 71, 0.16);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 245, 236, 0.94);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.support-contact-link {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.support-contact-link:hover,
+.support-contact-link:focus-visible {
+  color: var(--accent-light);
+  outline: none;
+}
+
+.support-page .footer {
+  margin-top: 18px;
+}
+
+@media (max-width: 1040px) {
+  .support-hero-shell,
+  .support-transfer-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .support-actions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .support-transfer-copy {
+    padding: 0;
+  }
+}
+
+@media (max-width: 860px) {
+  .support-main {
+    padding-top: 100px;
+  }
+
+  .support-hero-section {
+    padding-top: 12px;
+  }
+
+  .support-hero-copy-card,
+  .support-card,
+  .support-iban-card {
+    padding: 24px 20px;
+  }
+
+  .support-highlight-copy {
+    padding: 22px 20px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .support-hero-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .support-highlight-media {
+    min-height: 240px;
+  }
+
+  .support-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .support-card-button {
+    width: 100%;
+  }
+
+  .support-iban-value {
+    font-size: 0.96rem;
+  }
+}

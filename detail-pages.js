@@ -8,7 +8,6 @@ const detailPageKey = detailPageName.replace(/\.html$/, "");
 const inferDetailSection = (pageName) => {
   if (pageName.startsWith("ftc-")) return "ftc";
   if (pageName.startsWith("frc-")) return "frc";
-  if (pageName.startsWith("events-")) return "events";
   if (pageName.startsWith("fgc-")) return "fgc";
   return "home";
 };
@@ -19,10 +18,7 @@ const detailTranslations = {
       home: "Home",
       ftc: "FTC",
       frc: "FRC",
-      events: "Evenimente",
       fgc: "FGC",
-      sponsors: "Sponsori",
-      partners: "Parteneri",
       contact: "Contact",
     },
     brandAria: "Pagina principală a echipei noastre",
@@ -48,10 +44,7 @@ const detailTranslations = {
       home: "Home",
       ftc: "FTC",
       frc: "FRC",
-      events: "Events",
       fgc: "FGC",
-      sponsors: "Sponsors",
-      partners: "Partners",
       contact: "Contact",
     },
     brandAria: "Our team home page",
@@ -75,6 +68,42 @@ const detailTranslations = {
 };
 
 const placeholderSet = Array(4).fill("placeholder.png");
+
+detailTranslations.ro.brandAria = "Pagina principală Delta Force";
+detailTranslations.ro.languageLabel = "Schimbă în engleză";
+detailTranslations.en.brandAria = "Delta Force home page";
+
+const repairMojibakeString = (text) => {
+  if (typeof text !== "string") return text;
+
+  let repaired = text;
+
+  if (/[ĂČÄâ]/.test(repaired)) {
+    try {
+      repaired = decodeURIComponent(escape(repaired));
+    } catch {}
+  }
+
+  return repaired.replace(/\bFirst\b/g, "FIRST").replace(/\s{2,}/g, " ").trim();
+};
+
+const repairNestedStrings = (value) => {
+  if (typeof value === "string") {
+    return repairMojibakeString(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(repairNestedStrings);
+  }
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, entry]) => [key, repairNestedStrings(entry)])
+    );
+  }
+
+  return value;
+};
 
 const detailPages = {
   "ftc-freight-frenzy": {
@@ -923,6 +952,463 @@ const detailPagesEn = {
   },
 };
 
+const applyPageTextOverrides = (collection, overrides) => {
+  Object.entries(overrides).forEach(([pageKey, pageOverrides]) => {
+    if (!collection[pageKey]) return;
+    collection[pageKey] = {
+      ...collection[pageKey],
+      ...pageOverrides,
+    };
+  });
+};
+
+applyPageTextOverrides(detailPages, {
+  "ftc-freight-frenzy": {
+    lead: "Freight Frenzy a fost sezonul în care echipa noastră a trecut din statutul de echipă foarte bună la statutul de campioană mondială FTC. Jocul a fost despre freight, duck carousel și warehouse cycles, iar sezonul oficial s-a încheiat la Houston, cu titlul mondial câștigat din postura de alliance captain.",
+    highlights: [
+      "18 victorii în evenimentele oficiale FTC din sezon",
+      "Inspire Award 2nd Place la Romania National Championship",
+      "Franklin Division winner și FIRST World Championship winner la Houston",
+    ],
+  },
+  "ftc-power-play": {
+    intro: [
+      "Echipa noastră a încheiat sezonul oficial cu 11 victorii. În prima parte a anului a adunat repere bune, inclusiv Innovate Award 3rd Place la RO022 Bucharest #1, dar adevărata explozie a venit la Romania National Championship.",
+      "La națională, echipa noastră a terminat pe locul 1 după calificări, a intrat în playoff-uri ca Finalist Alliance Captain și a primit Design Award. Power Play a arătat foarte bine cum o echipă poate urca în timpul sezonului și poate închide anul mult peste așteptările inițiale.",
+    ],
+    highlights: [
+      "11 victorii în circuitul oficial Power Play",
+      "Locul 1 după calificări la Romania National Championship",
+      "Finalist Alliance Captain și Design Award la națională",
+    ],
+  },
+  "ftc-centerstage": {
+    intro: [
+      "În datele oficiale FTC, echipa noastră a terminat sezonul cu 20 de victorii în 5 evenimente. La RO #3 Timișoara, echipa a obținut Design Award și a fost Finalist Alliance - 1st Team Selected, semn că robotul și execuția din meciuri mergeau în direcția bună.",
+      "Centerstage a fost și un sezon cu mult potențial vizual: backdrop scoring, drone launch și o prezentare mai curată a întregii munci. Pentru echipa noastră, anul acesta arată un program FTC mai matur și mai coerent în toate direcțiile lui.",
+    ],
+    highlights: [
+      "20 de victorii în evenimentele oficiale FTC",
+      "Design Award la RO #3 Timișoara",
+      "Finalist Alliance - 1st Team Selected într-un sezon mult mai stabil",
+    ],
+  },
+  "ftc-into-the-deep": {
+    intro: [
+      "Echipa noastră a încheiat anul cu 23 de victorii în 7 evenimente oficiale. La Romania West League Tournament, echipa noastră a câștigat din postura de 1st Team Selected și a luat și Design Award, apoi și-a continuat parcursul către Romania Championship.",
+      "Into The Deep a fost sezonul în care robotul a părut foarte controlat, iar ritmul de competiție a rămas constant de la un event la altul. Din punct de vedere al arhivei FTC, este un sezon ușor de descris ca fiind compact, clar și foarte competitiv.",
+    ],
+    highlights: [
+      "23 de victorii în evenimentele oficiale FTC",
+      "Winning Alliance - 1st Team Selected la West Romania League Tournament",
+      "Design Award și calificare la Romania Championship",
+    ],
+  },
+  "ftc-decode": {
+    intro: [
+      "În circuitul oficial public, echipa noastră are momentan 17 victorii în 5 evenimente. În februarie 2026, echipa noastră a câștigat West Romania League Tournament din postura de 1st Team Selected și a primit Inspire Award 3rd Place.",
+      "Decode este încă deschis, dar are deja suficientă substanță ca să fie tratat ca un sezon serios: rezultate bune, ritm competitiv și un nou traseu spre Romania Championship. Tocmai pentru că pagina e vie, textul sezonului trebuie să lase loc și pentru update-uri ulterioare.",
+    ],
+    highlights: [
+      "17 victorii în evenimentele oficiale publicate până acum",
+      "Winning Alliance - 1st Team Selected la West Romania League Tournament",
+      "Inspire Award 3rd Place într-un sezon încă deschis",
+    ],
+  },
+  "frc-crescendo": {
+    intro: [
+      "În datele publice de sezon, am încheiat anul oficial cu 12 victorii. Am prins playoff-uri la ambele regionale importante ale anului, Istanbul Regional și Bosphorus Regional, iar la Bosphorus am fost chiar alliance captain.",
+      "Crescendo nu are dramatismul debutului din Charged Up, dar are ceva foarte important pentru un program aflat la început de drum în FRC: continuitate. Am rămas competitivi, am fost din nou relevanți în playoff-uri și am confirmat că progresul nostru nu depinde de un singur sezon bun.",
+    ],
+    highlights: [
+      "12 victorii în datele publice de sezon",
+      "Playoff-uri atât la Istanbul Regional, cât și la Bosphorus Regional",
+      "Alliance captain la Bosphorus într-un an de consolidare FRC",
+    ],
+  },
+});
+
+applyPageTextOverrides(detailPagesEn, {
+  "ftc-freight-frenzy": {
+    lead: "Freight Frenzy was the season when our team moved from being a strong FTC contender to becoming a world champion. The game centered on freight, the duck carousel, and warehouse cycles, and the official season ended in Houston with a world title won as alliance captain.",
+    highlights: [
+      "18 wins in official FTC events",
+      "Inspire Award 2nd Place at Romania National Championship",
+      "Franklin Division winner and FIRST World Championship winner in Houston",
+    ],
+  },
+  "ftc-power-play": {
+    intro: [
+      "We finished the official season with 11 wins. Early in the year we collected solid markers, including Innovate Award 3rd Place at RO022 Bucharest #1, but the real jump came at Romania National Championship.",
+      "At nationals, our team finished first after qualifications, entered playoffs as Finalist Alliance Captain, and earned the Design Award. Power Play showed how much a team can grow during a season and still peak when it matters most.",
+    ],
+    highlights: [
+      "11 wins in the official Power Play circuit",
+      "1st after qualifications at Romania National Championship",
+      "Finalist Alliance Captain and Design Award at nationals",
+    ],
+  },
+  "ftc-centerstage": {
+    intro: [
+      "In the official FTC data, we finished the season with 20 wins across 5 events. At RO #3 Timisoara, we earned the Design Award and became Finalist Alliance - 1st Team Selected, a sign that the robot and our match execution were moving in the right direction.",
+      "Centerstage also had strong visual potential: backdrop scoring, the drone launch, and a cleaner presentation of the work behind the season. For us, it represents a more mature and more coherent FTC program.",
+    ],
+    highlights: [
+      "20 wins in official FTC events",
+      "Design Award at RO #3 Timisoara",
+      "Finalist Alliance - 1st Team Selected in a much steadier season",
+    ],
+  },
+  "ftc-into-the-deep": {
+    intro: [
+      "We ended the year with 23 wins in 7 official events. At West Romania League Tournament, our team won as Winning Alliance - 1st Team Selected, also earning the Design Award before moving on to Romania Championship.",
+      "Into The Deep was the season in which the robot looked controlled and the pace of competition stayed consistent from one event to the next. In our FTC archive, it reads as a compact, clear, and highly competitive year.",
+    ],
+    highlights: [
+      "23 wins in official FTC events",
+      "Winning Alliance - 1st Team Selected at West Romania League Tournament",
+      "Design Award and qualification to Romania Championship",
+    ],
+  },
+  "ftc-decode": {
+    intro: [
+      "In the public official circuit, we currently have 17 wins across 5 events. In February 2026, our team won West Romania League Tournament as Winning Alliance - 1st Team Selected and also received Inspire Award 3rd Place.",
+      "Decode is still open, but it already has enough substance to be treated like a serious season: strong results, a competitive rhythm, and a new path toward Romania Championship. Because the page is still alive, the structure should leave room for later updates.",
+    ],
+    highlights: [
+      "17 wins in the official events published so far",
+      "Winning Alliance - 1st Team Selected at West Romania League Tournament",
+      "Inspire Award 3rd Place in a season that is still open",
+    ],
+  },
+  "frc-crescendo": {
+    intro: [
+      "In the public season data, we finished the official year with 12 wins. We reached playoffs at both major regionals of the year, Istanbul Regional and Bosphorus Regional, and at Bosphorus we were alliance captain again.",
+      "Crescendo does not have the drama of the Charged Up debut, but it has something very important for a young FRC program: continuity. We stayed competitive, remained relevant in playoffs, and showed that our progress does not depend on a single strong season.",
+    ],
+    highlights: [
+      "12 wins in the public season data",
+      "Playoff appearances at both Istanbul Regional and Bosphorus Regional",
+      "Alliance captain at Bosphorus in a year of FRC consolidation",
+    ],
+  },
+});
+
+const seasonalResearchRo = {
+  "ftc-freight-frenzy": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Freight, ducks și warehouse cycles",
+    themeBody:
+      "FREIGHT FRENZY a fost jocul în care alianțele colectau freight, activau duck carousel și încărcau hub-urile, apoi închideau cu warehouse parking și capping. Sezonul a premiat ritmul bun de ciclat, controlul finalului de meci și consistența pe tot terenul.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre din sezon",
+    awardsIntro:
+      "Pe listările oficiale FTC Events, pentru 2021 apar aceste repere importante pentru echipa noastră:",
+    awardsList: [
+      "FIRST Championship Winning Alliance - Captain la Houston",
+      "Franklin Division Winning Alliance - Captain la FIRST Championship",
+      "Inspire Award 2nd Place la Romania National Championship",
+      "Design Award la RO #1 Regionala Timișoara & București",
+      "Innovate Award la RU Remote Qualifier",
+    ],
+  },
+  "ftc-power-play": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Conuri, junction-uri și control de final",
+    themeBody:
+      "POWERPLAY a fost jocul conurilor și al junction-urilor, cu accent pe autonomous bazat pe signal sleeve, scoring pe înălțimi diferite și un endgame în care controlul terenului conta enorm. A fost un sezon în care precizia și traseele curate făceau diferența.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre din sezon",
+    awardsIntro:
+      "Din datele oficiale FTC Events și din rezultatele finale de sezon, acestea sunt bornele care ies cel mai clar în față:",
+    awardsList: [
+      "Innovate Award 3rd Place la RO BUCHAREST #1",
+      "Finalist Alliance - Captain la Romania National Championship",
+      "Design Award la Romania National Championship",
+      "Locul 1 după calificări la Romania National Championship",
+    ],
+  },
+  "ftc-centerstage": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Pixels, backdrop și drone",
+    themeBody:
+      "CENTERSTAGE a mutat jocul spre plasarea de pixels pe backdrop, control bun al ciclurilor și un endgame memorabil cu drone launch. Sezonul a cerut finețe în scoring și coordonare foarte bună între autonomous și driver control.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre din sezon",
+    awardsIntro:
+      "Pentru 2023, listarea oficială FTC Events confirmă aceste rezultate cheie pentru echipa noastră:",
+    awardsList: [
+      "Design Award la RO #3 Timișoara",
+      "Finalist Alliance - 1st Team Selected la RO #3 Timișoara",
+      "Record oficial de 20-7 în 5 evenimente FTC",
+    ],
+  },
+  "ftc-into-the-deep": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Samples, specimens și ascent",
+    themeBody:
+      "INTO THE DEEP a dus jocul FTC într-o zonă subacvatică, cu accent pe samples, specimens și ascent. Sezonul a recompensat controlul fin al robotului, scoring-ul curat și un ritm constant de la un meci la altul.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre din sezon",
+    awardsIntro:
+      "Pe pagina oficială FTC Events pentru 2024 apar următoarele rezultate și premii pentru echipa noastră:",
+    awardsList: [
+      "Winning Alliance - 1st Team Selected la West Romania League Tournament",
+      "Design Award la West Romania League Tournament",
+      "Prezență la Romania Championship 2025",
+    ],
+  },
+  "ftc-decode": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Logică, pattern-uri și decizii rapide",
+    themeBody:
+      "DECODE pune accent pe lectură bună a terenului, pattern-uri și decizii rapide, într-un format în care consistența dintre autonomous și driver control contează enorm. Este un joc care cere claritate, viteză și adaptare foarte bună pe parcursul meciului.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre de până acum",
+    awardsIntro:
+      "Sezonul este încă deschis, dar FTC Events listează deja câteva rezultate importante pentru echipa noastră:",
+    awardsList: [
+      "Winning Alliance - 1st Team Selected la Romania West League Tournament",
+      "Inspire Award 3rd Place la Romania West League Tournament",
+      "Prezență listată la Romania Championship 2026",
+    ],
+  },
+  "frc-charged-up": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Conuri, cuburi, links și charging station",
+    themeBody:
+      "CHARGED UP a fost jocul grilelor cu conuri și cuburi, în care alianțele construiau links și căutau dock sau engage pe charging station în endgame. A fost un sezon care a premiat robotul versatil și o execuție calmă sub presiune.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre din sezon",
+    awardsIntro:
+      "Pe FRC Events, debutul nostru din 2023 este legat în primul rând de Bosphorus Regional:",
+    awardsList: [
+      "Regional Finalists la Bosphorus Regional 2023",
+      "Industrial Design Award la Bosphorus Regional 2023",
+      "Debutul oficial al echipei noastre în FIRST Robotics Competition",
+    ],
+  },
+  "frc-crescendo": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Notes, Speaker, Amp și Trap",
+    themeBody:
+      "CRESCENDO a fost jocul notelor, cu scoring în Speaker și Amp, plus Trap și climb pe Chain în endgame. Sezonul a pus accent pe flow de meci, alimentare rapidă și execuție coerentă a finalului.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre din sezon",
+    awardsIntro:
+      "Pentru 2024, FRC Events nu listează premii oficiale, dar confirmă clar câteva rezultate importante:",
+    awardsList: [
+      "Playoff appearance la İstanbul Regional 2024",
+      "Locul 10 din 51 după calificări la Bosphorus Regional 2024",
+      "Captain of Alliance 7 la Bosphorus Regional 2024",
+    ],
+  },
+  "frc-reefscape": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Coral, algae și scoring pe reef",
+    themeBody:
+      "REEFSCAPE a dus jocul FRC într-un decor marin, cu coral și algae plasate pe reef, processor și barge. Tema a fost construită în jurul unui flux de joc dinamic, cu accent pe poziționare și prioritizarea corectă a obiectivelor.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Ce apare public pentru sezon",
+    awardsIntro:
+      "Aici am păstrat formularea onestă, strict după ce apare public în sursele oficiale:",
+    awardsList: [
+      "Pe pagina oficială FRC Events, Team 9001 este listată cu sezoanele 2023, 2024 și 2026",
+      "Nu apare un sezon oficial 2025 listat pentru Team 9001",
+      "Din această cauză, nu există premii oficiale publice de sezon pe care să le pot atribui onest paginii Reefscape",
+    ],
+  },
+  "frc-rebuilt": {
+    themeKicker: "Tema sezonului",
+    themeTitle: "Fuel cells, panouri de service și dock/climb",
+    themeBody:
+      "REBUILT, conform materialelor oficiale FRC 2026, combină fuel cells, montare de panouri în zonele de service și un endgame de dock sau climb. Este un joc orientat spre ritm, adaptare rapidă și reconstrucție eficientă a infrastructurii de pe teren.",
+    awardsKicker: "Premii și rezultate",
+    awardsTitle: "Reperele noastre de până acum",
+    awardsIntro:
+      "Sezonul este încă în mers, dar în listările publice oficiale apare deja acest rezultat important:",
+    awardsList: [
+      "Regional Finalists la Bosphorus Regional 2026",
+      "Sezon activ, cu rezultate publice încă actualizabile pe FRC Events",
+    ],
+  },
+  "fgc-2023": {
+    themeKicker: "Tema competiției",
+    themeTitle: "Hydrogen Horizons și energia curată",
+    themeBody:
+      "La FIRST Global Challenge 2023, tema oficială a fost «Hydrogen as a Clean Energy Carrier», iar jocul Hydrogen Horizons cerea alianțelor internaționale să producă, stocheze, transporte și convertească hidrogenul în alte forme de energie. A fost o competiție construită direct pe ideea de colaborare globală pentru un viitor energetic mai curat.",
+    awardsKicker: "Medalii și premii",
+    awardsTitle: "Reperele noastre din Singapore",
+    awardsIntro:
+      "În sursele publice despre Team România apar aceste distincții pentru participarea noastră la FGC 2023:",
+    awardsList: [
+      "Medalie de argint pentru Al-Khwarizmi Award for Outstanding Supporter",
+      "Medalie de bronz pentru Ustad Ahmad Lahori Award for Innovation in Engineering",
+      "Social Media Challenge Award",
+      "Safety Award",
+    ],
+  },
+};
+
+const seasonalResearchEn = {
+  "ftc-freight-frenzy": {
+    themeKicker: "Season theme",
+    themeTitle: "Freight, ducks, and warehouse cycles",
+    themeBody:
+      "FREIGHT FRENZY was the game in which alliances collected freight, activated the duck carousel, and loaded hubs before closing with warehouse parking and capping. The season rewarded clean cycling, reliable endgame control, and consistency across the full field.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "Our key season markers",
+    awardsIntro:
+      "On the official FTC Events listings, these are the biggest public milestones for our 2021 season:",
+    awardsList: [
+      "FIRST Championship Winning Alliance - Captain in Houston",
+      "Franklin Division Winning Alliance - Captain at FIRST Championship",
+      "Inspire Award 2nd Place at Romania National Championship",
+      "Design Award at RO #1 Regionala Timisoara & Bucuresti",
+      "Innovate Award at RU Remote Qualifier",
+    ],
+  },
+  "ftc-power-play": {
+    themeKicker: "Season theme",
+    themeTitle: "Cones, junctions, and endgame control",
+    themeBody:
+      "POWERPLAY was the season of cones and junctions, with autonomous choices driven by the signal sleeve, layered scoring heights, and an endgame where field control mattered a lot. Precision and efficient routes made the biggest difference.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "Our key season markers",
+    awardsIntro:
+      "From official FTC Events data and the final season results, these are the clearest markers for our run:",
+    awardsList: [
+      "Innovate Award 3rd Place at RO BUCHAREST #1",
+      "Finalist Alliance - Captain at Romania National Championship",
+      "Design Award at Romania National Championship",
+      "1st after qualifications at Romania National Championship",
+    ],
+  },
+  "ftc-centerstage": {
+    themeKicker: "Season theme",
+    themeTitle: "Pixels, backdrop, and drones",
+    themeBody:
+      "CENTERSTAGE moved FTC toward pixel scoring on the backdrop, controlled cycling, and a memorable drone launch endgame. It was a season that rewarded scoring finesse and strong coordination between autonomous and driver control.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "Our key season markers",
+    awardsIntro:
+      "For 2023, the official FTC Events page confirms these key results for our team:",
+    awardsList: [
+      "Design Award at RO #3 Timisoara",
+      "Finalist Alliance - 1st Team Selected at RO #3 Timisoara",
+      "Official 20-7 record across 5 FTC events",
+    ],
+  },
+  "ftc-into-the-deep": {
+    themeKicker: "Season theme",
+    themeTitle: "Samples, specimens, and ascent",
+    themeBody:
+      "INTO THE DEEP pushed FTC into an underwater world built around samples, specimens, and ascent. The season rewarded fine robot control, clean scoring, and a steady pace from one match to the next.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "Our key season markers",
+    awardsIntro:
+      "On the official 2024 FTC Events page, these are the main public results for our team:",
+    awardsList: [
+      "Winning Alliance - 1st Team Selected at West Romania League Tournament",
+      "Design Award at West Romania League Tournament",
+      "Romania Championship 2025 appearance",
+    ],
+  },
+  "ftc-decode": {
+    themeKicker: "Season theme",
+    themeTitle: "Logic, patterns, and quick decisions",
+    themeBody:
+      "DECODE emphasizes field reading, pattern recognition, and fast decisions in a format where consistency between autonomous and driver control matters a lot. It is a game built around clarity, speed, and smart adaptation during the match.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "Our key markers so far",
+    awardsIntro:
+      "The season is still open, but FTC Events already lists several important public results for our team:",
+    awardsList: [
+      "Winning Alliance - 1st Team Selected at Romania West League Tournament",
+      "Inspire Award 3rd Place at Romania West League Tournament",
+      "Romania Championship 2026 appearance listed in the season record",
+    ],
+  },
+  "frc-charged-up": {
+    themeKicker: "Season theme",
+    themeTitle: "Cones, cubes, links, and charging station",
+    themeBody:
+      "CHARGED UP was the grid game of cones and cubes, where alliances built links and chased dock or engage on the charging station in endgame. It rewarded versatility, structure, and calm execution under pressure.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "Our key season markers",
+    awardsIntro:
+      "On FRC Events, our 2023 debut is tied mainly to the Bosphorus Regional results:",
+    awardsList: [
+      "Regional Finalists at Bosphorus Regional 2023",
+      "Industrial Design Award at Bosphorus Regional 2023",
+      "Our official FIRST Robotics Competition debut season",
+    ],
+  },
+  "frc-crescendo": {
+    themeKicker: "Season theme",
+    themeTitle: "Notes, Speaker, Amp, and Trap",
+    themeBody:
+      "CRESCENDO was the game of Notes, with scoring in the Speaker and Amp, followed by Trap and Chain climb in the endgame. It put a premium on match flow, quick feeding, and clean finishing execution.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "Our key season markers",
+    awardsIntro:
+      "For 2024, FRC Events does not list judged awards, but it does confirm these important competitive results:",
+    awardsList: [
+      "Playoff appearance at İstanbul Regional 2024",
+      "10th out of 51 after qualifications at Bosphorus Regional 2024",
+      "Captain of Alliance 7 at Bosphorus Regional 2024",
+    ],
+  },
+  "frc-reefscape": {
+    themeKicker: "Season theme",
+    themeTitle: "Coral, algae, and reef scoring",
+    themeBody:
+      "REEFSCAPE moved FRC into a marine setting built around coral and algae scored on the reef, processor, and barge. The theme was shaped around positioning, dynamic flow, and smart prioritization of field objectives.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "What appears publicly for this season",
+    awardsIntro:
+      "Here I kept the wording strictly honest and limited to what appears in the official public sources:",
+    awardsList: [
+      "On the official FRC Events team page, Team 9001 is listed with the 2023, 2024, and 2026 seasons",
+      "There is no official 2025 season listed there for Team 9001",
+      "Because of that, I did not add unverified public awards to the Reefscape page",
+    ],
+  },
+  "frc-rebuilt": {
+    themeKicker: "Season theme",
+    themeTitle: "Fuel cells, service panels, and dock or climb",
+    themeBody:
+      "REBUILT, according to the official 2026 FRC materials, combines fuel cells, service-panel placement, and an endgame based on dock or climb. It is a game built around pace, adaptation, and efficient reconstruction of field infrastructure.",
+    awardsKicker: "Awards and results",
+    awardsTitle: "Our key markers so far",
+    awardsIntro:
+      "The season is still active, but the public official listings already show this important result:",
+    awardsList: [
+      "Regional Finalists at Bosphorus Regional 2026",
+      "Active season, with public results still subject to update on FRC Events",
+    ],
+  },
+  "fgc-2023": {
+    themeKicker: "Competition theme",
+    themeTitle: "Hydrogen Horizons and clean energy",
+    themeBody:
+      "At FIRST Global Challenge 2023, the official theme was “Hydrogen as a Clean Energy Carrier,” and the Hydrogen Horizons game asked international alliances to produce, store, transport, and convert hydrogen into other forms of energy. It was a competition built directly around global collaboration for a cleaner energy future.",
+    awardsKicker: "Medals and awards",
+    awardsTitle: "Our key markers in Singapore",
+    awardsIntro:
+      "The public sources about Team Romania list these distinctions for our FGC 2023 participation:",
+    awardsList: [
+      "Silver medal for the Al-Khwarizmi Award for Outstanding Supporter",
+      "Bronze medal for the Ustad Ahmad Lahori Award for Innovation in Engineering",
+      "Social Media Challenge Award",
+      "Safety Award",
+    ],
+  },
+};
+
+applyPageTextOverrides(detailPages, seasonalResearchRo);
+applyPageTextOverrides(detailPagesEn, seasonalResearchEn);
+
 const activeSection = inferDetailSection(detailPageKey);
 
 const renderDetailNav = () => {
@@ -931,15 +1417,15 @@ const renderDetailNav = () => {
 
   detailHeader.innerHTML = `
     <nav class="nav-shell">
-      <a class="brand" href="index.html#home" aria-label="Our team home page">
+      <a class="brand" href="index.html#home" aria-label="Pagina principală Delta Force">
         <img class="brand-logo" src="media/logo copy.png" alt="Delta Force logo">
         <span class="brand-copy">
-          <strong>DELtA FORcE</strong>
-          <small>FRC 9001 / FtC 17713</small>
+          <strong>DELTA FORCE</strong>
+          <small>FRC 9001 / FTC 17713</small>
         </span>
       </a>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Deschide meniul de navigare">
         <span></span>
         <span></span>
       </button>
@@ -948,12 +1434,9 @@ const renderDetailNav = () => {
         <a href="index.html#home" data-nav-link="home">Home</a>
         <a href="index.html#ftc" data-nav-link="ftc">FTC</a>
         <a href="index.html#frc" data-nav-link="frc">FRC</a>
-        <a href="index.html#events" data-nav-link="events">Evenimente</a>
         <a href="index.html#fgc" data-nav-link="fgc">FGC</a>
-        <a href="index.html#sponsors" data-nav-link="sponsors">Sponsori</a>
-        <a href="index.html#partners" data-nav-link="partners">Parteneri</a>
         <a href="index.html#contact" data-nav-link="contact">Contact</a>
-        <button class="language-toggle" type="button" aria-pressed="false" aria-label="Switch language" title="Switch language">
+        <button class="language-toggle" type="button" aria-pressed="false" aria-label="Schimbă în engleză" title="Schimbă în engleză">
           <img class="language-flag-image" src="Flags/romania.png" alt="" aria-hidden="true">
         </button>
       </div>
@@ -966,6 +1449,38 @@ const renderParagraphs = (paragraphs) =>
 
 const renderList = (items) =>
   items.map((item) => `<li>${item}</li>`).join("");
+
+const renderSeasonResearch = (page) => {
+  if (!page.themeBody && !(Array.isArray(page.awardsList) && page.awardsList.length)) {
+    return "";
+  }
+
+  const awardsIntro = page.awardsIntro ? `<p>${page.awardsIntro}</p>` : "";
+  const awardsList = Array.isArray(page.awardsList) && page.awardsList.length
+    ? `
+      <ul class="detail-summary-list">
+        ${renderList(page.awardsList)}
+      </ul>
+    `
+    : "";
+
+  return `
+    <section class="detail-season-summary">
+      <article class="detail-summary-card">
+        <p class="detail-copy-kicker">${page.themeKicker ?? ""}</p>
+        <h2>${page.themeTitle ?? ""}</h2>
+        <p>${page.themeBody ?? ""}</p>
+      </article>
+
+      <article class="detail-summary-card detail-summary-card--awards">
+        <p class="detail-copy-kicker">${page.awardsKicker ?? ""}</p>
+        <h2>${page.awardsTitle ?? ""}</h2>
+        ${awardsIntro}
+        ${awardsList}
+      </article>
+    </section>
+  `;
+};
 
 const buildPageImages = (page, ui) => {
   const sources = Array.isArray(page.images) && page.images.length
@@ -996,10 +1511,12 @@ const renderDetailPage = (language) => {
   const basePage = detailPages[detailPageKey];
   if (!basePage) return;
 
-  const ui = detailTranslations[language] ?? detailTranslations.ro;
-  const page = language === "en"
-    ? { ...basePage, ...(detailPagesEn[detailPageKey] ?? {}) }
-    : basePage;
+  const ui = repairNestedStrings(detailTranslations[language] ?? detailTranslations.ro);
+  const page = repairNestedStrings(
+    language === "en"
+      ? { ...basePage, ...(detailPagesEn[detailPageKey] ?? {}) }
+      : basePage
+  );
   const images = buildPageImages(page, ui);
 
   detailMain.innerHTML = `
@@ -1009,6 +1526,8 @@ const renderDetailPage = (language) => {
         <h1>${page.title}</h1>
         <p class="detail-lead">${page.lead}</p>
       </div>
+
+      ${renderSeasonResearch(page)}
 
       <article class="detail-article">
         ${renderImage(images[0], 0, "detail-media--hero", ui)}
@@ -1041,8 +1560,25 @@ const renderDetailPage = (language) => {
   `;
 
   detailFooter.innerHTML = `
-    <strong>Delta Force Robotics</strong>
-    <span>${page.footer}</span>
+    <div class="footer-brand">
+      <strong>Delta Force Robotics</strong>
+      <span>FRC 9001 / FTC 17713</span>
+    </div>
+
+    <div class="footer-socials" aria-label="Canale sociale Delta Force">
+      <button class="footer-social-button" type="button" aria-label="Facebook" title="Facebook">
+        <img class="footer-social-icon footer-social-icon-fb" src="socialmediaicons/fb.png" alt="" aria-hidden="true">
+      </button>
+      <button class="footer-social-button" type="button" aria-label="Instagram" title="Instagram">
+        <img class="footer-social-icon footer-social-icon-ig" src="socialmediaicons/ig.png" alt="" aria-hidden="true">
+      </button>
+      <button class="footer-social-button" type="button" aria-label="LinkedIn" title="LinkedIn">
+        <img class="footer-social-icon footer-social-icon-linkedin" src="socialmediaicons/linked.png" alt="" aria-hidden="true">
+      </button>
+      <button class="footer-social-button" type="button" aria-label="YouTube" title="YouTube">
+        <img class="footer-social-icon footer-social-icon-yt" src="socialmediaicons/yt.png" alt="" aria-hidden="true">
+      </button>
+    </div>
   `;
 
   document.title = `${page.title} | Delta Force Robotics`;
@@ -1166,7 +1702,7 @@ const bindDetailGallery = (images, ui) => {
 };
 
 const applyDetailLanguage = (language) => {
-  const copy = detailTranslations[language] ?? detailTranslations.ro;
+  const copy = repairNestedStrings(detailTranslations[language] ?? detailTranslations.ro);
   document.documentElement.lang = language;
   closeDetailGallery();
 
@@ -1175,10 +1711,7 @@ const applyDetailLanguage = (language) => {
     home: document.querySelector('[data-nav-link="home"]'),
     ftc: document.querySelector('[data-nav-link="ftc"]'),
     frc: document.querySelector('[data-nav-link="frc"]'),
-    events: document.querySelector('[data-nav-link="events"]'),
     fgc: document.querySelector('[data-nav-link="fgc"]'),
-    sponsors: document.querySelector('[data-nav-link="sponsors"]'),
-    partners: document.querySelector('[data-nav-link="partners"]'),
     contact: document.querySelector('[data-nav-link="contact"]'),
   };
   const navToggle = document.querySelector(".nav-toggle");

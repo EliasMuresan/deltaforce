@@ -3,6 +3,7 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const revealElements = [...document.querySelectorAll(".reveal")];
 const topbar = document.querySelector(".topbar");
 const progressBar = document.querySelector(".scroll-progress");
+const siteLoader = document.getElementById("site-loader");
 const navToggle = document.querySelector(".nav-toggle");
 const navMenu = document.querySelector(".nav-links");
 const navLinks = [...document.querySelectorAll(".nav-links a")];
@@ -33,37 +34,26 @@ const aboutTeamImage = aboutTeamShot?.querySelector("img");
 const aboutRobotImage = aboutRobotShot?.querySelector("img");
 const ftcTitle = document.querySelector(".ftc-title");
 const ftcSubtitle = document.querySelector(".ftc-subtitle");
+const ftcFactOne = document.querySelector(".ftc-fact-one");
+const ftcFactTwo = document.querySelector(".ftc-fact-two");
+const ftcFactThree = document.querySelector(".ftc-fact-three");
 const ftcCtas = [...document.querySelectorAll("#ftc .season-card-cta")];
 const currentSeasonBadges = [...document.querySelectorAll(".season-status-current")];
 const frcTitle = document.querySelector(".frc-title");
 const frcSubtitle = document.querySelector(".frc-subtitle");
+const frcFactOne = document.querySelector(".frc-fact-one");
+const frcFactTwo = document.querySelector(".frc-fact-two");
+const frcFactThree = document.querySelector(".frc-fact-three");
 const frcCtas = [...document.querySelectorAll("#frc .season-card-cta")];
-const eventsEyebrow = document.querySelector(".events-eyebrow");
-const eventsTitle = document.querySelector(".events-title");
-const eventsSubtitle = document.querySelector(".events-subtitle");
-const eventLabelPremier = document.querySelector(".event-label-premier");
-const eventTitlePremier = document.querySelector(".event-title-premier");
-const eventCopyPremier = document.querySelector(".event-copy-premier");
-const eventCtaPremier = document.querySelector(".event-cta-premier");
-const eventLabelInvitational = document.querySelector(".event-label-invitational");
-const eventTitleInvitational = document.querySelector(".event-title-invitational");
-const eventCopyInvitational = document.querySelector(".event-copy-invitational");
-const eventCtaInvitational = document.querySelector(".event-cta-invitational");
+const carouselPrevButtons = [...document.querySelectorAll("[data-carousel-prev]")];
+const carouselNextButtons = [...document.querySelectorAll("[data-carousel-next]")];
+const seasonCarousels = [...document.querySelectorAll("[data-season-carousel]")];
 const fgcTitle = document.querySelector(".fgc-title");
 const fgcSubtitle = document.querySelector(".fgc-subtitle");
-const fgcProgramLabel = document.querySelector(".fgc-program-label");
+const fgcFactOne = document.querySelector(".fgc-fact-one");
+const fgcFactTwo = document.querySelector(".fgc-fact-two");
+const fgcFactThree = document.querySelector(".fgc-fact-three");
 const fgcCta = document.querySelector(".fgc-cta");
-const sponsorsEyebrow = document.querySelector(".sponsors-eyebrow");
-const sponsorsTitle = document.querySelector(".sponsors-title");
-const sponsorsSubtitle = document.querySelector(".sponsors-subtitle");
-const sponsorsMarquee = document.querySelector(".sponsors-marquee");
-const partnersEyebrow = document.querySelector(".partners-eyebrow");
-const partnersTitle = document.querySelector(".partners-title");
-const partnersSubtitle = document.querySelector(".partners-subtitle");
-const partnerNameLiceu = document.querySelector(".partner-name-liceu");
-const partnerDescLiceu = document.querySelector(".partner-desc-liceu");
-const partnerNameUav = document.querySelector(".partner-name-uav");
-const partnerDescUav = document.querySelector(".partner-desc-uav");
 const contactEyebrow = document.querySelector(".contact-eyebrow");
 const contactTitle = document.querySelector(".contact-title");
 const contactCopy = document.querySelector(".contact-copy");
@@ -82,18 +72,17 @@ const contactNoteLabel = document.querySelector(".contact-note-label");
 const contactCorinaRole = document.querySelector(".contact-corina-role");
 const contactOctavianRole = document.querySelector(".contact-octavian-role");
 const contactSideNote = document.querySelector(".contact-side-note");
-const footerFtcLink = document.querySelector('[data-footer-link="ftc"]');
-const footerFrcLink = document.querySelector('[data-footer-link="frc"]');
-const footerEventsLink = document.querySelector('[data-footer-link="events"]');
-const footerPartnersLink = document.querySelector('[data-footer-link="partners"]');
+const supportPopup = document.getElementById("support-popup");
+const supportPopupClose = document.getElementById("support-popup-close");
+const supportPopupEyebrow = document.querySelector(".support-popup-eyebrow");
+const supportPopupTitle = document.querySelector(".support-popup-title");
+const supportPopupCopy = document.querySelector(".support-popup-copy");
+const supportPopupLink = document.querySelector(".support-popup-link");
 const navLinkMap = {
   home: document.querySelector('[data-nav-link="home"]'),
   ftc: document.querySelector('[data-nav-link="ftc"]'),
   frc: document.querySelector('[data-nav-link="frc"]'),
-  events: document.querySelector('[data-nav-link="events"]'),
   fgc: document.querySelector('[data-nav-link="fgc"]'),
-  sponsors: document.querySelector('[data-nav-link="sponsors"]'),
-  partners: document.querySelector('[data-nav-link="partners"]'),
   contact: document.querySelector('[data-nav-link="contact"]'),
 };
 
@@ -101,31 +90,28 @@ const translations = {
   ro: {
     meta: {
       title: "Delta Force Robotics | FRC 9001 & FTC 17713",
-      description: "Delta Force Robotics - site cinematic pentru FRC 9001 si FTC 17713, organizat pe sezoane si competitii.",
+      description: "Delta Force Robotics - site cinematic pentru FRC 9001 și FTC 17713, organizat pe sezoane și competiții.",
     },
-    brandAria: "Pagina principala Delta Force",
+    brandAria: "Pagina principală Delta Force",
     navToggleLabel: "Deschide meniul de navigare",
     nav: {
       home: "Home",
       ftc: "FTC",
       frc: "FRC",
-      events: "Evenimente",
       fgc: "FGC",
-      sponsors: "Sponsori",
-      partners: "Parteneri",
       contact: "Contact",
     },
     language: {
       image: "Flags/romania.png",
-      label: "Schimba in engleza",
+      label: "Schimbă în engleză",
     },
     hero: {
       static: "CONSTRUIM",
       words: [
-        "ROBOTI",
+        "ROBOȚI",
         "ECHIPE",
         "AUTONOMII",
-        "ALIANTE",
+        "ALIANȚE",
         "COMUNITATE",
         "LIDERI",
         "CAMPIONI",
@@ -136,11 +122,11 @@ const translations = {
     about: {
       eyebrow: "Despre noi",
       title: "Delta Force Robotics",
-      lead: "Suntem Delta Force, echipa de robotica a Liceului National de Informatica Arad, fondata in 2018.",
+      lead: "Suntem Delta Force, echipa de robotică a Liceului Național de Informatică Arad, fondată în 2018.",
       copyOne:
-        "Am pornit la drum cu resurse limitate, dar prin perseverenta, invatare continua si colaborare am crescut intr-o echipa stabila, cu un laborator dedicat si o comunitate care ne sustine.",
+        "Am pornit la drum cu resurse limitate, dar prin perseverență, învățare continuă și colaborare am crescut într-o echipă stabilă, cu un laborator dedicat și o comunitate care ne susține.",
       copyTwo:
-        "Credem in fair-play, respect reciproc si sprijin intre echipe, iar modul nostru de lucru se bazeaza pe prototipare, testare si asumare a responsabilitatii fata de obiectivele echipei si fata de comunitatea FIRST.",
+        "Credem în fair-play, respect reciproc și sprijin între echipe, iar modul nostru de lucru se bazează pe prototipare, testare și asumarea responsabilității față de obiectivele echipei și față de comunitatea FIRST.",
       teamAlt: "Fotografie de grup a echipei Delta Force",
       teamAria: "Deschide fotografia de grup",
       teamLightboxTitle: "Fotografie de grup Delta Force",
@@ -149,91 +135,73 @@ const translations = {
       robotLightboxTitle: "Robot Delta Force",
     },
     ftc: {
-      title: "First Tech Challenge",
+      title: "FIRST Tech Challenge",
       subtitle:
-        "De la primul sezon pana in prezent, o privire asupra fiecarui an de competitie, provocarilor pe care le-am infruntat si progresului pe care l-am facut ca echipa.",
-      cta: "Vizualizeaza sezonul",
+        "Competiție pentru roboți de dimensiuni mici, construiți și programați de elevi, în meciuri rapide și foarte tehnice.",
+      factOne: "roboți de mici dimensiuni",
+      factTwo: "alianțe de câte 2 echipe",
+      factThree: "iterare, autonomie și driver control",
+      cta: "Vizualizează sezonul",
       currentBadge: "Actual",
     },
     frc: {
-      title: "FRC are propria sectiune, separata si usor de parcurs.",
+      title: "FIRST Robotics Competition",
       subtitle:
-        "Am pastrat doar sezoanele FRC, fiecare cu propriul cover, ca arhiva sa ramana curata si usor de parcurs.",
-      cta: "Vizualizeaza sezonul",
-    },
-    events: {
-      eyebrow: "Special",
-      title: "Evenimente premier / invitationale",
-      subtitle:
-        "O zona separata pentru aparitii speciale, invitationale si momente care merita propria pagina, nu doar un loc pierdut intre sezoane.",
-      premierLabel: "Premier",
-      premierTitle: "Evenimente Premier",
-      premierCopy:
-        "Prezentari, aparitii speciale si momente de referinta puse intr-un spatiu separat, pregatit pentru media si recap.",
-      premierCta: "Deschide pagina",
-      invitLabel: "Invitational",
-      invitTitle: "Invitationale",
-      invitCopy:
-        "Un loc dedicat pentru competitii speciale, parteneriate si rezultate care nu tin strict de sezonul standard.",
-      invitCta: "Deschide pagina",
+        "Competiție pentru roboți de mari dimensiuni, unde designul mecanic, strategia și rezistența fac diferența.",
+      factOne: "roboți de mari dimensiuni",
+      factTwo: "alianțe de câte 3 echipe",
+      factThree: "strategie, impact și meciuri intense",
+      cta: "Vizualizează sezonul",
     },
     fgc: {
-      title: "First Global Challenge merita propria prezenta, nu doar o nota mica in subsol.",
+      title: "FIRST Global Challenge",
       subtitle:
-        "Sectiunea este separata ca sa ai loc pentru poveste, imagini si context international fara sa incarci FTC sau FRC.",
-      program: "First Global Challenge",
-      cta: "Vizualizeaza povestea",
-    },
-    sponsors: {
-      eyebrow: "Sponsori",
-      title: "Multumim sponsorilor nostrii:",
-      subtitle:
-        "Sprijinul lor ne ajuta sa construim, sa concuram si sa crestem de la sezon la sezon.",
-      aria: "Logouri sponsori",
-    },
-    partners: {
-      eyebrow: "Parteneri",
-      title: "Parteneri educationali",
-      subtitle:
-        "Institutii care sustin cresterea echipei prin educatie, spatiu de dezvoltare si deschidere catre proiecte reale.",
-      liceuName: "Liceul National de Informatica Arad",
-      liceuDesc:
-        "Locul in care a inceput povestea Delta Force si mediul care a sustinut cresterea echipei de la primul sezon pana azi.",
-      uavName: "Universitatea Aurel Vlaicu Arad",
-      uavDesc:
-        "Un partener educational important pentru deschiderea catre comunitatea academica si pentru consolidarea directiei tehnice a echipei.",
+        "Competiție internațională de robotică în care fiecare țară vine cu o singură echipă. Pentru noi, FGC înseamnă reprezentarea României într-un format axat pe STEM, colaborare și impact global.",
+      program: "Participarea Delta Force la competiția globală FIRST",
+      cta: "Vezi participarea",
     },
     contact: {
       eyebrow: "Contact",
-      title: "Contacteaza-ne",
+      title: "Contactează-ne",
       copy:
-        "Daca vrei sa colaborezi cu echipa, sa ne sustii sau sa afli mai multe despre activitatea noastra, ne poti scrie direct aici.",
+        "Dacă vrei să colaborezi cu echipa, să ne susții sau să afli mai multe despre activitatea noastră, ne poți scrie direct aici.",
       formName: "Nume",
       formEmail: "Email",
       formMessage: "Mesaj",
-      formNamePlaceholder: "Cum te numesti",
+      formNamePlaceholder: "Cum te numești",
       formEmailPlaceholder: "adresa@exemplu.com",
       formMessagePlaceholder: "Spune-ne cu ce te putem ajuta",
-      formNote: "Formular demonstrativ pentru moment. Il conectam ulterior.",
+      formNote: "Formular demonstrativ pentru moment. Îl conectăm ulterior.",
       submit: "Trimite mesaj",
       emailLabel: "Email",
       phoneLabel: "Numere de telefon",
-      noteLabel: "Colaborari",
+      noteLabel: "Colaborări",
       corinaRole: "Corina Botosan - Mentor",
       octavianRole: "Octavian Botosan - Mentor",
       sideNote:
-        "Pentru parteneriate, sponsorizari sau oportunitati educationale, ne poti contacta direct prin email sau telefon.",
+        "Pentru parteneriate, sponsorizări sau oportunități educaționale, ne poți contacta direct prin email sau telefon.",
+    },
+    supportPopup: {
+      ariaLabel: "Susținere Delta Force",
+      closeLabel: "Închide fereastra",
+      eyebrow: "SUSȚINE DELTA FORCE",
+      title: "Susținerea ta contează",
+      copy:
+        "Intră pe pagina de susținere și vezi variantele prin care ne poți ajuta să ajungem mai aproape de competiția mondială.",
+      cta: "Vezi cum poți ajuta",
     },
     footer: {
       ftc: "Arhiva FTC",
       frc: "Arhiva FRC",
-      events: "Evenimente",
-      partners: "Parteneri",
+    },
+    carousel: {
+      prev: "Sezonul anterior",
+      next: "Sezonul următor",
     },
     lightbox: {
       dialogLabel: "Vizualizare imagine",
-      closeLabel: "Inchide imaginea",
-      closeText: "Inchide",
+      closeLabel: "Închide imaginea",
+      closeText: "Închide",
     },
   },
   en: {
@@ -247,10 +215,7 @@ const translations = {
       home: "Home",
       ftc: "FTC",
       frc: "FRC",
-      events: "Events",
       fgc: "FGC",
-      sponsors: "Sponsors",
-      partners: "Partners",
       contact: "Contact",
     },
     language: {
@@ -287,59 +252,30 @@ const translations = {
       robotLightboxTitle: "Delta Force robot",
     },
     ftc: {
-      title: "First Tech Challenge",
+      title: "FIRST Tech Challenge",
       subtitle:
-        "From our first season to the present, a look at each competition year, the challenges we faced, and the progress we made as a team.",
+        "A competition for smaller robots built and programmed by students, focused on fast matches and precise technical execution.",
+      factOne: "small-size robots",
+      factTwo: "2-team alliances",
+      factThree: "iteration, autonomy, driver control",
       cta: "View season",
       currentBadge: "Current",
     },
     frc: {
-      title: "FRC has its own section, separate and easy to browse.",
+      title: "FIRST Robotics Competition",
       subtitle:
-        "We kept only the FRC seasons, each with its own cover, so the archive stays clean and easy to follow.",
+        "A competition for larger robots where mechanical design, strategy, and resilience make the difference.",
+      factOne: "large-scale robots",
+      factTwo: "3-team alliances",
+      factThree: "strategy, impact, intense matches",
       cta: "View season",
     },
-    events: {
-      eyebrow: "Special",
-      title: "Premier / invitational events",
-      subtitle:
-        "A separate area for special appearances, invitationals, and standout moments that deserve their own page instead of being buried between seasons.",
-      premierLabel: "Premier",
-      premierTitle: "Premier Events",
-      premierCopy:
-        "Presentations, special appearances, and milestone moments placed in a dedicated space ready for media and recap content.",
-      premierCta: "Open page",
-      invitLabel: "Invitational",
-      invitTitle: "Invitationals",
-      invitCopy:
-        "A dedicated place for special competitions, partnerships, and results that do not strictly belong to the standard season flow.",
-      invitCta: "Open page",
-    },
     fgc: {
-      title: "First Global Challenge deserves its own presence, not just a small note in the footer.",
+      title: "FIRST Global Challenge",
       subtitle:
-        "This section stands on its own so there is room for story, imagery, and international context without overloading FTC or FRC.",
-      program: "First Global Challenge",
+        "An international robotics competition where each country enters with a single team. For us, FGC means representing Romania in a format built around STEM, collaboration, and global impact.",
+      program: "Delta Force at the global FIRST competition",
       cta: "View story",
-    },
-    sponsors: {
-      eyebrow: "Sponsors",
-      title: "Thank you to our sponsors:",
-      subtitle:
-        "Their support helps us build, compete, and grow from one season to the next.",
-      aria: "Sponsor logos",
-    },
-    partners: {
-      eyebrow: "Partners",
-      title: "Educational partners",
-      subtitle:
-        "Institutions that support the team's growth through education, development space, and openness toward real-world projects.",
-      liceuName: "National High School of Computer Science Arad",
-      liceuDesc:
-        "The place where the Delta Force story began and the environment that supported the team's growth from the first season until today.",
-      uavName: "Aurel Vlaicu University of Arad",
-      uavDesc:
-        "An important educational partner for opening doors toward the academic community and strengthening the team's technical direction.",
     },
     contact: {
       eyebrow: "Contact",
@@ -362,10 +298,22 @@ const translations = {
       sideNote:
         "For partnerships, sponsorships, or educational opportunities, you can contact us directly by email or phone.",
     },
+    supportPopup: {
+      ariaLabel: "Delta Force support",
+      closeLabel: "Close the popup",
+      eyebrow: "SUPPORT DELTA FORCE",
+      title: "Your support matters",
+      copy:
+        "Visit the support page and choose the option that helps us move closer to the world championship.",
+      cta: "See how you can help",
+    },
     footer: {
       ftc: "FTC Archive",
       frc: "FRC Archive",
-      partners: "Partners",
+    },
+    carousel: {
+      prev: "Previous season",
+      next: "Next season",
     },
     lightbox: {
       dialogLabel: "Image viewer",
@@ -375,6 +323,34 @@ const translations = {
   },
 };
 
+translations.ro.fgc = {
+  title: "FIRST Global Challenge",
+  subtitle:
+    "Competiție internațională de robotică în care fiecare țară vine cu o singură echipă. Pentru noi, FGC înseamnă reprezentarea României într-un format axat pe STEM, colaborare și impact global.",
+  factOne: "o singură echipă pentru fiecare țară",
+  factTwo: "România într-o competiție globală",
+  factThree: "robotică, STEM și colaborare internațională",
+  program: "Participarea Delta Force la competiția globală FIRST",
+  coverTitle: "România la FGC 2023",
+  coverCopy:
+    "Povestea participării noastre într-o competiție internațională unde fiecare țară este reprezentată de o singură echipă.",
+  cta: "Vezi participarea",
+};
+
+translations.en.fgc = {
+  title: "FIRST Global Challenge",
+  subtitle:
+    "An international robotics competition where each country enters with a single team. For us, FGC means representing Romania in a format built around STEM, collaboration, and global impact.",
+  factOne: "one team for each country",
+  factTwo: "Romania in a global competition",
+  factThree: "robotics, STEM and international collaboration",
+  program: "Delta Force at the global FIRST competition",
+  coverTitle: "Romania at FGC 2023",
+  coverCopy:
+    "The story of our participation in an international competition where each country is represented by a single team.",
+  cta: "View story",
+};
+
 let currentLanguage = "ro";
 let typeTimeoutId = null;
 let reducedIntervalId = null;
@@ -382,6 +358,9 @@ let words = [...translations.ro.hero.words];
 let wordIndex = 0;
 let charIndex = words[0].length;
 let isDeleting = false;
+const introStartedAt = typeof performance !== "undefined" ? performance.now() : Date.now();
+const loaderMinimumDuration = prefersReducedMotion ? 320 : 1480;
+let siteEntranceCompleted = false;
 
 const showTopbar = () => {
   if (!topbar) return;
@@ -464,6 +443,135 @@ const closeLightbox = () => {
   body.classList.remove("lightbox-open");
 };
 
+const showSupportPopup = () => {
+  if (!(supportPopup instanceof HTMLElement)) return;
+
+  supportPopup.hidden = false;
+  window.requestAnimationFrame(() => {
+    supportPopup.classList.add("is-visible");
+  });
+};
+
+const dismissSupportPopup = () => {
+  if (!(supportPopup instanceof HTMLElement)) return;
+
+  supportPopup.classList.remove("is-visible");
+
+  window.setTimeout(() => {
+    supportPopup.hidden = true;
+  }, 220);
+};
+
+const finalizeSiteEntrance = () => {
+  if (siteEntranceCompleted) return;
+  siteEntranceCompleted = true;
+
+  body.classList.remove("is-loading");
+  body.classList.add("is-loaded");
+  showTopbar();
+  showSupportPopup();
+
+  if (siteLoader instanceof HTMLElement) {
+    siteLoader.classList.add("is-hidden");
+    window.setTimeout(() => {
+      siteLoader.remove();
+    }, 560);
+  }
+};
+
+const getCarouselStep = (track) => {
+  const firstCard = track.querySelector(".season-card");
+  if (!(firstCard instanceof HTMLElement)) {
+    return track.clientWidth;
+  }
+
+  const trackStyles = window.getComputedStyle(track);
+  const gap = Number.parseFloat(trackStyles.gap || trackStyles.columnGap || "0") || 0;
+  return firstCard.getBoundingClientRect().width + gap;
+};
+
+const getCarouselIndex = (track, cards) => {
+  const trackLeft = track.getBoundingClientRect().left;
+  let closestIndex = 0;
+  let closestDistance = Number.POSITIVE_INFINITY;
+
+  cards.forEach((card, index) => {
+    const distance = Math.abs(card.getBoundingClientRect().left - trackLeft);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = index;
+    }
+  });
+
+  return closestIndex;
+};
+
+const syncSeasonCarousel = (carousel) => {
+  const track = carousel.querySelector(".season-track");
+  const cards = [...carousel.querySelectorAll(".season-card")];
+  const prevButton = carousel.querySelector("[data-carousel-prev]");
+  const nextButton = carousel.querySelector("[data-carousel-next]");
+  const currentValue = carousel.querySelector("[data-carousel-current]");
+  const totalValue = carousel.querySelector("[data-carousel-total]");
+
+  if (!(track instanceof HTMLElement) || !cards.length) return;
+
+  const activeIndex = getCarouselIndex(track, cards);
+
+  if (currentValue) {
+    currentValue.textContent = String(activeIndex + 1);
+  }
+
+  if (totalValue) {
+    totalValue.textContent = String(cards.length);
+  }
+
+  if (prevButton instanceof HTMLButtonElement) {
+    prevButton.disabled = activeIndex <= 0;
+  }
+
+  if (nextButton instanceof HTMLButtonElement) {
+    nextButton.disabled = activeIndex >= cards.length - 1;
+  }
+};
+
+const initializeSeasonCarousel = (carousel) => {
+  const track = carousel.querySelector(".season-track");
+  const prevButton = carousel.querySelector("[data-carousel-prev]");
+  const nextButton = carousel.querySelector("[data-carousel-next]");
+
+  if (!(track instanceof HTMLElement)) return;
+
+  const scrollByStep = (direction) => {
+    const step = getCarouselStep(track);
+    track.scrollBy({
+      left: step * direction,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  };
+
+  prevButton?.addEventListener("click", () => scrollByStep(-1));
+  nextButton?.addEventListener("click", () => scrollByStep(1));
+
+  let frameId = null;
+  track.addEventListener(
+    "scroll",
+    () => {
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      frameId = window.requestAnimationFrame(() => {
+        syncSeasonCarousel(carousel);
+        frameId = null;
+      });
+    },
+    { passive: true }
+  );
+
+  syncSeasonCarousel(carousel);
+};
+
 const applyLanguage = (language) => {
   const copy = translations[language] ?? translations.ro;
 
@@ -509,6 +617,9 @@ const applyLanguage = (language) => {
 
   ftcTitle && (ftcTitle.textContent = copy.ftc.title);
   ftcSubtitle && (ftcSubtitle.textContent = copy.ftc.subtitle);
+  ftcFactOne && (ftcFactOne.textContent = copy.ftc.factOne);
+  ftcFactTwo && (ftcFactTwo.textContent = copy.ftc.factTwo);
+  ftcFactThree && (ftcFactThree.textContent = copy.ftc.factThree);
   ftcCtas.forEach((cta) => {
     cta.textContent = copy.ftc.cta;
   });
@@ -518,39 +629,29 @@ const applyLanguage = (language) => {
 
   frcTitle && (frcTitle.textContent = copy.frc.title);
   frcSubtitle && (frcSubtitle.textContent = copy.frc.subtitle);
+  frcFactOne && (frcFactOne.textContent = copy.frc.factOne);
+  frcFactTwo && (frcFactTwo.textContent = copy.frc.factTwo);
+  frcFactThree && (frcFactThree.textContent = copy.frc.factThree);
   frcCtas.forEach((cta) => {
     cta.textContent = copy.frc.cta;
   });
 
-  eventsEyebrow && (eventsEyebrow.textContent = copy.events.eyebrow);
-  eventsTitle && (eventsTitle.textContent = copy.events.title);
-  eventsSubtitle && (eventsSubtitle.textContent = copy.events.subtitle);
-  eventLabelPremier && (eventLabelPremier.textContent = copy.events.premierLabel);
-  eventTitlePremier && (eventTitlePremier.textContent = copy.events.premierTitle);
-  eventCopyPremier && (eventCopyPremier.textContent = copy.events.premierCopy);
-  eventCtaPremier && (eventCtaPremier.textContent = copy.events.premierCta);
-  eventLabelInvitational && (eventLabelInvitational.textContent = copy.events.invitLabel);
-  eventTitleInvitational && (eventTitleInvitational.textContent = copy.events.invitTitle);
-  eventCopyInvitational && (eventCopyInvitational.textContent = copy.events.invitCopy);
-  eventCtaInvitational && (eventCtaInvitational.textContent = copy.events.invitCta);
+  carouselPrevButtons.forEach((button) => {
+    button.setAttribute("aria-label", copy.carousel.prev);
+    button.setAttribute("title", copy.carousel.prev);
+  });
+
+  carouselNextButtons.forEach((button) => {
+    button.setAttribute("aria-label", copy.carousel.next);
+    button.setAttribute("title", copy.carousel.next);
+  });
 
   fgcTitle && (fgcTitle.textContent = copy.fgc.title);
   fgcSubtitle && (fgcSubtitle.textContent = copy.fgc.subtitle);
-  fgcProgramLabel && (fgcProgramLabel.textContent = copy.fgc.program);
+  fgcFactOne && (fgcFactOne.textContent = copy.fgc.factOne);
+  fgcFactTwo && (fgcFactTwo.textContent = copy.fgc.factTwo);
+  fgcFactThree && (fgcFactThree.textContent = copy.fgc.factThree);
   fgcCta && (fgcCta.textContent = copy.fgc.cta);
-
-  sponsorsEyebrow && (sponsorsEyebrow.textContent = copy.sponsors.eyebrow);
-  sponsorsTitle && (sponsorsTitle.textContent = copy.sponsors.title);
-  sponsorsSubtitle && (sponsorsSubtitle.textContent = copy.sponsors.subtitle);
-  sponsorsMarquee?.setAttribute("aria-label", copy.sponsors.aria);
-
-  partnersEyebrow && (partnersEyebrow.textContent = copy.partners.eyebrow);
-  partnersTitle && (partnersTitle.textContent = copy.partners.title);
-  partnersSubtitle && (partnersSubtitle.textContent = copy.partners.subtitle);
-  partnerNameLiceu && (partnerNameLiceu.textContent = copy.partners.liceuName);
-  partnerDescLiceu && (partnerDescLiceu.textContent = copy.partners.liceuDesc);
-  partnerNameUav && (partnerNameUav.textContent = copy.partners.uavName);
-  partnerDescUav && (partnerDescUav.textContent = copy.partners.uavDesc);
 
   contactEyebrow && (contactEyebrow.textContent = copy.contact.eyebrow);
   contactTitle && (contactTitle.textContent = copy.contact.title);
@@ -570,10 +671,12 @@ const applyLanguage = (language) => {
   contactOctavianRole && (contactOctavianRole.textContent = copy.contact.octavianRole);
   contactSideNote && (contactSideNote.textContent = copy.contact.sideNote);
 
-  footerFtcLink && (footerFtcLink.textContent = copy.footer.ftc);
-  footerFrcLink && (footerFrcLink.textContent = copy.footer.frc);
-  footerEventsLink && (footerEventsLink.textContent = copy.footer.events);
-  footerPartnersLink && (footerPartnersLink.textContent = copy.footer.partners);
+  supportPopup?.setAttribute("aria-label", copy.supportPopup.ariaLabel);
+  supportPopupClose?.setAttribute("aria-label", copy.supportPopup.closeLabel);
+  supportPopupEyebrow && (supportPopupEyebrow.textContent = copy.supportPopup.eyebrow);
+  supportPopupTitle && (supportPopupTitle.textContent = copy.supportPopup.title);
+  supportPopupCopy && (supportPopupCopy.textContent = copy.supportPopup.copy);
+  supportPopupLink && (supportPopupLink.textContent = copy.supportPopup.cta);
 
   lightboxDialog?.setAttribute("aria-label", copy.lightbox.dialogLabel);
   lightboxCloseButtons.forEach((button) => {
@@ -589,8 +692,11 @@ const applyLanguage = (language) => {
 };
 
 window.addEventListener("load", () => {
-  body.classList.add("is-loaded");
-  showTopbar();
+  const now = typeof performance !== "undefined" ? performance.now() : Date.now();
+  const elapsed = now - introStartedAt;
+  const remaining = Math.max(0, loaderMinimumDuration - elapsed);
+
+  window.setTimeout(finalizeSiteEntrance, remaining);
 });
 
 if (!prefersReducedMotion) {
@@ -609,6 +715,10 @@ if (!prefersReducedMotion) {
 } else {
   revealElements.forEach((element) => element.classList.add("is-visible"));
 }
+
+seasonCarousels.forEach((carousel) => {
+  initializeSeasonCarousel(carousel);
+});
 
 const updateScrollState = () => {
   const scrollTop = window.scrollY;
@@ -640,6 +750,9 @@ const updateScrollState = () => {
 updateScrollState();
 window.addEventListener("scroll", updateScrollState, { passive: true });
 window.addEventListener("resize", updateScrollState);
+window.addEventListener("resize", () => {
+  seasonCarousels.forEach((carousel) => syncSeasonCarousel(carousel));
+});
 
 const closeNavMenu = () => {
   navToggle?.setAttribute("aria-expanded", "false");
@@ -682,6 +795,8 @@ languageToggle?.addEventListener("click", () => {
   const nextLanguage = currentLanguage === "ro" ? "en" : "ro";
   applyLanguage(nextLanguage);
 });
+
+supportPopupClose?.addEventListener("click", dismissSupportPopup);
 
 contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
